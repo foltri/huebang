@@ -80,8 +80,6 @@ public class Lamp {
 
     public void setOnGoingEffect(String effect, boolean heartBeat) {
         ArrayList<ControlFrame> newEffect = new ArrayList<ControlFrame>();
-
-        synchronized (this) { //todo ??
             switch (effect) {
                 case "shot":
                     newEffect.addAll(effects.shot.frames);
@@ -107,9 +105,8 @@ public class Lamp {
             this.nextFrameStartTime = 0;
             if (heartBeat) {
                 this.heart_beat = true;
-                this.heart_beat_started = true;
+                //this.heart_beat_started = true;
             } else this.heart_beat = false;
-        }
     }
 
     public void endOfEffect() {
@@ -128,7 +125,7 @@ public class Lamp {
         PHBridge bridge = phHueSDK.getSelectedBridge();
         ControlFrame nextFrame = getNextFrame();
         //if there's frame to send
-        if (nextFrame != null) {
+        if (nextFrame != null && !this.index.equals("heart_beat_reference")) {
             PHLightState lightState = new PHLightState();
 
             if (nextFrame.getHue() != 0) {
@@ -141,6 +138,7 @@ public class Lamp {
             // To validate your lightstate is valid (before sending to the bridge) you can use:
             // String validState = lightState.validateState();
             //  bridge.updateLightState(light, lightState);   // If no bridge response is required then use this simpler form.
+
             bridge.updateLightState(this.source, lightState);
 
             //debug
@@ -151,7 +149,7 @@ public class Lamp {
     //returns the frames that are scheduled for the current tick
     private ControlFrame getNextFrame() {
         ControlFrame frameToSend = null;
-        if (this.timer_state == this.nextFrameStartTime) {
+        if (this.timer_state == this.nextFrameStartTime && this.onGoingEffect.frames.size() > this.nextFrameIndex) {
             frameToSend = this.onGoingEffect.frames.get(this.nextFrameIndex); // error: onGoingEffect = "shot" but nextFrameIndex = 3 (so it's still heart_beat)
 
             //reset timer

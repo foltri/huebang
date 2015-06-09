@@ -30,6 +30,12 @@ public class Lamps {
         this.top_light = new Lamp();
         this.heart_beat_reference = new Lamp();
 
+        this.heart_beat_reference.timer_state = 0;
+        this.heart_beat_reference.nextFrameIndex = 0;
+        this.heart_beat_reference.nextFrameStartTime = 0;
+        this.heart_beat_reference.index = "heart_beat_reference";
+        this.heart_beat_reference.setOnGoingEffect("heart_beat");
+
         for(PHLight light:lights) {
             switch (light.getName()) {
                 case "P1 lamp":
@@ -76,7 +82,7 @@ public class Lamps {
                 TimerMethod();
             }
 
-        }, 0, 200);
+        }, 0, 100);
     }
 
     private void TimerMethod()
@@ -84,6 +90,7 @@ public class Lamps {
         //This method is called directly by the timer
         //and runs in the same thread as the timer.
         this.heart_beat_sync();
+        if(this.heart_beat_reference.onGoingEffect.name != null) this.heart_beat_reference.sendNextFrame();
         if(this.p1light.onGoingEffect.name != null) this.p1light.sendNextFrame();
         if(this.p2light.onGoingEffect.name != null) this.p2light.sendNextFrame();
         if(this.p3light.onGoingEffect.name != null) this.p3light.sendNextFrame();
@@ -96,47 +103,22 @@ public class Lamps {
 
     public void heart_beat_sync() {
         if(this.p1light.heart_beat_started) {
-            if(this.heart_beat_reference_on) {
                 this.p1light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
                 this.p1light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
                 this.p1light.timer_state = this.heart_beat_reference.timer_state;
                 this.p1light.heart_beat_started = false;
-                this.heart_beat_reference = this.p1light;
-            } else {
-                this.heart_beat_reference_on = true;
-                this.heart_beat_reference = this.p1light;
-                this.p1light.heart_beat_started = false;
-            }
         }
         if(this.p2light.heart_beat_started) {
-            if(this.heart_beat_reference_on) {
                 this.p2light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
                 this.p2light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
                 this.p2light.timer_state = this.heart_beat_reference.timer_state;
                 this.p2light.heart_beat_started = false;
-                this.heart_beat_reference = this.p2light;
-            } else {
-                this.heart_beat_reference_on = true;
-                this.heart_beat_reference = this.p2light;
-                this.p2light.heart_beat_started = false;
-            }
         }
         if(this.p3light.heart_beat_started) {
-            if(this.heart_beat_reference_on) {
                 this.p3light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
                 this.p3light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
                 this.p3light.timer_state = this.heart_beat_reference.timer_state;
                 this.p3light.heart_beat_started = false;
-                this.heart_beat_reference = this.p3light;
-            } else {
-                this.heart_beat_reference_on = true;
-                this.heart_beat_reference = this.p3light;
-                this.p3light.heart_beat_started = false;
-            }
-        }
-
-        if(!this.p1light.heart_beat && !this.p2light.heart_beat && !this.p3light.heart_beat) {
-            this.heart_beat_reference_on = false;
         }
     }
 

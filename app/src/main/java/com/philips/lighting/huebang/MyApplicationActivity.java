@@ -50,9 +50,9 @@ public class MyApplicationActivity extends Activity {
         lamps.p2light.setOnGoingEffect("heart_normal");
         lamps.p3light.setOnGoingEffect("heart_normal");
 
-        final Player p1 = new Player(8,0, (TextView) findViewById(R.id.p1arrowView), (TextView) findViewById(R.id.p1lifeView));
-        final Player p2 = new Player(8,0, (TextView) findViewById(R.id.p2arrowView), (TextView) findViewById(R.id.p2lifeView));
-        final Player p3 = new Player(8,0, (TextView) findViewById(R.id.p3arrowView), (TextView) findViewById(R.id.p3lifeView));
+        final Player p1 = new Player(4,0, (TextView) findViewById(R.id.p1arrowView), (TextView) findViewById(R.id.p1lifeView));
+        final Player p2 = new Player(4,0, (TextView) findViewById(R.id.p2arrowView), (TextView) findViewById(R.id.p2lifeView));
+        final Player p3 = new Player(4,0, (TextView) findViewById(R.id.p3arrowView), (TextView) findViewById(R.id.p3lifeView));
 
 
         //EXTENTIONAL ELEMENTS//
