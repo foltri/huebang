@@ -19,6 +19,8 @@ public class Lamps {
     public Lamp top_light;
     private Timer myTimer;
     private boolean pause = false;
+    private boolean heart_beat_reference_on = false;
+    private Lamp heart_beat_reference;
 
 
     public Lamps(List<PHLight> lights) {
@@ -26,6 +28,7 @@ public class Lamps {
         this.p2light = new Lamp();
         this.p3light = new Lamp();
         this.top_light = new Lamp();
+        this.heart_beat_reference = new Lamp();
 
         for(PHLight light:lights) {
             switch (light.getName()) {
@@ -38,20 +41,20 @@ public class Lamps {
                     this.p1light.onGoingEffect = new Effect();
                     break;
                 case "P2 lamp":
-                    p2light.source = light;
-                    p2light.timer_state = 0;
-                    p2light.index = "P2 lamp";
-                    p2light.nextFrameIndex = 0;
-                    p2light.nextFrameStartTime = 0;
-                    p2light.onGoingEffect = new Effect();
+                    this.p2light.source = light;
+                    this.p2light.timer_state = 0;
+                    this.p2light.index = "P2 lamp";
+                    this.p2light.nextFrameIndex = 0;
+                    this.p2light.nextFrameStartTime = 0;
+                    this.p2light.onGoingEffect = new Effect();
                     break;
                 case "P3 lamp":
-                    p3light.source = light;
-                    p3light.timer_state = 0;
-                    p3light.index = "P3 lamp";
-                    p3light.nextFrameIndex = 0;
-                    p3light.nextFrameStartTime = 0;
-                    p3light.onGoingEffect = new Effect();
+                    this.p3light.source = light;
+                    this.p3light.timer_state = 0;
+                    this.p3light.index = "P3 lamp";
+                    this.p3light.nextFrameIndex = 0;
+                    this.p3light.nextFrameStartTime = 0;
+                    this.p3light.onGoingEffect = new Effect();
                     break;
                 case "Top lamp":
                     this.top_light.source = light;
@@ -66,14 +69,75 @@ public class Lamps {
             }
         }
         //Todo init timer and frame arrays, start timer
-        myTimer = new Timer();
-        myTimer.schedule(new TimerTask() {
+        this.myTimer = new Timer();
+        this.myTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 TimerMethod();
             }
 
-        }, 0, 100);
+        }, 0, 200);
+    }
+
+    private void TimerMethod()
+    {
+        //This method is called directly by the timer
+        //and runs in the same thread as the timer.
+        this.heart_beat_sync();
+        if(this.p1light.onGoingEffect.name != null) this.p1light.sendNextFrame();
+        if(this.p2light.onGoingEffect.name != null) this.p2light.sendNextFrame();
+        if(this.p3light.onGoingEffect.name != null) this.p3light.sendNextFrame();
+        if(this.top_light.onGoingEffect.name != null) this.top_light.sendNextFrame();
+
+        //We call the method that will work with the UI
+        //through the runOnUiThread method.
+        //this.runOnUiThread(Timer_Tick);
+    }
+
+    public void heart_beat_sync() {
+        if(this.p1light.heart_beat_started) {
+            if(this.heart_beat_reference_on) {
+                this.p1light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
+                this.p1light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
+                this.p1light.timer_state = this.heart_beat_reference.timer_state;
+                this.p1light.heart_beat_started = false;
+                this.heart_beat_reference = this.p1light;
+            } else {
+                this.heart_beat_reference_on = true;
+                this.heart_beat_reference = this.p1light;
+                this.p1light.heart_beat_started = false;
+            }
+        }
+        if(this.p2light.heart_beat_started) {
+            if(this.heart_beat_reference_on) {
+                this.p2light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
+                this.p2light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
+                this.p2light.timer_state = this.heart_beat_reference.timer_state;
+                this.p2light.heart_beat_started = false;
+                this.heart_beat_reference = this.p2light;
+            } else {
+                this.heart_beat_reference_on = true;
+                this.heart_beat_reference = this.p2light;
+                this.p2light.heart_beat_started = false;
+            }
+        }
+        if(this.p3light.heart_beat_started) {
+            if(this.heart_beat_reference_on) {
+                this.p3light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
+                this.p3light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
+                this.p3light.timer_state = this.heart_beat_reference.timer_state;
+                this.p3light.heart_beat_started = false;
+                this.heart_beat_reference = this.p3light;
+            } else {
+                this.heart_beat_reference_on = true;
+                this.heart_beat_reference = this.p3light;
+                this.p3light.heart_beat_started = false;
+            }
+        }
+
+        if(!this.p1light.heart_beat && !this.p2light.heart_beat && !this.p3light.heart_beat) {
+            this.heart_beat_reference_on = false;
+        }
     }
 
     public void setIndians(LightEffects effect) {
@@ -89,29 +153,15 @@ public class Lamps {
     }
 
     public void pause() {
-        pause = true;
+        this.pause = true;
     }
 
     public void resume() {
-        pause = false;
+        this.pause = false;
     }
 
     public void stop() {
-        if (myTimer != null) myTimer.cancel();
-    }
-
-    private void TimerMethod()
-    {
-        //This method is called directly by the timer
-        //and runs in the same thread as the timer.
-        if(p1light.onGoingEffect.name != null) p1light.sendNextFrame();
-        if(p2light.onGoingEffect.name != null) p2light.sendNextFrame();
-        if(p3light.onGoingEffect.name != null) p3light.sendNextFrame();
-        if(top_light.onGoingEffect.name != null) top_light.sendNextFrame();
-
-        //We call the method that will work with the UI
-        //through the runOnUiThread method.
-        //this.runOnUiThread(Timer_Tick);
+        if (this.myTimer != null) this.myTimer.cancel();
     }
 
     public void setOnGoingEffect(String effect) {

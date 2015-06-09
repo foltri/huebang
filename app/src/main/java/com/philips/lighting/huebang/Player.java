@@ -27,10 +27,10 @@ public class Player {
     public void setLives(int lives, Lamp lamp) {
         this.lives = lives;
         this.lifeNum.setText("L:" + this.lives);
-        if(this.lives <= 3 && lamp.onGoingEffect.name != "heart_beat") {
+        if(isHeartBeat() && lamp.onGoingEffect.name != "heart_beat") {
             lamp.setOnGoingEffect("heart_beat");
         }
-        if(this.lives > 3 && lamp.onGoingEffect.name == "heart_beat") {
+        if(!isHeartBeat() && lamp.onGoingEffect.name == "heart_beat") {
             lamp.setOnGoingEffect("heart_normal");
         }
     }
@@ -61,7 +61,7 @@ public class Player {
         if(isHeartBeat() && lamp.onGoingEffect.name != "heart_beat") {
             lamp.setOnGoingEffect("heart_beat");
         }
-        if(isHeartBeat() && lamp.onGoingEffect.name == "heart_beat") {
+        if(!isHeartBeat() && lamp.onGoingEffect.name == "heart_beat") {
             lamp.setOnGoingEffect("heart_normal");
         }
     }

@@ -21,6 +21,7 @@ public class Lamp {
     public int nextFrameIndex;
     public int nextFrameStartTime;
     public boolean heart_beat = false;
+    public boolean heart_beat_started = false;
     public Effect onGoingEffect = new Effect();
     private final LightEffects effects = new LightEffects().init();
 
@@ -70,38 +71,45 @@ public class Lamp {
         this.timer_state = 0;
         this.nextFrameIndex = 0;
         this.nextFrameStartTime = 0;
-        if (effect.equals("heart_beat")) this.heart_beat = true;
+        if (effect.equals("heart_beat")) {
+            this.heart_beat = true;
+            this.heart_beat_started = true;
+        }
         else if (effect.equals("heart_normal")) this.heart_beat = false;
     }
 
     public void setOnGoingEffect(String effect, boolean heartBeat) {
         ArrayList<ControlFrame> newEffect = new ArrayList<ControlFrame>();
 
-        switch (effect) {
-            case "shot":
-                newEffect.addAll(effects.shot.frames);
-                this.onGoingEffect.frames = newEffect;
-                this.onGoingEffect.name = effect;
-                break;
-            case "top_storm":
-                newEffect.addAll(effects.top_storm.frames);
-                this.onGoingEffect.frames = newEffect;
-                this.onGoingEffect.name = effect;
-                break;
-            case "top_normal":
-                newEffect.addAll(effects.top_normal.frames);
-                this.onGoingEffect.frames = newEffect;
-                this.onGoingEffect.name = effect;
-                break;
-            default:
-                break;
-        }
+        synchronized (this) { //todo ??
+            switch (effect) {
+                case "shot":
+                    newEffect.addAll(effects.shot.frames);
+                    this.onGoingEffect.frames = newEffect;
+                    this.onGoingEffect.name = effect;
+                    break;
+                case "top_storm":
+                    newEffect.addAll(effects.top_storm.frames);
+                    this.onGoingEffect.frames = newEffect;
+                    this.onGoingEffect.name = effect;
+                    break;
+                case "top_normal":
+                    newEffect.addAll(effects.top_normal.frames);
+                    this.onGoingEffect.frames = newEffect;
+                    this.onGoingEffect.name = effect;
+                    break;
+                default:
+                    break;
+            }
 
-        this.timer_state = 0;
-        this.nextFrameIndex = 0;
-        this.nextFrameStartTime = 0;
-        if (heartBeat) this.heart_beat = true;
-        else this.heart_beat = false;
+            this.timer_state = 0;
+            this.nextFrameIndex = 0;
+            this.nextFrameStartTime = 0;
+            if (heartBeat) {
+                this.heart_beat = true;
+                this.heart_beat_started = true;
+            } else this.heart_beat = false;
+        }
     }
 
     public void endOfEffect() {
@@ -115,11 +123,36 @@ public class Lamp {
         }
     }
 
+    public void sendNextFrame() {
+        PHHueSDK phHueSDK = PHHueSDK.create();
+        PHBridge bridge = phHueSDK.getSelectedBridge();
+        ControlFrame nextFrame = getNextFrame();
+        //if there's frame to send
+        if (nextFrame != null) {
+            PHLightState lightState = new PHLightState();
+
+            if (nextFrame.getHue() != 0) {
+                lightState.setHue(nextFrame.getHue());
+            }
+            if (nextFrame.getBri() != 0) {
+                lightState.setBrightness(nextFrame.getBri());
+            }
+            lightState.setTransitionTime(nextFrame.getTransitionTime() / 100);
+            // To validate your lightstate is valid (before sending to the bridge) you can use:
+            // String validState = lightState.validateState();
+            //  bridge.updateLightState(light, lightState);   // If no bridge response is required then use this simpler form.
+            bridge.updateLightState(this.source, lightState);
+
+            //debug
+            Log.w("Sent frames", "Sent: " + nextFrame.getBri());
+        }
+    }
+
     //returns the frames that are scheduled for the current tick
     private ControlFrame getNextFrame() {
         ControlFrame frameToSend = null;
         if (this.timer_state == this.nextFrameStartTime) {
-            frameToSend = this.onGoingEffect.frames.get(this.nextFrameIndex);
+            frameToSend = this.onGoingEffect.frames.get(this.nextFrameIndex); // error: onGoingEffect = "shot" but nextFrameIndex = 3 (so it's still heart_beat)
 
             //reset timer
             this.timer_state = 0;
@@ -149,31 +182,6 @@ public class Lamp {
         }
 
         return frameToSend;
-    }
-
-    public void sendNextFrame() {
-        PHHueSDK phHueSDK = PHHueSDK.create();
-        PHBridge bridge = phHueSDK.getSelectedBridge();
-        ControlFrame nextFrame = getNextFrame();
-        //if there's frame to send
-        if (nextFrame != null) {
-            PHLightState lightState = new PHLightState();
-
-            if (nextFrame.getHue() != 0) {
-                lightState.setHue(nextFrame.getHue());
-            }
-            if (nextFrame.getBri() != 0) {
-                lightState.setBrightness(nextFrame.getBri());
-            }
-            lightState.setTransitionTime(nextFrame.getTransitionTime() / 100);
-            // To validate your lightstate is valid (before sending to the bridge) you can use:
-            // String validState = lightState.validateState();
-            //  bridge.updateLightState(light, lightState);   // If no bridge response is required then use this simpler form.
-            bridge.updateLightState(this.source, lightState);
-
-            //debug
-            Log.w("Sent frames" , "Sent: " + nextFrame.getBri());
-        }
     }
 }
 
