@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by folti on 07/06/15.
@@ -17,10 +20,17 @@ public class Lamps {
     public Lamp p2light;
     public Lamp p3light;
     public Lamp top_light;
-    private Timer myTimer;
+//    private Timer myTimer;
+//    private Timer myTimer1;
     private boolean pause = false;
     private boolean heart_beat_reference_on = false;
     private Lamp heart_beat_reference;
+    private  Runnable timer = new Runnable() {
+        public void run() {
+            TimerMethod();
+        }
+    };
+    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
 
     public Lamps(List<PHLight> lights) {
@@ -75,14 +85,25 @@ public class Lamps {
             }
         }
         //Todo init timer and frame arrays, start timer
-        this.myTimer = new Timer();
-        this.myTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                TimerMethod();
-            }
+//        this.myTimer = new Timer();
+//        this.myTimer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                TimerMethod();
+//            }
+//
+//        }, 0, 100);
+//        this.myTimer1 = new Timer();
+//        this.myTimer1.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                TimerMethod1();
+//            }
+//
+//        }, 0, 100);
 
-        }, 0, 100);
+        scheduler.scheduleAtFixedRate(timer, 0, 100, TimeUnit.MILLISECONDS);
+
     }
 
     private void TimerMethod()
@@ -143,7 +164,7 @@ public class Lamps {
     }
 
     public void stop() {
-        if (this.myTimer != null) this.myTimer.cancel();
+        //if (this.myTimer != null) this.myTimer.cancel();
     }
 
     public void setOnGoingEffect(String effect) {

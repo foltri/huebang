@@ -66,11 +66,13 @@ public class Player {
         }
     }
 
-    public void gotGgun(Player other1, Player other2) {
+    public void gotGgun(Player other1, Player other2, Lamp l1, Lamp l2) {
         other1.lives -= 1;
         other2.lives -= 1;
         other1.lifeNum.setText("L:" + other1.lives);
         other2.lifeNum.setText("L:" + other2.lives);
+        l1.setOnGoingEffect("shot", isHeartBeat());
+        l2.setOnGoingEffect("shot", isHeartBeat());
 
         this.setArrows(0);
     }

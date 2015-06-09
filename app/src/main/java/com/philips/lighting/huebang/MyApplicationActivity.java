@@ -253,7 +253,7 @@ public class MyApplicationActivity extends Activity {
         p1ggun.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p1.gotGgun(p2,p3);
+                p1.gotGgun(p2,p3, lamps.p2light, lamps.p3light);
                 //Todo Ggun animation
             }
         });
@@ -261,7 +261,7 @@ public class MyApplicationActivity extends Activity {
         p2ggun.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p2.gotGgun(p1,p3);
+                p2.gotGgun(p1,p3, lamps.p1light, lamps.p3light);
                 //Todo Ggun animation
             }
         });
@@ -269,7 +269,7 @@ public class MyApplicationActivity extends Activity {
         p3ggun.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p3.gotGgun(p1,p2);
+                p3.gotGgun(p1,p2, lamps.p1light, lamps.p2light);
                 //Todo Ggun animation
             }
         });
