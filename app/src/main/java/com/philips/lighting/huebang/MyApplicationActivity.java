@@ -47,6 +47,8 @@ public class MyApplicationActivity extends Activity {
 
         final Lamps lamps = new Lamps(phHueSDK.getSelectedBridge().getResourceCache().getAllLights());
         lamps.p1light.setOnGoingEffect("heart_normal");
+        lamps.p2light.setOnGoingEffect("heart_normal");
+        lamps.p3light.setOnGoingEffect("heart_normal");
 
         final Player p1 = new Player(8,0, (TextView) findViewById(R.id.p1arrowView), (TextView) findViewById(R.id.p1lifeView));
         final Player p2 = new Player(8,0, (TextView) findViewById(R.id.p2arrowView), (TextView) findViewById(R.id.p2lifeView));
@@ -114,14 +116,14 @@ public class MyApplicationActivity extends Activity {
         p2incLifeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p2.setLives(p2.getLives() + 1, lamps.p1light);
+                p2.setLives(p2.getLives() + 1, lamps.p2light);
             }
         });
         Button p3incLifeButton = (Button) findViewById(R.id.p3incLifeButton);
         p3incLifeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p3.setLives(p3.getLives() + 1, lamps.p1light);
+                p3.setLives(p3.getLives() + 1, lamps.p3light);
             }
         });
 
@@ -137,14 +139,14 @@ public class MyApplicationActivity extends Activity {
         p2decLifeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p2.setLives(p2.getLives() - 1, lamps.p1light);
+                p2.setLives(p2.getLives() - 1, lamps.p2light);
             }
         });
         Button p3decLifeButton = (Button) findViewById(R.id.p3decLifeButton);
         p3decLifeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p3.setLives(p3.getLives() - 1, lamps.p1light);
+                p3.setLives(p3.getLives() - 1, lamps.p3light);
             }
         });
 
@@ -207,7 +209,7 @@ public class MyApplicationActivity extends Activity {
         p2beer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p2.gotBeer(lamps.p1light);
+                p2.gotBeer(lamps.p2light);
                 //Todo Beer animation
             }
         });
@@ -215,7 +217,7 @@ public class MyApplicationActivity extends Activity {
         p3beer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p3.gotBeer(lamps.p1light);
+                p3.gotBeer(lamps.p3light);
                 //Todo Beer animation
             }
         });
@@ -233,7 +235,7 @@ public class MyApplicationActivity extends Activity {
         p2shot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p2.gotShot(lamps.p1light);
+                p2.gotShot(lamps.p2light);
                 //Todo Shot animation
             }
         });
@@ -241,7 +243,7 @@ public class MyApplicationActivity extends Activity {
         p3shot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                p3.gotShot(lamps.p1light);
+                p3.gotShot(lamps.p3light);
                 //Todo Shot animation
             }
         });

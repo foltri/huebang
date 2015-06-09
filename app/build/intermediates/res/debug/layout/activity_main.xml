@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sunset"
-            android:id="@+id/button2" />
+            android:id="@+id/nightSunsetButton" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="Sunrise"
-            android:id="@+id/button" />
+            android:id="@+id/nightSunriseButton" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
             android:layout_marginRight="4dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="T: 20"
-            android:id="@+id/textView" />
+            android:id="@+id/nightTimerView" />
 
     </LinearLayout>
 
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="1"
-                android:id="@+id/radioButton"
+                android:id="@+id/indian1check"
                 android:checked="false" />
 
             <RadioButton
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="2"
-                android:id="@+id/radioButton2"
+                android:id="@+id/indian2check"
                 android:checked="false" />
 
             <RadioButton
@@ -119,14 +119,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:text="3"
-                android:id="@+id/radioButton3"
+                android:id="@+id/indian3check"
                 android:checked="false" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4"
-                android:id="@+id/radioButton4"
+                android:id="@+id/indian4check"
                 android:checked="false" />
         </RadioGroup>
 
@@ -136,7 +136,7 @@
             android:layout_marginRight="4dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="T: 20"
-            android:id="@+id/textView2" />
+            android:id="@+id/indianTimerView" />
 
     </LinearLayout>
 
@@ -154,7 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Dynamite"
-            android:id="@+id/button3" />
+            android:id="@+id/indianDynamiteButton" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Arrow"
-            android:id="@+id/button4" />
+            android:id="@+id/indianArrowButton" />
     </LinearLayout>
 
 

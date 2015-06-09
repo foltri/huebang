@@ -25,16 +25,19 @@ public final class R {
         public static final int bridge_ip=0x7f08003d;
         public static final int bridge_list=0x7f080035;
         public static final int bridge_mac=0x7f08003c;
-        public static final int button=0x7f080004;
-        public static final int button2=0x7f080003;
-        public static final int button3=0x7f08000e;
-        public static final int button4=0x7f08000f;
         public static final int countdownPB=0x7f08003b;
         public static final int descriptionTextview=0x7f080039;
         public static final int empty_list_view=0x7f080037;
         public static final int find_new_bridge=0x7f08003f;
         public static final int imageView1=0x7f08003a;
+        public static final int indian1check=0x7f080008;
+        public static final int indian2check=0x7f080009;
+        public static final int indian3check=0x7f08000a;
+        public static final int indian4check=0x7f08000b;
+        public static final int indianArrowButton=0x7f08000f;
         public static final int indianButton=0x7f080007;
+        public static final int indianDynamiteButton=0x7f08000e;
+        public static final int indianTimerView=0x7f08000c;
         public static final int linear1=0x7f080034;
         public static final int linearLayout01=0x7f080000;
         public static final int linearLayout02=0x7f080006;
@@ -46,6 +49,9 @@ public final class R {
         public static final int linearLayout31=0x7f080028;
         public static final int linearLayout32=0x7f080030;
         public static final int nightButton=0x7f080002;
+        public static final int nightSunriseButton=0x7f080004;
+        public static final int nightSunsetButton=0x7f080003;
+        public static final int nightTimerView=0x7f080005;
         public static final int p1arrowView=0x7f080015;
         public static final int p1beer=0x7f080019;
         public static final int p1decArrowButton=0x7f080016;
@@ -76,16 +82,10 @@ public final class R {
         public static final int p3lifeView=0x7f08002a;
         public static final int p3radioButton=0x7f080029;
         public static final int p3shot=0x7f080033;
-        public static final int radioButton=0x7f080008;
-        public static final int radioButton2=0x7f080009;
-        public static final int radioButton3=0x7f08000a;
-        public static final int radioButton4=0x7f08000b;
         public static final int refresh=0x7f08003e;
         public static final int settings=0x7f080040;
         public static final int stormButton=0x7f080001;
-        public static final int textView=0x7f080005;
         public static final int textView1=0x7f080036;
-        public static final int textView2=0x7f08000c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

@@ -14,8 +14,8 @@ import java.util.TimerTask;
  */
 public class Lamps {
     public Lamp p1light;
-    //public Lamp p2light;
-    //public Lamp p3light;
+    public Lamp p2light;
+    public Lamp p3light;
     public Lamp top_light;
     private Timer myTimer;
     private boolean pause = false;
@@ -23,8 +23,8 @@ public class Lamps {
 
     public Lamps(List<PHLight> lights) {
         this.p1light = new Lamp();
-//      this.p2light = null;
-//      this.p3light = null;
+        this.p2light = new Lamp();
+        this.p3light = new Lamp();
         this.top_light = new Lamp();
 
         for(PHLight light:lights) {
@@ -37,22 +37,22 @@ public class Lamps {
                     this.p1light.nextFrameStartTime = 0;
                     this.p1light.onGoingEffect = new Effect();
                     break;
-//                case "P2 lamp":
-//                    p2light.source = light;
-//                    p2light.timer_state = 0;
-//                    p2light.index = "P2 lamp";
-//                    p2light.nextFrameIndex = 0;
-//                    p2light.nextFrameStartTime = 0;
-//                    p2light.onGoingEffect = null;
-//                    break;
-//                case "P2 lamp":
-//                    p3light.source = light;
-//                    p3light.timer_state = 0;
-//                    p3light.index = "P3 lamp";
-//                    p3light.nextFrameIndex = 0;
-//                    p3light.nextFrameStartTime = 0;
-//                    p3light.onGoingEffect = null;
-//                    break;
+                case "P2 lamp":
+                    p2light.source = light;
+                    p2light.timer_state = 0;
+                    p2light.index = "P2 lamp";
+                    p2light.nextFrameIndex = 0;
+                    p2light.nextFrameStartTime = 0;
+                    p2light.onGoingEffect = new Effect();
+                    break;
+                case "P3 lamp":
+                    p3light.source = light;
+                    p3light.timer_state = 0;
+                    p3light.index = "P3 lamp";
+                    p3light.nextFrameIndex = 0;
+                    p3light.nextFrameStartTime = 0;
+                    p3light.onGoingEffect = new Effect();
+                    break;
                 case "Top lamp":
                     this.top_light.source = light;
                     this.top_light.timer_state = 0;
@@ -105,8 +105,8 @@ public class Lamps {
         //This method is called directly by the timer
         //and runs in the same thread as the timer.
         if(p1light.onGoingEffect.name != null) p1light.sendNextFrame();
-//        if(p2light.onGoingEffect.name != null) p2light.sendNextFrame();
-//        if(p3light.onGoingEffect.name != null) p3light.sendNextFrame();
+        if(p2light.onGoingEffect.name != null) p2light.sendNextFrame();
+        if(p3light.onGoingEffect.name != null) p3light.sendNextFrame();
         if(top_light.onGoingEffect.name != null) top_light.sendNextFrame();
 
         //We call the method that will work with the UI
