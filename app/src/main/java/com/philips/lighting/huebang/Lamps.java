@@ -75,10 +75,10 @@ public class Lamps {
                 case "Top lamp":
                     this.top_light.source = light;
                     this.top_light.timer_state = 0;
-                    this.p1light.index = "Top lamp";
-                    this.p1light.nextFrameIndex = 0;
-                    this.p1light.nextFrameStartTime = 0;
-                    this.p1light.onGoingEffect = new Effect();
+                    this.top_light.index = "Top lamp";
+                    this.top_light.nextFrameIndex = 0;
+                    this.top_light.nextFrameStartTime = 0;
+                    this.top_light.onGoingEffect = new Effect();
                     break;
                 default:
                     break;
@@ -112,10 +112,11 @@ public class Lamps {
         //and runs in the same thread as the timer.
         this.heart_beat_sync();
         if(this.heart_beat_reference.onGoingEffect.name != null) this.heart_beat_reference.sendNextFrame();
-        if(this.p1light.onGoingEffect.name != null) this.p1light.sendNextFrame();
-        if(this.p2light.onGoingEffect.name != null) this.p2light.sendNextFrame();
-        if(this.p3light.onGoingEffect.name != null) this.p3light.sendNextFrame();
-        if(this.top_light.onGoingEffect.name != null) this.top_light.sendNextFrame();
+        //if the lamp is connected and there's an ongoing effect
+        if(this.p1light.onGoingEffect.name != null && this.p1light.source != null) this.p1light.sendNextFrame();
+        if(this.p2light.onGoingEffect.name != null && this.p2light.source != null) this.p2light.sendNextFrame();
+        if(this.p3light.onGoingEffect.name != null && this.p3light.source != null) this.p3light.sendNextFrame();
+        if(this.top_light.onGoingEffect.name != null && this.top_light.source != null) this.top_light.sendNextFrame();
 
         //We call the method that will work with the UI
         //through the runOnUiThread method.

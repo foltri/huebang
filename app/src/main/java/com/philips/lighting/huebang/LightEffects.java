@@ -22,6 +22,9 @@ public class LightEffects {
     public final Effect shot;
     public final Effect top_storm;
     public final Effect top_normal;
+    public final Effect top_night;
+    public final Effect top_sunset;
+    public final Effect top_sunrise;
 
     public LightEffects() {
         this.heart_normal = new Effect();
@@ -29,6 +32,9 @@ public class LightEffects {
         this.shot = new Effect();
         this.top_normal = new Effect();
         this.top_storm = new Effect();
+        this.top_night = new Effect();
+        this.top_sunset = new Effect();
+        this.top_sunrise = new Effect();
     }
 
     public LightEffects init() {
@@ -81,6 +87,18 @@ public class LightEffects {
                 case "top_normal.txt":
                     effects.top_normal.frames = tmp;
                     effects.top_normal.name = "top_normal";
+                    break;
+                case "top_night.txt":
+                    effects.top_night.frames = tmp;
+                    effects.top_night.name = "top_night";
+                    break;
+                case "top_sunset.txt":
+                    effects.top_sunset.frames = tmp;
+                    effects.top_sunset.name = "top_sunset";
+                    break;
+                case "top_sunrise.txt":
+                    effects.top_sunrise.frames = tmp;
+                    effects.top_sunrise.name = "top_sunrise";
                     break;
                 default:
                     break;

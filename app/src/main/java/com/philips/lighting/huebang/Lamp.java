@@ -64,6 +64,21 @@ public class Lamp {
                 this.onGoingEffect.frames = newEffect;
                 this.onGoingEffect.name = effect;
                 break;
+            case "top_night":
+                newEffect.addAll(effects.top_night.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                break;
+            case "top_sunset":
+                newEffect.addAll(effects.top_sunset.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                break;
+            case "top_sunrise":
+                newEffect.addAll(effects.top_sunrise.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                break;
             default:
                 break;
         }
@@ -139,10 +154,14 @@ public class Lamp {
             // String validState = lightState.validateState();
             //  bridge.updateLightState(light, lightState);   // If no bridge response is required then use this simpler form.
 
+            //turn on if the lamp is off
+            if(!this.source.getLastKnownLightState().isOn()) {
+                lightState.setOn(true);
+            }
             bridge.updateLightState(this.source, lightState);
 
             //debug
-            Log.w("Sent frames", "Sent: " + nextFrame.getBri());
+            //Log.w("Sent frames", "Sent: " + nextFrame.getBri());
         }
     }
 
@@ -162,6 +181,14 @@ public class Lamp {
 
             //Stop if last frame
             if (this.nextFrameIndex == this.onGoingEffect.frames.size() - 1) {
+                //turn off lamp after last frame of sunset
+                if (this.onGoingEffect.name.equals("top_sunset")) {
+                    PHHueSDK phHueSDK = PHHueSDK.create();
+                    PHBridge bridge = phHueSDK.getSelectedBridge();
+                    PHLightState lightState = new PHLightState();
+                    lightState.setOn(false);
+                    bridge.updateLightState(this.source, lightState);
+                }
                 //loop if last frame of heart beat
                 if (this.onGoingEffect.name.equals("heart_beat") || this.onGoingEffect.name.equals("top_storm")) {
                     this.nextFrameIndex = 0;

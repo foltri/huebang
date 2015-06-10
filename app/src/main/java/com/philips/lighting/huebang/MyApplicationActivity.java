@@ -49,6 +49,7 @@ public class MyApplicationActivity extends Activity {
         lamps.p1light.setOnGoingEffect("heart_normal");
         lamps.p2light.setOnGoingEffect("heart_normal");
         lamps.p3light.setOnGoingEffect("heart_normal");
+        lamps.top_light.setOnGoingEffect("top_normal");
 
         final Player p1 = new Player(4,0, (TextView) findViewById(R.id.p1arrowView), (TextView) findViewById(R.id.p1lifeView));
         final Player p2 = new Player(4,0, (TextView) findViewById(R.id.p2arrowView), (TextView) findViewById(R.id.p2lifeView));
@@ -82,10 +83,28 @@ public class MyApplicationActivity extends Activity {
 
                 if (on) {
                     // Turn on storm effect
-                    lamps.setOnGoingEffect("night");
+                    lamps.top_light.setOnGoingEffect("top_night");
                 } else {
                     // Turn back normal lighting
+                    lamps.top_light.setOnGoingEffect("top_normal");
                 }
+            }
+        });
+
+        final Button sunsetButton = (Button) findViewById(R.id.nightSunsetButton);
+        sunsetButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lamps.top_light.setOnGoingEffect("top_sunset");
+            }
+        });
+
+        final Button sunriseButton = (Button) findViewById(R.id.nightSunriseButton);
+        sunriseButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lamps.top_light.setOnGoingEffect("top_sunrise");
+                nightButton.setChecked(false);
             }
         });
 
@@ -254,7 +273,6 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 p1.gotGgun(p2,p3, lamps.p2light, lamps.p3light);
-                //Todo Ggun animation
             }
         });
         Button p2ggun = (Button) findViewById(R.id.p2ggun);
@@ -262,7 +280,6 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 p2.gotGgun(p1,p3, lamps.p1light, lamps.p3light);
-                //Todo Ggun animation
             }
         });
         Button p3ggun = (Button) findViewById(R.id.p3ggun);
@@ -270,7 +287,6 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 p3.gotGgun(p1,p2, lamps.p1light, lamps.p2light);
-                //Todo Ggun animation
             }
         });
 
