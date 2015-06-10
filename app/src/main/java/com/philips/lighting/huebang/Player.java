@@ -77,7 +77,7 @@ public class Player {
         this.setArrows(0);
     }
 
-    private boolean isHeartBeat() {
+    public boolean isHeartBeat() {
         if(this.lives <= 3) {
             return true;
         }

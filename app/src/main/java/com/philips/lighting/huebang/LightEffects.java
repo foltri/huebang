@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class LightEffects {
     public final Effect heart_normal;
     public final Effect heart_beat;
+    public final Effect heart_night;
+    public final Effect heart_sunset;
     public final Effect shot;
     public final Effect top_storm;
     public final Effect top_normal;
@@ -29,6 +31,8 @@ public class LightEffects {
     public LightEffects() {
         this.heart_normal = new Effect();
         this.heart_beat = new Effect();
+        this.heart_night = new Effect();
+        this.heart_sunset = new Effect();
         this.shot = new Effect();
         this.top_normal = new Effect();
         this.top_storm = new Effect();
@@ -75,6 +79,14 @@ public class LightEffects {
                 case "heart_beat.txt":
                     effects.heart_beat.frames = tmp;
                     effects.heart_beat.name = "heart_beat";
+                    break;
+                case "heart_night.txt":
+                    effects.heart_night.frames = tmp;
+                    effects.heart_night.name = "heart_night";
+                    break;
+                case "heart_sunset.txt":
+                    effects.heart_sunset.frames = tmp;
+                    effects.heart_sunset.name = "heart_sunset";
                     break;
                 case "shot.txt":
                     effects.shot.frames = tmp;

@@ -22,6 +22,7 @@ public class Lamp {
     public int nextFrameStartTime;
     public boolean heart_beat = false;
     public boolean heart_beat_started = false;
+    public boolean night_task_on = false;
     public Effect onGoingEffect = new Effect();
     private final LightEffects effects = new LightEffects().init();
 
@@ -46,6 +47,16 @@ public class Lamp {
                 break;
             case "heart_beat":
                 newEffect.addAll(effects.heart_beat.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                break;
+            case "heart_night":
+                newEffect.addAll(effects.heart_night.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                break;
+            case "heart_sunset":
+                newEffect.addAll(effects.heart_sunset.frames);
                 this.onGoingEffect.frames = newEffect;
                 this.onGoingEffect.name = effect;
                 break;
@@ -78,6 +89,7 @@ public class Lamp {
                 newEffect.addAll(effects.top_sunrise.frames);
                 this.onGoingEffect.frames = newEffect;
                 this.onGoingEffect.name = effect;
+                this.night_task_on = false;
                 break;
             default:
                 break;
@@ -182,15 +194,17 @@ public class Lamp {
             //Stop if last frame
             if (this.nextFrameIndex == this.onGoingEffect.frames.size() - 1) {
                 //turn off lamp after last frame of sunset
-                if (this.onGoingEffect.name.equals("top_sunset")) {
+                if (this.onGoingEffect.name.equals("top_sunset") || this.onGoingEffect.name.equals("heart_sunset")) {
                     PHHueSDK phHueSDK = PHHueSDK.create();
                     PHBridge bridge = phHueSDK.getSelectedBridge();
                     PHLightState lightState = new PHLightState();
                     lightState.setOn(false);
                     bridge.updateLightState(this.source, lightState);
+                    this.night_task_on = true;
                 }
+
                 //loop if last frame of heart beat
-                if (this.onGoingEffect.name.equals("heart_beat") || this.onGoingEffect.name.equals("top_storm")) {
+                if (this.onGoingEffect.name.equals("heart_beat") || this.onGoingEffect.name.equals("top_storm") || this.onGoingEffect.name.equals("heart_night")) {
                     this.nextFrameIndex = 0;
                     this.timer_state += 1;
                 } else {

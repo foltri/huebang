@@ -1,5 +1,7 @@
 package com.philips.lighting.huebang;
 
+import android.widget.TextView;
+
 import com.philips.lighting.model.PHBridge;
 import com.philips.lighting.model.PHLight;
 import com.philips.lighting.model.PHLightState;
@@ -22,6 +24,7 @@ public class Lamps {
     public Lamp top_light;
 //    private Timer myTimer;
 //    private Timer myTimer1;
+    public int task_timer;
     private boolean pause = false;
     private boolean heart_beat_reference_on = false;
     private Lamp heart_beat_reference;
@@ -30,21 +33,33 @@ public class Lamps {
             TimerMethod();
         }
     };
-    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private  Runnable timer1 = new Runnable() {
+        public void run() {
+            TimerMethod1();
+        }
+    };
+    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
+    private TextView nightTimerView = null;
+    private TextView indianTimerView = null;
+    public int nightTimer = 0;
 
-
-    public Lamps(List<PHLight> lights) {
+    public Lamps(List<PHLight> lights, TextView nightTimer, TextView indianTimer) {
         this.p1light = new Lamp();
         this.p2light = new Lamp();
         this.p3light = new Lamp();
         this.top_light = new Lamp();
         this.heart_beat_reference = new Lamp();
 
+        this.task_timer = 0;
         this.heart_beat_reference.timer_state = 0;
         this.heart_beat_reference.nextFrameIndex = 0;
         this.heart_beat_reference.nextFrameStartTime = 0;
         this.heart_beat_reference.index = "heart_beat_reference";
         this.heart_beat_reference.setOnGoingEffect("heart_beat");
+
+        this.nightTimerView = nightTimer;
+        this.indianTimerView = indianTimer;
+        this.nightTimer = 0;
 
         for(PHLight light:lights) {
             switch (light.getName()) {
@@ -102,7 +117,8 @@ public class Lamps {
 //
 //        }, 0, 100);
 
-        scheduler.scheduleAtFixedRate(timer, 0, 100, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(timer, 0, 110, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(timer1, 5, 110, TimeUnit.MILLISECONDS);
 
     }
 
@@ -116,12 +132,34 @@ public class Lamps {
         if(this.p1light.onGoingEffect.name != null && this.p1light.source != null) this.p1light.sendNextFrame();
         if(this.p2light.onGoingEffect.name != null && this.p2light.source != null) this.p2light.sendNextFrame();
         if(this.p3light.onGoingEffect.name != null && this.p3light.source != null) this.p3light.sendNextFrame();
-        if(this.top_light.onGoingEffect.name != null && this.top_light.source != null) this.top_light.sendNextFrame();
+//        if(this.top_light.onGoingEffect.name != null && this.top_light.source != null) this.top_light.sendNextFrame();
 
         //We call the method that will work with the UI
         //through the runOnUiThread method.
         //this.runOnUiThread(Timer_Tick);
     }
+
+    private void TimerMethod1()
+    {
+        if(this.top_light.night_task_on) {
+            this.nightTimer += 1;
+            if(this.nightTimer%10 ==0) MyApplicationActivity.getInstance().runOnUiThread(Timer_Tick);
+        } else this.nightTimer = 0;
+        //needed another thread, otherwise it didn't always turn (off/) back on during sunrise effect
+        if(this.top_light.onGoingEffect.name != null && this.top_light.source != null) this.top_light.sendNextFrame();
+
+
+        //We call the method that will work with the UI
+        //through the runOnUiThread method.
+    }
+
+    private Runnable Timer_Tick = new Runnable() {
+        public void run() {
+            //This method runs in the same thread as the UI.
+            //Do something to the UI thread here
+            Lamps.this.nightTimerView.setText("T:" + Lamps.this.nightTimer/10);
+        }
+    };
 
     public void heart_beat_sync() {
         if(this.p1light.heart_beat_started) {

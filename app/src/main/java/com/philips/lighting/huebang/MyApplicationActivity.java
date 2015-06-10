@@ -35,17 +35,21 @@ public class MyApplicationActivity extends Activity {
     public RadioButton p1radioButton = null;
     public RadioButton p2radioButton = null;
     public RadioButton p3radioButton = null;
+    private static MyApplicationActivity instance = null;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.instance = this;
         setTitle(R.string.app_name);
         setContentView(R.layout.activity_main);
         phHueSDK = PHHueSDK.create();
+        TextView nightTimer = (TextView) findViewById(R.id.nightTimerView);
+        TextView indianTimer = (TextView) findViewById(R.id.indianTimerView);
 
         //final LightEffects lightEffects = new LightEffects().init();
 
-        final Lamps lamps = new Lamps(phHueSDK.getSelectedBridge().getResourceCache().getAllLights());
+        final Lamps lamps = new Lamps(phHueSDK.getSelectedBridge().getResourceCache().getAllLights(), nightTimer, indianTimer);
         lamps.p1light.setOnGoingEffect("heart_normal");
         lamps.p2light.setOnGoingEffect("heart_normal");
         lamps.p3light.setOnGoingEffect("heart_normal");
@@ -84,6 +88,9 @@ public class MyApplicationActivity extends Activity {
                 if (on) {
                     // Turn on storm effect
                     lamps.top_light.setOnGoingEffect("top_night");
+                    lamps.p1light.setOnGoingEffect("heart_night");
+                    lamps.p2light.setOnGoingEffect("heart_night");
+                    lamps.p3light.setOnGoingEffect("heart_night");
                 } else {
                     // Turn back normal lighting
                     lamps.top_light.setOnGoingEffect("top_normal");
@@ -96,6 +103,9 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 lamps.top_light.setOnGoingEffect("top_sunset");
+                lamps.p1light.setOnGoingEffect("heart_sunset");
+                lamps.p2light.setOnGoingEffect("heart_sunset");
+                lamps.p3light.setOnGoingEffect("heart_sunset");
             }
         });
 
@@ -104,6 +114,19 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 lamps.top_light.setOnGoingEffect("top_sunrise");
+
+                if(p1.isHeartBeat()) {
+                    lamps.p1light.setOnGoingEffect("heart_beat");
+                } else lamps.p1light.setOnGoingEffect("heart_normal");
+
+                if(p2.isHeartBeat()) {
+                    lamps.p2light.setOnGoingEffect("heart_beat");
+                } else lamps.p2light.setOnGoingEffect("heart_normal");
+
+                if(p3.isHeartBeat()) {
+                    lamps.p3light.setOnGoingEffect("heart_beat");
+                } else lamps.p3light.setOnGoingEffect("heart_normal");
+
                 nightButton.setChecked(false);
             }
         });
@@ -391,5 +414,9 @@ public class MyApplicationActivity extends Activity {
             p2radioButton.setChecked(false);
         }
         return null;
+    }
+
+    public static MyApplicationActivity getInstance() {
+        return instance;
     }
 }
