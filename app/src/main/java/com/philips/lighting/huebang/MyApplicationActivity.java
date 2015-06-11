@@ -176,6 +176,9 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi1light.setOnGoingEffect("ambi1_indian4");
                 lamps.ambi2light.setOnGoingEffect("ambi2_indian4");
                 lamps.ambi3light.setOnGoingEffect("ambi3_indian4");
+                lamps.p1light.setOnGoingEffect("heart1_indian4");
+                lamps.p2light.setOnGoingEffect("heart2_indian4");
+                lamps.p3light.setOnGoingEffect("heart3_indian4");
             }
         });
 
@@ -212,6 +215,8 @@ public class MyApplicationActivity extends Activity {
                         lamps.p3light.setOnGoingEffect("heart_beat");
                     } else lamps.p3light.setOnGoingEffect("heart_normal");
 
+                    lamps.ambi1light.timed_task_on = false;
+
                     indian1check.setChecked(false);
                     indian2check.setChecked(false);
                     indian3check.setChecked(false);
@@ -224,6 +229,16 @@ public class MyApplicationActivity extends Activity {
         dynamiteButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                lamps.ambi1light.timed_task_on = false;
+
+                lamps.ambi1light.setOnGoingEffect("dynamite");
+                lamps.ambi2light.setOnGoingEffect("dynamite");
+                lamps.ambi3light.setOnGoingEffect("dynamite");
+                lamps.p1light.setOnGoingEffect("dynamite");
+                lamps.p2light.setOnGoingEffect("dynamite");
+                lamps.p3light.setOnGoingEffect("dynamite");
+                lamps.top_light.setOnGoingEffect("dynamite");
+
                 indian1check.setChecked(false);
                 indian2check.setChecked(false);
                 indian3check.setChecked(false);
@@ -236,6 +251,8 @@ public class MyApplicationActivity extends Activity {
         arrowButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                lamps.ambi1light.timed_task_on = false;
+
                 indian1check.setChecked(false);
                 indian2check.setChecked(false);
                 indian3check.setChecked(false);

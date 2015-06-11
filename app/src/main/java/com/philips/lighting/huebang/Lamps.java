@@ -51,6 +51,7 @@ public class Lamps {
     private TextView nightTimerView = null;
     private TextView indianTimerView = null;
     public int nightTimer = 0;
+    public int indianTimer = 0;
 
     public Lamps(List<PHLight> lights, TextView nightTimer, TextView indianTimer) {
         this.p1light = new Lamp();
@@ -72,6 +73,7 @@ public class Lamps {
         this.nightTimerView = nightTimer;
         this.indianTimerView = indianTimer;
         this.nightTimer = 0;
+        this.indianTimer = 0;
 
         for(PHLight light:lights) {
             switch (light.getName()) {
@@ -159,10 +161,17 @@ public class Lamps {
 
     private void TimerMethod1()
     {
-        if(this.top_light.night_task_on) {
+        //night timing
+        if(this.top_light.timed_task_on) {
             this.nightTimer += 1;
             if(this.nightTimer%10 ==0) MyApplicationActivity.getInstance().runOnUiThread(Timer_Tick);
         } else this.nightTimer = 0;
+
+        //indian timing
+        if(this.ambi1light.timed_task_on) {
+            this.indianTimer += 1;
+            if(this.indianTimer%10 ==0) MyApplicationActivity.getInstance().runOnUiThread(Timer_Tick);
+        } else this.indianTimer = 0;
         //needed another thread, otherwise it didn't always turn (off/) back on during sunrise effect
         if(this.top_light.onGoingEffect.name != null && this.top_light.source != null) this.top_light.sendNextFrame();
 
@@ -185,7 +194,12 @@ public class Lamps {
         public void run() {
             //This method runs in the same thread as the UI.
             //Do something to the UI thread here
-            Lamps.this.nightTimerView.setText("T:" + Lamps.this.nightTimer/10);
+            if(Lamps.this.top_light.timed_task_on) {
+                Lamps.this.nightTimerView.setText("T:" + Lamps.this.nightTimer / 10);
+            }
+            if(Lamps.this.ambi1light.timed_task_on) {
+                Lamps.this.indianTimerView.setText("T:" + Lamps.this.indianTimer / 10);
+            }
         }
     };
 

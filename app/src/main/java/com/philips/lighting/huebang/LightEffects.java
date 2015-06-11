@@ -21,9 +21,12 @@ public class LightEffects {
     public final Effect heart_beat;
     public final Effect heart_night;
     public final Effect heart_sunset;
+    public final Effect heart_arrow;
     public final Effect heart_indian2;
     public final Effect heart_indian3;
-    public final Effect heart_indian4;
+    public final Effect heart1_indian4;
+    public final Effect heart2_indian4;
+    public final Effect heart3_indian4;
     public final Effect shot;
     public final Effect top_storm;
     public final Effect top_normal;
@@ -48,6 +51,7 @@ public class LightEffects {
     public final Effect ambi1_indian4;
     public final Effect ambi2_indian4;
     public final Effect ambi3_indian4;
+    public final Effect dynamite;
 
 
     public LightEffects() {
@@ -55,9 +59,12 @@ public class LightEffects {
         this.heart_beat = new Effect();
         this.heart_night = new Effect();
         this.heart_sunset = new Effect();
+        this.heart_arrow = new Effect();
         this.heart_indian2 = new Effect();
         this.heart_indian3 = new Effect();
-        this.heart_indian4 = new Effect();
+        this.heart1_indian4 = new Effect();
+        this.heart2_indian4 = new Effect();
+        this.heart3_indian4 = new Effect();
         this.shot = new Effect();
         this.top_normal = new Effect();
         this.top_storm = new Effect();
@@ -82,6 +89,7 @@ public class LightEffects {
         this.ambi1_indian4 = new Effect();
         this.ambi2_indian4 = new Effect();
         this.ambi3_indian4 = new Effect();
+        this.dynamite = new Effect();
     }
 
     public LightEffects init() {
@@ -135,6 +143,11 @@ public class LightEffects {
                     effects.heart_sunset.name = "heart_sunset";
                     effects.heart_sunset.looping = false;
                     break;
+                case "heart_arrow.txt":
+                    effects.heart_arrow.frames = tmp;
+                    effects.heart_arrow.name = "heart_arrow";
+                    effects.heart_arrow.looping = false;
+                    break;
                 case "heart_indian2.txt":
                     effects.heart_indian2.frames = tmp;
                     effects.heart_indian2.name = "heart_indian2";
@@ -145,10 +158,20 @@ public class LightEffects {
                     effects.heart_indian3.name = "heart_indian3";
                     effects.heart_indian3.looping = true;
                     break;
-                case "heart_indian4.txt":
-                    effects.heart_indian4.frames = tmp;
-                    effects.heart_indian4.name = "heart_indian4";
-                    effects.heart_indian4.looping = true;
+                case "heart1_indian4.txt":
+                    effects.heart1_indian4.frames = tmp;
+                    effects.heart1_indian4.name = "heart1_indian4";
+                    effects.heart1_indian4.looping = true;
+                    break;
+                case "heart2_indian4.txt":
+                    effects.heart2_indian4.frames = tmp;
+                    effects.heart2_indian4.name = "heart2_indian4";
+                    effects.heart2_indian4.looping = true;
+                    break;
+                case "heart3_indian4.txt":
+                    effects.heart3_indian4.frames = tmp;
+                    effects.heart3_indian4.name = "heart3_indian4";
+                    effects.heart3_indian4.looping = true;
                     break;
                 case "shot.txt":
                     effects.shot.frames = tmp;
@@ -269,6 +292,11 @@ public class LightEffects {
                     effects.ambi3_indian4.frames = tmp;
                     effects.ambi3_indian4.name = "ambi3_indian4";
                     effects.ambi3_indian4.looping = true;
+                    break;
+                case "dynamite.txt":
+                    effects.dynamite.frames = tmp;
+                    effects.dynamite.name = "dynamite";
+                    effects.dynamite.looping = false;
                     break;
                 default:
                     break;
