@@ -297,6 +297,9 @@ public class Lamp {
             if (nextFrame.getBri() != 0) {
                 lightState.setBrightness(nextFrame.getBri());
             }
+            if (nextFrame.getSat() != 0) {
+                lightState.setSaturation(nextFrame.getSat());
+            }
             lightState.setTransitionTime(nextFrame.getTransitionTime() / 100);
             // To validate your lightstate is valid (before sending to the bridge) you can use:
             // String validState = lightState.validateState();
