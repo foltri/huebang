@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Effect {
     public ArrayList<ControlFrame> frames;
     public String name;
-
+    public boolean looping;
 //    public Effect() {
 //        this.frames = new ArrayList<ControlFrame>();
 //        this.name = null;

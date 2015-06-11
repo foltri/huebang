@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -131,6 +132,46 @@ public class MyApplicationActivity extends Activity {
             }
         });
 
+        final RadioButton indian1check = (RadioButton) findViewById(R.id.indian1check);
+        indian1check.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lamps.ambi1light.setOnGoingEffect("ambi1_indian1");
+                lamps.ambi2light.setOnGoingEffect("ambi2_indian1");
+                lamps.ambi3light.setOnGoingEffect("ambi3_indian1");
+            }
+        });
+
+        final RadioButton indian2check = (RadioButton) findViewById(R.id.indian2check);
+        indian2check.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lamps.ambi1light.setOnGoingEffect("ambi1_indian2");
+                lamps.ambi2light.setOnGoingEffect("ambi2_indian2");
+                lamps.ambi3light.setOnGoingEffect("ambi3_indian2");
+            }
+        });
+
+        final RadioButton indian3check = (RadioButton) findViewById(R.id.indian3check);
+        indian3check.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lamps.ambi1light.setOnGoingEffect("ambi1_indian3");
+                lamps.ambi2light.setOnGoingEffect("ambi2_indian3");
+                lamps.ambi3light.setOnGoingEffect("ambi3_indian3");
+            }
+        });
+
+        final RadioButton indian4check = (RadioButton) findViewById(R.id.indian4check);
+        indian4check.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lamps.ambi1light.setOnGoingEffect("ambi1_indian4");
+                lamps.ambi2light.setOnGoingEffect("ambi2_indian4");
+                lamps.ambi3light.setOnGoingEffect("ambi3_indian4");
+            }
+        });
+
         final ToggleButton indianButton = (ToggleButton) findViewById(R.id.indianButton);
         indianButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -140,9 +181,46 @@ public class MyApplicationActivity extends Activity {
 
                 if (on) {
                     // Turn on storm effect
+                    lamps.ambi1light.setOnGoingEffect("ambi1_indian1");
+                    lamps.ambi2light.setOnGoingEffect("ambi2_indian1");
+                    lamps.ambi3light.setOnGoingEffect("ambi3_indian1");
+
+                    indian1check.setChecked(true);
                 } else {
                     // Turn back normal lighting
+                    lamps.ambi1light.setOnGoingEffect("ambi1_normal");
+                    lamps.ambi2light.setOnGoingEffect("ambi2_normal");
+                    lamps.ambi3light.setOnGoingEffect("ambi3_normal");
+
+                    indian1check.setChecked(false);
+                    indian2check.setChecked(false);
+                    indian3check.setChecked(false);
+                    indian4check.setChecked(false);
                 }
+            }
+        });
+
+        final Button dynamiteButton = (Button) findViewById(R.id.indianDynamiteButton);
+        dynamiteButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                indian1check.setChecked(false);
+                indian2check.setChecked(false);
+                indian3check.setChecked(false);
+                indian4check.setChecked(false);
+                indianButton.setChecked(false);
+            }
+        });
+
+        final Button arrowButton = (Button) findViewById(R.id.indianArrowButton);
+        arrowButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                indian1check.setChecked(false);
+                indian2check.setChecked(false);
+                indian3check.setChecked(false);
+                indian4check.setChecked(false);
+                indianButton.setChecked(false);
             }
         });
 

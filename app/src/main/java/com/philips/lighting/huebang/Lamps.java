@@ -22,6 +22,9 @@ public class Lamps {
     public Lamp p2light;
     public Lamp p3light;
     public Lamp top_light;
+    public Lamp ambi1light;
+    public Lamp ambi2light;
+    public Lamp ambi3light;
 //    private Timer myTimer;
 //    private Timer myTimer1;
     public int task_timer;
@@ -38,7 +41,13 @@ public class Lamps {
             TimerMethod1();
         }
     };
-    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
+    private  Runnable timer2 = new Runnable() {
+        public void run() {
+            TimerMethod2();
+        }
+    };
+    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(3);
+
     private TextView nightTimerView = null;
     private TextView indianTimerView = null;
     public int nightTimer = 0;
@@ -48,6 +57,9 @@ public class Lamps {
         this.p2light = new Lamp();
         this.p3light = new Lamp();
         this.top_light = new Lamp();
+        this.ambi1light = new Lamp();
+        this.ambi2light = new Lamp();
+        this.ambi3light = new Lamp();
         this.heart_beat_reference = new Lamp();
 
         this.task_timer = 0;
@@ -95,31 +107,37 @@ public class Lamps {
                     this.top_light.nextFrameStartTime = 0;
                     this.top_light.onGoingEffect = new Effect();
                     break;
+                case "Ambient 1":
+                    this.ambi1light.source = light;
+                    this.ambi1light.timer_state = 0;
+                    this.ambi1light.index = "Ambient 1";
+                    this.ambi1light.nextFrameIndex = 0;
+                    this.ambi1light.nextFrameStartTime = 0;
+                    this.ambi1light.onGoingEffect = new Effect();
+                    break;
+                case "Ambient 2":
+                    this.ambi2light.source = light;
+                    this.ambi2light.timer_state = 0;
+                    this.ambi2light.index = "Ambient 2";
+                    this.ambi2light.nextFrameIndex = 0;
+                    this.ambi2light.nextFrameStartTime = 0;
+                    this.ambi2light.onGoingEffect = new Effect();
+                    break;
+                case "Ambient 3":
+                    this.ambi3light.source = light;
+                    this.ambi3light.timer_state = 0;
+                    this.ambi3light.index = "Ambient 3";
+                    this.ambi3light.nextFrameIndex = 0;
+                    this.ambi3light.nextFrameStartTime = 0;
+                    this.ambi3light.onGoingEffect = new Effect();
+                    break;
                 default:
                     break;
             }
         }
-        //Todo init timer and frame arrays, start timer
-//        this.myTimer = new Timer();
-//        this.myTimer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                TimerMethod();
-//            }
-//
-//        }, 0, 100);
-//        this.myTimer1 = new Timer();
-//        this.myTimer1.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                TimerMethod1();
-//            }
-//
-//        }, 0, 100);
-
         scheduler.scheduleAtFixedRate(timer, 0, 110, TimeUnit.MILLISECONDS);
         scheduler.scheduleAtFixedRate(timer1, 5, 110, TimeUnit.MILLISECONDS);
-
+        scheduler.scheduleAtFixedRate(timer2, 5, 110, TimeUnit.MILLISECONDS);
     }
 
     private void TimerMethod()
@@ -148,6 +166,16 @@ public class Lamps {
         //needed another thread, otherwise it didn't always turn (off/) back on during sunrise effect
         if(this.top_light.onGoingEffect.name != null && this.top_light.source != null) this.top_light.sendNextFrame();
 
+
+        //We call the method that will work with the UI
+        //through the runOnUiThread method.
+    }
+
+    private void TimerMethod2()
+    {
+        if(this.ambi1light.onGoingEffect.name != null && this.ambi1light.source != null) this.ambi1light.sendNextFrame();
+        if(this.ambi2light.onGoingEffect.name != null && this.ambi2light.source != null) this.ambi2light.sendNextFrame();
+        if(this.ambi3light.onGoingEffect.name != null && this.ambi3light.source != null) this.ambi3light.sendNextFrame();
 
         //We call the method that will work with the UI
         //through the runOnUiThread method.
