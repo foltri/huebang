@@ -284,6 +284,12 @@ public class Lamp {
                     this.onGoingEffect.frames = newEffect;
                     this.onGoingEffect.name = effect;
                     break;
+                case "heart_arrow":
+                    newEffect.addAll(effects.heart_arrow.frames);
+                    this.onGoingEffect.frames = newEffect;
+                    this.onGoingEffect.name = effect;
+                    this.onGoingEffect.looping = this.effects.heart_arrow.looping;
+                    break;
                 default:
                     break;
             }

@@ -251,6 +251,14 @@ public class MyApplicationActivity extends Activity {
         arrowButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                p1.gotIndianAttack(lamps.p1light);
+                p2.gotIndianAttack(lamps.p2light);
+                p3.gotIndianAttack(lamps.p3light);
+                lamps.ambi1light.setOnGoingEffect("ambi1_normal");
+                lamps.ambi2light.setOnGoingEffect("ambi2_normal");
+                lamps.ambi3light.setOnGoingEffect("ambi3_normal");
+                lamps.top_light.setOnGoingEffect("top_normal");
+
                 lamps.ambi1light.timed_task_on = false;
 
                 indian1check.setChecked(false);

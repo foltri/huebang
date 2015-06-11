@@ -50,6 +50,13 @@ public class Player {
         lamp.setOnGoingEffect("shot", isHeartBeat());
     }
 
+    public void gotIndianAttack(Lamp lamp) {
+        this.lives = this.lives - this.arrows;
+        this.lifeNum.setText("L:" + this.lives);
+        this.setArrows(0);
+        lamp.setOnGoingEffect("heart_arrow", isHeartBeat());
+    }
+
     public void gotArrow() {
         this.arrows = this.arrows + 1;
         this.arrowNum.setText("A:" + this.arrows);
