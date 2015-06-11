@@ -55,6 +55,9 @@ public class MyApplicationActivity extends Activity {
         lamps.p2light.setOnGoingEffect("heart_normal");
         lamps.p3light.setOnGoingEffect("heart_normal");
         lamps.top_light.setOnGoingEffect("top_normal");
+        lamps.ambi1light.setOnGoingEffect("ambi1_normal");
+        lamps.ambi2light.setOnGoingEffect("ambi2_normal");
+        lamps.ambi3light.setOnGoingEffect("ambi3_normal");
 
         final Player p1 = new Player(4,0, (TextView) findViewById(R.id.p1arrowView), (TextView) findViewById(R.id.p1lifeView));
         final Player p2 = new Player(4,0, (TextView) findViewById(R.id.p2arrowView), (TextView) findViewById(R.id.p2lifeView));
@@ -149,6 +152,9 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi1light.setOnGoingEffect("ambi1_indian2");
                 lamps.ambi2light.setOnGoingEffect("ambi2_indian2");
                 lamps.ambi3light.setOnGoingEffect("ambi3_indian2");
+                lamps.p1light.setOnGoingEffect("heart_indian2");
+                lamps.p2light.setOnGoingEffect("heart_indian2");
+                lamps.p3light.setOnGoingEffect("heart_indian2");
             }
         });
 
@@ -159,6 +165,7 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi1light.setOnGoingEffect("ambi1_indian3");
                 lamps.ambi2light.setOnGoingEffect("ambi2_indian3");
                 lamps.ambi3light.setOnGoingEffect("ambi3_indian3");
+                lamps.top_light.setOnGoingEffect("top_indian3");
             }
         });
 
@@ -191,6 +198,19 @@ public class MyApplicationActivity extends Activity {
                     lamps.ambi1light.setOnGoingEffect("ambi1_normal");
                     lamps.ambi2light.setOnGoingEffect("ambi2_normal");
                     lamps.ambi3light.setOnGoingEffect("ambi3_normal");
+                    lamps.top_light.setOnGoingEffect("top_normal");
+
+                    if(p1.isHeartBeat()) {
+                        lamps.p1light.setOnGoingEffect("heart_beat");
+                    } else lamps.p1light.setOnGoingEffect("heart_normal");
+
+                    if(p2.isHeartBeat()) {
+                        lamps.p2light.setOnGoingEffect("heart_beat");
+                    } else lamps.p2light.setOnGoingEffect("heart_normal");
+
+                    if(p3.isHeartBeat()) {
+                        lamps.p3light.setOnGoingEffect("heart_beat");
+                    } else lamps.p3light.setOnGoingEffect("heart_normal");
 
                     indian1check.setChecked(false);
                     indian2check.setChecked(false);
@@ -348,7 +368,6 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 p1.gotShot(lamps.p1light);
-                //Todo Shot animation
             }
         });
         Button p2shot = (Button) findViewById(R.id.p2shot);
@@ -356,7 +375,6 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 p2.gotShot(lamps.p2light);
-                //Todo Shot animation
             }
         });
         Button p3shot = (Button) findViewById(R.id.p3shot);
@@ -364,7 +382,6 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 p3.gotShot(lamps.p3light);
-                //Todo Shot animation
             }
         });
 

@@ -138,7 +138,7 @@ public class LightEffects {
                 case "heart_indian2.txt":
                     effects.heart_indian2.frames = tmp;
                     effects.heart_indian2.name = "heart_indian2";
-                    effects.heart_indian2.looping = true;
+                    effects.heart_indian2.looping = false;
                     break;
                 case "heart_indian3.txt":
                     effects.heart_indian3.frames = tmp;
