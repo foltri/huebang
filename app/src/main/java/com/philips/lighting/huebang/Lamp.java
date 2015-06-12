@@ -273,16 +273,19 @@ public class Lamp {
                     newEffect.addAll(effects.shot.frames);
                     this.onGoingEffect.frames = newEffect;
                     this.onGoingEffect.name = effect;
+                    this.onGoingEffect.looping = this.effects.shot.looping;
                     break;
                 case "top_storm":
                     newEffect.addAll(effects.top_storm.frames);
                     this.onGoingEffect.frames = newEffect;
                     this.onGoingEffect.name = effect;
+                    this.onGoingEffect.looping = this.effects.top_storm.looping;
                     break;
                 case "top_normal":
                     newEffect.addAll(effects.top_normal.frames);
                     this.onGoingEffect.frames = newEffect;
                     this.onGoingEffect.name = effect;
+                    this.onGoingEffect.looping = this.effects.top_normal.looping;
                     break;
                 case "heart_arrow":
                     newEffect.addAll(effects.heart_arrow.frames);
@@ -304,19 +307,26 @@ public class Lamp {
     }
 
     public void endOfEffect() {
+
         if((this.onGoingEffect.name == "shot" || this.onGoingEffect.name == "heart_arrow" || this.onGoingEffect.name == "dynamite") && this.heart_beat) {
+
+
             this.onGoingEffect.name = null;
             this.onGoingEffect.frames.clear();
             this.setOnGoingEffect("heart_beat");
         }
         //if end of dynamite set back normal state
         else if (this.onGoingEffect.name.equals("dynamite")) {
+            this.onGoingEffect.name = null;
+            this.onGoingEffect.frames.clear();
             switch (this.index) {
                 case "Top lamp":
                     this.setOnGoingEffect("top_normal");
+                    Log.w("top_normal", String.valueOf(this.onGoingEffect.frames.get(0).getHue()));
                     break;
                 case "Ambient 1":
                     this.setOnGoingEffect("ambi1_normal");
+                    Log.w("ambi1_normal", String.valueOf(this.onGoingEffect.frames.get(0).getHue()));
                     break;
                 case "Ambient 2":
                     this.setOnGoingEffect("ambi2_normal");
@@ -363,7 +373,7 @@ public class Lamp {
             bridge.updateLightState(this.source, lightState);
 
             //debug
-            //Log.w("Sent frames", "Sent: " + nextFrame.getBri());
+            Log.w("Sent frames", this.index + ": " + String.valueOf(nextFrame.getHue()) + " " + String.valueOf(this.onGoingEffect.name));
         }
     }
 
@@ -409,7 +419,6 @@ public class Lamp {
             //Increment timerState
             this.timer_state += 1;
         }
-
         return frameToSend;
     }
 }
