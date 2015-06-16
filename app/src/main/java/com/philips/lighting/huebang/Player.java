@@ -28,10 +28,10 @@ public class Player {
         this.lives = lives;
         this.lifeNum.setText("L:" + this.lives);
         if(isHeartBeat() && lamp.onGoingEffect.name != "heart_beat") {
-            lamp.setOnGoingEffect("heart_beat");
+            lamp.setOnGoingEffect(lamp.effects.heart_beat);
         }
         if(!isHeartBeat() && lamp.onGoingEffect.name == "heart_beat") {
-            lamp.setOnGoingEffect("heart_normal");
+            lamp.setOnGoingEffect(lamp.effects.heart_normal);
         }
     }
 
@@ -47,14 +47,14 @@ public class Player {
     public void gotShot(Lamp lamp) {
         this.lives = this.lives - 1;
         this.lifeNum.setText("L:" + this.lives);
-        lamp.setOnGoingEffect("shot", isHeartBeat());
+        lamp.setOnGoingEffect(lamp.effects.shot, isHeartBeat());
     }
 
     public void gotIndianAttack(Lamp lamp) {
         this.lives = this.lives - this.arrows;
         this.lifeNum.setText("L:" + this.lives);
         this.setArrows(0);
-        lamp.setOnGoingEffect("heart_arrow", isHeartBeat());
+        lamp.setOnGoingEffect(lamp.effects.heart_arrow, isHeartBeat());
     }
 
     public void gotArrow() {
@@ -66,10 +66,10 @@ public class Player {
         this.lives = this.lives + 1;
         this.lifeNum.setText("L:" + this.lives);
         if(isHeartBeat() && lamp.onGoingEffect.name != "heart_beat") {
-            lamp.setOnGoingEffect("heart_beat");
+            lamp.setOnGoingEffect(lamp.effects.heart_beat);
         }
         if(!isHeartBeat() && lamp.onGoingEffect.name == "heart_beat") {
-            lamp.setOnGoingEffect("heart_normal");
+            lamp.setOnGoingEffect(lamp.effects.heart_normal);
         }
     }
 
@@ -78,8 +78,8 @@ public class Player {
         other2.lives -= 1;
         other1.lifeNum.setText("L:" + other1.lives);
         other2.lifeNum.setText("L:" + other2.lives);
-        l1.setOnGoingEffect("shot", isHeartBeat());
-        l2.setOnGoingEffect("shot", isHeartBeat());
+        l1.setOnGoingEffect(l1.effects.shot, isHeartBeat());
+        l2.setOnGoingEffect(l1.effects.shot, isHeartBeat());
 
         this.setArrows(0);
     }

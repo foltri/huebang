@@ -17,6 +17,10 @@ import java.util.ArrayList;
  * Created by folti on 06/06/15.
  */
 public class LightEffects {
+    public final Effect sun_normal;
+    public final Effect sun_night;
+    public final Effect sun_sunset;
+    public final Effect sun_sunrise;
     public final Effect heart_normal;
     public final Effect heart_beat;
     public final Effect heart_night;
@@ -36,6 +40,12 @@ public class LightEffects {
     public final Effect top_indian2;
     public final Effect top_indian3;
     public final Effect top_indian4;
+    public final Effect ambix1_night;
+    public final Effect ambix2_night;
+    public final Effect ambix1_sunset;
+    public final Effect ambix2_sunset;
+    public final Effect ambix1_sunrise;
+    public final Effect ambix2_sunrise;
     public final Effect ambi1_normal;
     public final Effect ambi2_normal;
     public final Effect ambi3_normal;
@@ -55,6 +65,10 @@ public class LightEffects {
 
 
     public LightEffects() {
+        this.sun_normal = new Effect();
+        this.sun_night = new Effect();
+        this.sun_sunset = new Effect();
+        this.sun_sunrise = new Effect();
         this.heart_normal = new Effect();
         this.heart_beat = new Effect();
         this.heart_night = new Effect();
@@ -74,6 +88,12 @@ public class LightEffects {
         this.top_indian2 = new Effect();
         this.top_indian3 = new Effect();
         this.top_indian4 = new Effect();
+        this.ambix1_night = new Effect();
+        this.ambix2_night = new Effect();
+        this.ambix1_sunset = new Effect();
+        this.ambix2_sunset = new Effect();
+        this.ambix1_sunrise = new Effect();
+        this.ambix2_sunrise = new Effect();
         this.ambi1_normal = new Effect();
         this.ambi2_normal = new Effect();
         this.ambi3_normal = new Effect();
@@ -123,6 +143,26 @@ public class LightEffects {
             }
 
             switch (name) {
+                case "sun_normal.txt":
+                    effects.sun_normal.frames = tmp;
+                    effects.sun_normal.name = "sun_normal";
+                    effects.sun_normal.looping = false;
+                    break;
+                case "sun_night.txt":
+                    effects.sun_night.frames = tmp;
+                    effects.sun_night.name = "sun_night";
+                    effects.sun_night.looping = false;
+                    break;
+                case "sun_sunset.txt":
+                    effects.sun_sunset.frames = tmp;
+                    effects.sun_sunset.name = "sun_sunset";
+                    effects.sun_sunset.looping = false;
+                    break;
+                case "sun_sunrise.txt":
+                    effects.sun_sunrise.frames = tmp;
+                    effects.sun_sunrise.name = "sun_sunrise";
+                    effects.sun_sunrise.looping = false;
+                    break;
                 case "heart_normal.txt":
                     effects.heart_normal.frames = tmp;
                     effects.heart_normal.name = "heart_normal";
@@ -217,6 +257,36 @@ public class LightEffects {
                     effects.top_indian4.frames = tmp;
                     effects.top_indian4.name = "top_indian4";
                     effects.top_indian4.looping = true;
+                    break;
+                case "ambix1_night.txt":
+                    effects.ambix1_night.frames = tmp;
+                    effects.ambix1_night.name = "ambix1_night";
+                    effects.ambix1_night.looping = false;
+                    break;
+                case "ambix2_night.txt":
+                    effects.ambix2_night.frames = tmp;
+                    effects.ambix2_night.name = "ambix2_night";
+                    effects.ambix2_night.looping = false;
+                    break;
+                case "ambix1_sunset.txt":
+                    effects.ambix1_sunset.frames = tmp;
+                    effects.ambix1_sunset.name = "ambix1_sunset";
+                    effects.ambix1_sunset.looping = false;
+                    break;
+                case "ambix2_sunset.txt":
+                    effects.ambix2_sunset.frames = tmp;
+                    effects.ambix2_sunset.name = "ambix2_sunset";
+                    effects.ambix2_sunset.looping = false;
+                    break;
+                case "ambix1_sunrise.txt":
+                    effects.ambix1_sunrise.frames = tmp;
+                    effects.ambix1_sunrise.name = "ambix1_sunrise";
+                    effects.ambix1_sunrise.looping = false;
+                    break;
+                case "ambix2_sunrise.txt":
+                    effects.ambix2_sunrise.frames = tmp;
+                    effects.ambix2_sunrise.name = "ambix2_sunrise";
+                    effects.ambix2_sunrise.looping = false;
                     break;
                 case "ambi1_normal.txt":
                     effects.ambi1_normal.frames = tmp;

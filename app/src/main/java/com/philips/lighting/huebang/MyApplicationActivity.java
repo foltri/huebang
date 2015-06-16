@@ -13,6 +13,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -37,6 +39,10 @@ public class MyApplicationActivity extends Activity {
     public RadioButton p2radioButton = null;
     public RadioButton p3radioButton = null;
     private static MyApplicationActivity instance = null;
+    public Lamps lamps;
+    public Player p1;
+    public Player p2;
+    public Player p3;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,20 +54,22 @@ public class MyApplicationActivity extends Activity {
         TextView nightTimer = (TextView) findViewById(R.id.nightTimerView);
         TextView indianTimer = (TextView) findViewById(R.id.indianTimerView);
 
-        //final LightEffects lightEffects = new LightEffects().init();
+        final LightEffects lightEffects = new LightEffects().init();
 
-        final Lamps lamps = new Lamps(phHueSDK.getSelectedBridge().getResourceCache().getAllLights(), nightTimer, indianTimer);
-        lamps.p1light.setOnGoingEffect("heart_normal");
-        lamps.p2light.setOnGoingEffect("heart_normal");
-        lamps.p3light.setOnGoingEffect("heart_normal");
-        lamps.top_light.setOnGoingEffect("top_normal");
-        lamps.ambi1light.setOnGoingEffect("ambi1_normal");
-        lamps.ambi2light.setOnGoingEffect("ambi2_normal");
-        lamps.ambi3light.setOnGoingEffect("ambi3_normal");
+        lamps = new Lamps(phHueSDK.getSelectedBridge().getResourceCache().getAllLights(), nightTimer, indianTimer);
+        lamps.sun_light.setOnGoingEffect(lightEffects.sun_normal);
+        lamps.p1light.setOnGoingEffect(lightEffects.heart_normal);
+        lamps.p2light.setOnGoingEffect(lightEffects.heart_normal);
+        lamps.p3light.setOnGoingEffect(lightEffects.heart_normal);
+        lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
+        lamps.ambi11light.setOnGoingEffect(lightEffects.ambi1_normal);
+        lamps.ambi12light.setOnGoingEffect(lightEffects.ambi1_normal);
+        lamps.ambi21light.setOnGoingEffect(lightEffects.ambi1_normal);
+        lamps.ambi22light.setOnGoingEffect(lightEffects.ambi1_normal);
 
-        final Player p1 = new Player(4,0, (TextView) findViewById(R.id.p1arrowView), (TextView) findViewById(R.id.p1lifeView));
-        final Player p2 = new Player(4,0, (TextView) findViewById(R.id.p2arrowView), (TextView) findViewById(R.id.p2lifeView));
-        final Player p3 = new Player(4,0, (TextView) findViewById(R.id.p3arrowView), (TextView) findViewById(R.id.p3lifeView));
+        p1 = new Player(4,0, (TextView) findViewById(R.id.p1arrowView), (TextView) findViewById(R.id.p1lifeView));
+        p2 = new Player(4,0, (TextView) findViewById(R.id.p2arrowView), (TextView) findViewById(R.id.p2lifeView));
+        p3 = new Player(4,0, (TextView) findViewById(R.id.p3arrowView), (TextView) findViewById(R.id.p3lifeView));
 
 
         //EXTENTIONAL ELEMENTS//
@@ -74,10 +82,10 @@ public class MyApplicationActivity extends Activity {
 
                 if (on) {
                     // Turn on storm effect
-                    lamps.top_light.setOnGoingEffect("top_storm");
+                    lamps.top_light.setOnGoingEffect(lightEffects.top_storm);
                 } else {
                     // Turn back normal lighting
-                    lamps.top_light.setOnGoingEffect("top_normal");
+                    lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
                 }
             }
         });
@@ -91,13 +99,29 @@ public class MyApplicationActivity extends Activity {
 
                 if (on) {
                     // Turn on storm effect
-                    lamps.top_light.setOnGoingEffect("top_night");
-                    lamps.p1light.setOnGoingEffect("heart_night");
-                    lamps.p2light.setOnGoingEffect("heart_night");
-                    lamps.p3light.setOnGoingEffect("heart_night");
+                    lamps.top_light.setOnGoingEffect(lightEffects.top_night);
+                    lamps.sun_light.setOnGoingEffect(lightEffects.sun_night);
+//                    lamps.p1light.setOnGoingEffect("heart_night");
+//                    lamps.p2light.setOnGoingEffect("heart_night");
+//                    lamps.p3light.setOnGoingEffect("heart_night");
+
+                    lamps.ambi11light.setOnGoingEffect(lightEffects.ambix1_night);
+                    lamps.ambi12light.setOnGoingEffect(lightEffects.ambix2_night);
+                    lamps.ambi21light.setOnGoingEffect(lightEffects.ambix1_night);
+                    lamps.ambi22light.setOnGoingEffect(lightEffects.ambix2_night);
                 } else {
                     // Turn back normal lighting
-                    lamps.top_light.setOnGoingEffect("top_normal");
+                    lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
+                    lamps.sun_light.setOnGoingEffect(lightEffects.sun_normal);
+
+                    lamps.p1light.setOnGoingEffect(lightEffects.heart_normal, p1.isHeartBeat());
+                    lamps.p2light.setOnGoingEffect(lightEffects.heart_normal, p2.isHeartBeat());
+                    lamps.p3light.setOnGoingEffect(lightEffects.heart_normal, p3.isHeartBeat());
+
+                    lamps.ambi11light.setOnGoingEffect(lightEffects.ambi1_normal);
+                    lamps.ambi12light.setOnGoingEffect(lightEffects.ambi1_normal);
+                    lamps.ambi21light.setOnGoingEffect(lightEffects.ambi1_normal);
+                    lamps.ambi22light.setOnGoingEffect(lightEffects.ambi1_normal);
                 }
             }
         });
@@ -106,10 +130,17 @@ public class MyApplicationActivity extends Activity {
         sunsetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.top_light.setOnGoingEffect("top_sunset");
-                lamps.p1light.setOnGoingEffect("heart_sunset");
-                lamps.p2light.setOnGoingEffect("heart_sunset");
-                lamps.p3light.setOnGoingEffect("heart_sunset");
+                lamps.top_light.setOnGoingEffect(lightEffects.top_sunset);
+//                lamps.p1light.setOnGoingEffect("heart_sunset");
+//                lamps.p2light.setOnGoingEffect("heart_sunset");
+//                lamps.p3light.setOnGoingEffect("heart_sunset");
+
+                lamps.sun_light.setOnGoingEffect(lightEffects.sun_sunset);
+
+                lamps.ambi11light.setOnGoingEffect(lightEffects.ambix1_sunset);
+                lamps.ambi12light.setOnGoingEffect(lightEffects.ambix2_sunset);
+                lamps.ambi21light.setOnGoingEffect(lightEffects.ambix1_sunset);
+                lamps.ambi22light.setOnGoingEffect(lightEffects.ambix2_sunset);
             }
         });
 
@@ -117,19 +148,19 @@ public class MyApplicationActivity extends Activity {
         sunriseButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.top_light.setOnGoingEffect("top_sunrise");
+                lamps.top_light.setOnGoingEffect(lightEffects.top_sunrise);
 
                 if(p1.isHeartBeat()) {
-                    lamps.p1light.setOnGoingEffect("heart_beat");
-                } else lamps.p1light.setOnGoingEffect("heart_normal");
+                    lamps.p1light.setOnGoingEffect(lightEffects.heart_beat);
+                } else lamps.p1light.setOnGoingEffect(lightEffects.heart_normal);
 
                 if(p2.isHeartBeat()) {
-                    lamps.p2light.setOnGoingEffect("heart_beat");
-                } else lamps.p2light.setOnGoingEffect("heart_normal");
+                    lamps.p2light.setOnGoingEffect(lightEffects.heart_beat);
+                } else lamps.p2light.setOnGoingEffect(lightEffects.heart_normal);
 
                 if(p3.isHeartBeat()) {
-                    lamps.p3light.setOnGoingEffect("heart_beat");
-                } else lamps.p3light.setOnGoingEffect("heart_normal");
+                    lamps.p3light.setOnGoingEffect(lightEffects.heart_beat);
+                } else lamps.p3light.setOnGoingEffect(lightEffects.heart_normal);
 
                 nightButton.setChecked(false);
             }
@@ -139,9 +170,11 @@ public class MyApplicationActivity extends Activity {
         indian1check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.ambi1light.setOnGoingEffect("ambi1_indian1");
-                lamps.ambi2light.setOnGoingEffect("ambi2_indian1");
-                lamps.ambi3light.setOnGoingEffect("ambi3_indian1");
+                //todo
+                lamps.ambi11light.setOnGoingEffect(lightEffects.ambi1_indian1);
+                lamps.ambi12light.setOnGoingEffect(lightEffects.ambi2_indian1);
+                lamps.ambi21light.setOnGoingEffect(lightEffects.ambi3_indian1);
+                lamps.ambi22light.setOnGoingEffect(lightEffects.ambi3_indian1);
             }
         });
 
@@ -149,12 +182,15 @@ public class MyApplicationActivity extends Activity {
         indian2check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.ambi1light.setOnGoingEffect("ambi1_indian2");
-                lamps.ambi2light.setOnGoingEffect("ambi2_indian2");
-                lamps.ambi3light.setOnGoingEffect("ambi3_indian2");
-                lamps.p1light.setOnGoingEffect("heart_indian2");
-                lamps.p2light.setOnGoingEffect("heart_indian2");
-                lamps.p3light.setOnGoingEffect("heart_indian2");
+                //todo
+//                lamps.ambi11light.setOnGoingEffect("ambi1_indian2");
+//                lamps.ambi12light.setOnGoingEffect("ambi2_indian2");
+//                lamps.ambi21light.setOnGoingEffect("ambi3_indian2");
+//                lamps.ambi22light.setOnGoingEffect("ambi3_indian2");
+
+                lamps.p1light.setOnGoingEffect(lightEffects.heart_indian2);
+                lamps.p2light.setOnGoingEffect(lightEffects.heart_indian2);
+                lamps.p3light.setOnGoingEffect(lightEffects.heart_indian2);
             }
         });
 
@@ -162,10 +198,13 @@ public class MyApplicationActivity extends Activity {
         indian3check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.ambi1light.setOnGoingEffect("ambi1_indian3");
-                lamps.ambi2light.setOnGoingEffect("ambi2_indian3");
-                lamps.ambi3light.setOnGoingEffect("ambi3_indian3");
-                lamps.top_light.setOnGoingEffect("top_indian3");
+                //todo
+//                lamps.ambi11light.setOnGoingEffect("ambi1_indian3");
+//                lamps.ambi12light.setOnGoingEffect("ambi2_indian3");
+//                lamps.ambi21light.setOnGoingEffect("ambi3_indian3");
+//                lamps.ambi22light.setOnGoingEffect("ambi3_indian3");
+
+                lamps.top_light.setOnGoingEffect(lightEffects.top_indian3);
             }
         });
 
@@ -173,12 +212,15 @@ public class MyApplicationActivity extends Activity {
         indian4check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.ambi1light.setOnGoingEffect("ambi1_indian4");
-                lamps.ambi2light.setOnGoingEffect("ambi2_indian4");
-                lamps.ambi3light.setOnGoingEffect("ambi3_indian4");
-                lamps.p1light.setOnGoingEffect("heart1_indian4");
-                lamps.p2light.setOnGoingEffect("heart2_indian4");
-                lamps.p3light.setOnGoingEffect("heart3_indian4");
+                //todo
+//                lamps.ambi11light.setOnGoingEffect("ambi1_indian4");
+//                lamps.ambi12light.setOnGoingEffect("ambi2_indian4");
+//                lamps.ambi21light.setOnGoingEffect("ambi3_indian4");
+//                lamps.ambi22light.setOnGoingEffect("ambi3_indian4");
+
+                lamps.p1light.setOnGoingEffect(lightEffects.heart1_indian4);
+                lamps.p2light.setOnGoingEffect(lightEffects.heart2_indian4);
+                lamps.p3light.setOnGoingEffect(lightEffects.heart3_indian4);
             }
         });
 
@@ -191,31 +233,35 @@ public class MyApplicationActivity extends Activity {
 
                 if (on) {
                     // Turn on storm effect
-                    lamps.ambi1light.setOnGoingEffect("ambi1_indian1");
-                    lamps.ambi2light.setOnGoingEffect("ambi2_indian1");
-                    lamps.ambi3light.setOnGoingEffect("ambi3_indian1");
+                    //todo
+//                    lamps.ambi11light.setOnGoingEffect("ambi1_indian1");
+//                    lamps.ambi12light.setOnGoingEffect("ambi2_indian1");
+//                    lamps.ambi21light.setOnGoingEffect("ambi3_indian1");
+//                    lamps.ambi22light.setOnGoingEffect("ambi3_indian1");
 
                     indian1check.setChecked(true);
                 } else {
                     // Turn back normal lighting
-                    lamps.ambi1light.setOnGoingEffect("ambi1_normal");
-                    lamps.ambi2light.setOnGoingEffect("ambi2_normal");
-                    lamps.ambi3light.setOnGoingEffect("ambi3_normal");
-                    lamps.top_light.setOnGoingEffect("top_normal");
+                    lamps.ambi11light.setOnGoingEffect(lightEffects.ambi1_normal);
+                    lamps.ambi12light.setOnGoingEffect(lightEffects.ambi1_normal);
+                    lamps.ambi21light.setOnGoingEffect(lightEffects.ambi1_normal);
+                    lamps.ambi22light.setOnGoingEffect(lightEffects.ambi1_normal);
+
+                    lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
 
                     if(p1.isHeartBeat()) {
-                        lamps.p1light.setOnGoingEffect("heart_beat");
-                    } else lamps.p1light.setOnGoingEffect("heart_normal");
+                        lamps.p1light.setOnGoingEffect(lightEffects.heart_beat);
+                    } else lamps.p1light.setOnGoingEffect(lightEffects.heart_normal);
 
                     if(p2.isHeartBeat()) {
-                        lamps.p2light.setOnGoingEffect("heart_beat");
-                    } else lamps.p2light.setOnGoingEffect("heart_normal");
+                        lamps.p2light.setOnGoingEffect(lightEffects.heart_beat);
+                    } else lamps.p2light.setOnGoingEffect(lightEffects.heart_normal);
 
                     if(p3.isHeartBeat()) {
-                        lamps.p3light.setOnGoingEffect("heart_beat");
-                    } else lamps.p3light.setOnGoingEffect("heart_normal");
+                        lamps.p3light.setOnGoingEffect(lightEffects.heart_beat);
+                    } else lamps.p3light.setOnGoingEffect(lightEffects.heart_normal);
 
-                    lamps.ambi1light.timed_task_on = false;
+                    lamps.ambi11light.timed_task_on = false;
 
                     indian1check.setChecked(false);
                     indian2check.setChecked(false);
@@ -229,15 +275,17 @@ public class MyApplicationActivity extends Activity {
         dynamiteButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.ambi1light.timed_task_on = false;
+                lamps.ambi11light.timed_task_on = false;
 
-                lamps.ambi1light.setOnGoingEffect("dynamite");
-                lamps.ambi2light.setOnGoingEffect("dynamite");
-                lamps.ambi3light.setOnGoingEffect("dynamite");
-                lamps.p1light.setOnGoingEffect("dynamite");
-                lamps.p2light.setOnGoingEffect("dynamite");
-                lamps.p3light.setOnGoingEffect("dynamite");
-                lamps.top_light.setOnGoingEffect("dynamite");
+                lamps.ambi11light.setOnGoingEffect(lightEffects.dynamite);
+                lamps.ambi12light.setOnGoingEffect(lightEffects.dynamite);
+                lamps.ambi21light.setOnGoingEffect(lightEffects.dynamite);
+                lamps.ambi22light.setOnGoingEffect(lightEffects.dynamite);
+
+                lamps.p1light.setOnGoingEffect(lightEffects.dynamite);
+                lamps.p2light.setOnGoingEffect(lightEffects.dynamite);
+                lamps.p3light.setOnGoingEffect(lightEffects.dynamite);
+                lamps.top_light.setOnGoingEffect(lightEffects.dynamite);
 
                 indian1check.setChecked(false);
                 indian2check.setChecked(false);
@@ -254,12 +302,15 @@ public class MyApplicationActivity extends Activity {
                 p1.gotIndianAttack(lamps.p1light);
                 p2.gotIndianAttack(lamps.p2light);
                 p3.gotIndianAttack(lamps.p3light);
-                lamps.ambi1light.setOnGoingEffect("ambi1_normal");
-                lamps.ambi2light.setOnGoingEffect("ambi2_normal");
-                lamps.ambi3light.setOnGoingEffect("ambi3_normal");
-                lamps.top_light.setOnGoingEffect("top_normal");
 
-                lamps.ambi1light.timed_task_on = false;
+                lamps.ambi11light.setOnGoingEffect(lightEffects.ambi1_normal);
+                lamps.ambi12light.setOnGoingEffect(lightEffects.ambi1_normal);
+                lamps.ambi21light.setOnGoingEffect(lightEffects.ambi1_normal);
+                lamps.ambi22light.setOnGoingEffect(lightEffects.ambi1_normal);
+
+                lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
+
+                lamps.ambi11light.timed_task_on = false;
 
                 indian1check.setChecked(false);
                 indian2check.setChecked(false);
@@ -538,5 +589,36 @@ public class MyApplicationActivity extends Activity {
 
     public static MyApplicationActivity getInstance() {
         return instance;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.refresh_list) {
+            lamps.p1light.setOnGoingEffect(lamps.ambi11light.effects.heart_normal, p1.isHeartBeat());
+            lamps.p2light.setOnGoingEffect(lamps.ambi11light.effects.heart_normal, p2.isHeartBeat());
+            lamps.p3light.setOnGoingEffect(lamps.ambi11light.effects.heart_normal, p3.isHeartBeat());
+
+            lamps.top_light.setOnGoingEffect(lamps.ambi11light.effects.top_normal);
+            lamps.sun_light.setOnGoingEffect(lamps.ambi11light.effects.sun_normal);
+            lamps.ambi11light.setOnGoingEffect(lamps.ambi11light.effects.ambi1_normal);
+            lamps.ambi12light.setOnGoingEffect(lamps.ambi11light.effects.ambi1_normal);
+            lamps.ambi21light.setOnGoingEffect(lamps.ambi11light.effects.ambi1_normal);
+            lamps.ambi22light.setOnGoingEffect(lamps.ambi11light.effects.ambi1_normal);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

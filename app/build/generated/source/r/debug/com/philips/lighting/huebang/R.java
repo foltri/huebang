@@ -83,7 +83,7 @@ public final class R {
         public static final int p3radioButton=0x7f080029;
         public static final int p3shot=0x7f080033;
         public static final int refresh=0x7f08003e;
-        public static final int settings=0x7f080040;
+        public static final int refresh_list=0x7f080040;
         public static final int stormButton=0x7f080001;
         public static final int textView1=0x7f080036;
     }

@@ -24,7 +24,7 @@ public class Lamp {
     public boolean heart_beat_started = false;
     public boolean timed_task_on = false;
     public Effect onGoingEffect = new Effect();
-    private final LightEffects effects = new LightEffects().init();
+    public final LightEffects effects = new LightEffects().init();
 
     public Lamp() {
         this.timer_state = 0;
@@ -36,10 +36,45 @@ public class Lamp {
         this.onGoingEffect = new Effect();
     }
 
-    public synchronized void setOnGoingEffect(String effect) {
+    public synchronized void setOnGoingEffect(Effect effect) {
         ArrayList<ControlFrame> newEffect = new ArrayList<ControlFrame>();
+        newEffect.addAll(effect.frames);
+        this.onGoingEffect.frames = newEffect;
+        this.onGoingEffect.name = effect.name;
+        this.onGoingEffect.looping = effect.looping;
 
-        switch (effect) {
+        if(effect.name.equals("ambi11_indian1")) { //todo
+            this.timed_task_on = true;
+        } else if(effect.name.equals("ambi11_sunrise") || effect.name.equals("dynamite") || effect.name.equals("heart_arrow")) { //todo
+            this.timed_task_on = false;
+        }
+
+
+        /*switch (effect) {
+            case "sun_normal":
+                newEffect.addAll(effects.sun_normal.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                this.onGoingEffect.looping = this.effects.sun_normal.looping;
+                break;
+            case "sun_night":
+                newEffect.addAll(effects.sun_night.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                this.onGoingEffect.looping = this.effects.sun_night.looping;
+                break;
+            case "sun_sunset":
+                newEffect.addAll(effects.sun_sunset.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                this.onGoingEffect.looping = this.effects.sun_sunset.looping;
+                break;
+            case "sun_sunrise":
+                newEffect.addAll(effects.sun_sunrise.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                this.onGoingEffect.looping = this.effects.sun_sunrise.looping;
+                break;
             case "heart_normal":
                 newEffect.addAll(effects.heart_normal.frames);
                 this.onGoingEffect.frames = newEffect;
@@ -148,14 +183,56 @@ public class Lamp {
                 this.onGoingEffect.name = effect;
                 this.onGoingEffect.looping = this.effects.top_sunset.looping;
                 break;
-            case "top_sunrise":
+        ///    case "top_sunrise":
                 newEffect.addAll(effects.top_sunrise.frames);
                 this.onGoingEffect.frames = newEffect;
                 this.onGoingEffect.name = effect;
                 this.timed_task_on = false;
                 this.onGoingEffect.looping = this.effects.top_sunrise.looping;
                 break;
-            case "ambi1_indian1":
+        ///    case "ambix1_night":
+                newEffect.addAll(effects.ambix1_night.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                this.timed_task_on = true;
+                this.onGoingEffect.looping = this.effects.ambix1_night.looping;
+                break;
+        ///    case "ambix2_night":
+                newEffect.addAll(effects.ambix2_night.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                this.timed_task_on = true;
+                this.onGoingEffect.looping = this.effects.ambix2_night.looping;
+                break;
+        ///    case "ambix1_sunset":
+                newEffect.addAll(effects.ambix1_sunset.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                this.timed_task_on = true;
+                this.onGoingEffect.looping = this.effects.ambix1_sunset.looping;
+                break;
+        ///    case "ambix2_sunset":
+                newEffect.addAll(effects.ambix2_sunset.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                this.timed_task_on = true;
+                this.onGoingEffect.looping = this.effects.ambix2_sunset.looping;
+                break;
+        ///    case "ambix1_sunrise":
+                newEffect.addAll(effects.ambix1_sunrise.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                this.timed_task_on = true;
+                this.onGoingEffect.looping = this.effects.ambix1_sunrise.looping;
+                break;
+       ///     case "ambix2_sunrise":
+                newEffect.addAll(effects.ambix2_sunrise.frames);
+                this.onGoingEffect.frames = newEffect;
+                this.onGoingEffect.name = effect;
+                this.timed_task_on = true;
+                this.onGoingEffect.looping = this.effects.ambix2_sunrise.looping;
+                break;
+      ////      case "ambi1_indian1":
                 newEffect.addAll(effects.ambi1_indian1.frames);
                 this.onGoingEffect.frames = newEffect;
                 this.onGoingEffect.name = effect;
@@ -254,21 +331,27 @@ public class Lamp {
                 break;
             default:
                 break;
-        }
+        }*/
 
         this.timer_state = 0;
         this.nextFrameIndex = 0;
         this.nextFrameStartTime = 0;
-        if (effect.equals("heart_beat")) {
+
+        if (effect.name.equals("heart_beat")) {
             this.heart_beat = true;
             this.heart_beat_started = true;
         }
-        else if (effect.equals("heart_normal")) this.heart_beat = false;
+        else if (effect.name.equals("heart_normal")) this.heart_beat = false;
     }
 
-    public void setOnGoingEffect(String effect, boolean heartBeat) {
+    public void setOnGoingEffect(Effect effect, boolean heartBeat) { //call this if the effect changes the amount of lives!! It can set heartbeat!
         ArrayList<ControlFrame> newEffect = new ArrayList<ControlFrame>();
-            switch (effect) {
+        newEffect.addAll(effect.frames);
+        this.onGoingEffect.frames = newEffect;
+        this.onGoingEffect.name = effect.name;
+        this.onGoingEffect.looping = effect.looping;
+
+            /*switch (effect) {
                 case "shot":
                     newEffect.addAll(effects.shot.frames);
                     this.onGoingEffect.frames = newEffect;
@@ -293,13 +376,20 @@ public class Lamp {
                     this.onGoingEffect.name = effect;
                     this.onGoingEffect.looping = this.effects.heart_arrow.looping;
                     break;
+                case "heart_normal":
+                    newEffect.addAll(effects.heart_normal.frames);
+                    this.onGoingEffect.frames = newEffect;
+                    this.onGoingEffect.name = effect;
+                    this.onGoingEffect.looping = this.effects.heart_normal.looping;
+                    break;
                 default:
                     break;
-            }
+            }*/
 
             this.timer_state = 0;
             this.nextFrameIndex = 0;
             this.nextFrameStartTime = 0;
+
             if (heartBeat) {
                 this.heart_beat = true;
                 //this.heart_beat_started = true;
@@ -308,31 +398,35 @@ public class Lamp {
 
     public void endOfEffect() {
 
-        if((this.onGoingEffect.name == "shot" || this.onGoingEffect.name == "heart_arrow" || this.onGoingEffect.name == "dynamite") && this.heart_beat) {
-
-
+        //id end of shot/arrow/dynamite set back normal heart state
+        if((this.onGoingEffect.name.equals("shot") || this.onGoingEffect.name.equals("heart_arrow") || this.onGoingEffect.name.equals("dynamite") || this.onGoingEffect.name.equals("heart_normal"))  && this.heart_beat) {
             this.onGoingEffect.name = null;
             this.onGoingEffect.frames.clear();
-            this.setOnGoingEffect("heart_beat");
+
+            if (this.heart_beat) this.setOnGoingEffect(this.effects.heart_beat);
+            else this.setOnGoingEffect(this.effects.heart_normal);
         }
-        //if end of dynamite set back normal state
+        //if end of dynamite set back normal ambience state
         else if (this.onGoingEffect.name.equals("dynamite")) {
             this.onGoingEffect.name = null;
             this.onGoingEffect.frames.clear();
             switch (this.index) {
                 case "Top lamp":
-                    this.setOnGoingEffect("top_normal");
-                    Log.w("top_normal", String.valueOf(this.onGoingEffect.frames.get(0).getHue()));
+                    this.setOnGoingEffect(this.effects.top_normal);
+                    //Log.w("top_normal", String.valueOf(this.onGoingEffect.frames.get(0).getHue()));
                     break;
-                case "Ambient 1":
-                    this.setOnGoingEffect("ambi1_normal");
-                    Log.w("ambi1_normal", String.valueOf(this.onGoingEffect.frames.get(0).getHue()));
+                case "Ambi 11":
+                    this.setOnGoingEffect(this.effects.ambi1_normal);
+                    //Log.w("ambi1_normal", String.valueOf(this.onGoingEffect.frames.get(0).getHue()));
                     break;
-                case "Ambient 2":
-                    this.setOnGoingEffect("ambi2_normal");
+                case "Ambi 12":
+                    this.setOnGoingEffect(this.effects.ambi1_normal);
                     break;
-                case "Ambient 3":
-                    this.setOnGoingEffect("ambi3_normal");
+                case "Ambi 21":
+                    this.setOnGoingEffect(this.effects.ambi1_normal);
+                    break;
+                case "Ambi 22":
+                    this.setOnGoingEffect(this.effects.ambi1_normal);
                     break;
                 default:
                     break;
@@ -370,10 +464,11 @@ public class Lamp {
             if(!this.source.getLastKnownLightState().isOn()) {
                 lightState.setOn(true);
             }
-            bridge.updateLightState(this.source, lightState);
+
+                bridge.updateLightState(this.source, lightState);
 
             //debug
-            Log.w("Sent frames", this.index + ": " + String.valueOf(nextFrame.getHue()) + " " + String.valueOf(this.onGoingEffect.name));
+            //Log.w("Sent frames", this.index + ": " + String.valueOf(nextFrame.getHue()) + " " + String.valueOf(this.onGoingEffect.name));
         }
     }
 
@@ -394,12 +489,16 @@ public class Lamp {
             //Stop if last frame
             if (this.nextFrameIndex == this.onGoingEffect.frames.size() - 1) {
                 //turn off lamp after last frame of sunset
-                if (this.onGoingEffect.name.equals("top_sunset") || this.onGoingEffect.name.equals("heart_sunset")) {
+                //if (this.onGoingEffect.name.equals("top_sunset") || this.onGoingEffect.name.equals("heart_sunset") || this.onGoingEffect.name.equals("ambix1_sunset") || this.onGoingEffect.name.equals("ambix2_sunset")) {
+                if (this.onGoingEffect.name.equals("ambix1_sunset")) {
                     PHHueSDK phHueSDK = PHHueSDK.create();
                     PHBridge bridge = phHueSDK.getSelectedBridge();
                     PHLightState lightState = new PHLightState();
                     lightState.setOn(false);
-                    bridge.updateLightState(this.source, lightState);
+
+                    //todo all lights at the same time vs in order?
+                    //bridge.updateLightState(this.source, lightState);
+                    bridge.setLightStateForDefaultGroup(lightState);
                     this.timed_task_on = true;
                 }
 
