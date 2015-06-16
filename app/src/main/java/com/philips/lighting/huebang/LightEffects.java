@@ -13,6 +13,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import static android.os.Environment.getExternalStorageDirectory;
+
 /**
  * Created by folti on 06/06/15.
  */
@@ -40,6 +42,7 @@ public class LightEffects {
     public final Effect top_indian2;
     public final Effect top_indian3;
     public final Effect top_indian4;
+    public final Effect ambi_storm;
     public final Effect ambix1_night;
     public final Effect ambix2_night;
     public final Effect ambix1_sunset;
@@ -49,18 +52,22 @@ public class LightEffects {
     public final Effect ambi1_normal;
     public final Effect ambi2_normal;
     public final Effect ambi3_normal;
-    public final Effect ambi1_indian1;
-    public final Effect ambi2_indian1;
-    public final Effect ambi3_indian1;
-    public final Effect ambi1_indian2;
-    public final Effect ambi2_indian2;
-    public final Effect ambi3_indian2;
-    public final Effect ambi1_indian3;
-    public final Effect ambi2_indian3;
-    public final Effect ambi3_indian3;
-    public final Effect ambi1_indian4;
-    public final Effect ambi2_indian4;
-    public final Effect ambi3_indian4;
+    public final Effect ambi11_indian1;
+    public final Effect ambi12_indian1;
+    public final Effect ambi21_indian1;
+    public final Effect ambi22_indian1;
+    public final Effect ambi11_indian2;
+    public final Effect ambi12_indian2;
+    public final Effect ambi21_indian2;
+    public final Effect ambi22_indian2;
+    public final Effect ambi11_indian3;
+    public final Effect ambi12_indian3;
+    public final Effect ambi21_indian3;
+    public final Effect ambi22_indian3;
+    public final Effect ambi11_indian4;
+    public final Effect ambi12_indian4;
+    public final Effect ambi21_indian4;
+    public final Effect ambi22_indian4;
     public final Effect dynamite;
 
 
@@ -88,6 +95,7 @@ public class LightEffects {
         this.top_indian2 = new Effect();
         this.top_indian3 = new Effect();
         this.top_indian4 = new Effect();
+        this.ambi_storm = new Effect();
         this.ambix1_night = new Effect();
         this.ambix2_night = new Effect();
         this.ambix1_sunset = new Effect();
@@ -97,25 +105,30 @@ public class LightEffects {
         this.ambi1_normal = new Effect();
         this.ambi2_normal = new Effect();
         this.ambi3_normal = new Effect();
-        this.ambi1_indian1 = new Effect();
-        this.ambi2_indian1 = new Effect();
-        this.ambi3_indian1 = new Effect();
-        this.ambi1_indian2 = new Effect();
-        this.ambi2_indian2 = new Effect();
-        this.ambi3_indian2 = new Effect();
-        this.ambi1_indian3 = new Effect();
-        this.ambi2_indian3 = new Effect();
-        this.ambi3_indian3 = new Effect();
-        this.ambi1_indian4 = new Effect();
-        this.ambi2_indian4 = new Effect();
-        this.ambi3_indian4 = new Effect();
+        ambi11_indian1 = new Effect();
+        ambi12_indian1 = new Effect();
+        ambi21_indian1 = new Effect();
+        ambi22_indian1 = new Effect();
+        ambi11_indian2 = new Effect();
+        ambi12_indian2 = new Effect();
+        ambi21_indian2 = new Effect();
+        ambi22_indian2 = new Effect();
+        ambi11_indian3 = new Effect();
+        ambi12_indian3 = new Effect();
+        ambi21_indian3 = new Effect();
+        ambi22_indian3 = new Effect();
+        ambi11_indian4 = new Effect();
+        ambi12_indian4 = new Effect();
+        ambi21_indian4 = new Effect();
+        ambi22_indian4 = new Effect();
+
         this.dynamite = new Effect();
     }
 
     public LightEffects init() {
         LightEffects effects = new LightEffects();
-        File sdCard = Environment.getExternalStorageDirectory();
-        File dir = new File (sdCard.getAbsolutePath() + "/Hue animations/bang");
+        File sdCard = getExternalStorageDirectory();
+        File dir = new File(sdCard.getAbsolutePath() + "/Hue animations/bang");
         dir.mkdirs();
 
         File[] filelist = dir.listFiles();
@@ -124,7 +137,7 @@ public class LightEffects {
             theNamesOfFiles[i] = filelist[i].getName();
         }
 
-        for(String name:theNamesOfFiles) {
+        for (String name : theNamesOfFiles) {
             File dir1 = new File(sdCard.getAbsolutePath() + "/Hue animations/bang/" + name);
             dir.mkdirs();
 
@@ -258,6 +271,11 @@ public class LightEffects {
                     effects.top_indian4.name = "top_indian4";
                     effects.top_indian4.looping = true;
                     break;
+                case "ambi_storm.txt":
+                    effects.ambi_storm.frames = tmp;
+                    effects.ambi_storm.name = "ambi_storm";
+                    effects.ambi_storm.looping = true;
+                    break;
                 case "ambix1_night.txt":
                     effects.ambix1_night.frames = tmp;
                     effects.ambix1_night.name = "ambix1_night";
@@ -293,75 +311,95 @@ public class LightEffects {
                     effects.ambi1_normal.name = "ambi1_normal";
                     effects.ambi1_normal.looping = false;
                     break;
-                case "ambi1_indian1.txt":
-                    effects.ambi1_indian1.frames = tmp;
-                    effects.ambi1_indian1.name = "ambi1_indian1";
-                    effects.ambi1_indian1.looping = true;
-                    break;
-                case "ambi1_indian2.txt":
-                    effects.ambi1_indian2.frames = tmp;
-                    effects.ambi1_indian2.name = "ambi1_indian2";
-                    effects.ambi1_indian2.looping = true;
-                    break;
-                case "ambi1_indian3.txt":
-                    effects.ambi1_indian3.frames = tmp;
-                    effects.ambi1_indian3.name = "ambi1_indian3";
-                    effects.ambi1_indian3.looping = true;
-                    break;
-                case "ambi1_indian4.txt":
-                    effects.ambi1_indian4.frames = tmp;
-                    effects.ambi1_indian4.name = "ambi1_indian4";
-                    effects.ambi1_indian4.looping = true;
-                    break;
                 case "ambi2_normal.txt":
                     effects.ambi2_normal.frames = tmp;
                     effects.ambi2_normal.name = "ambi2_normal";
                     effects.ambi2_normal.looping = false;
-                    break;
-                case "ambi2_indian1.txt":
-                    effects.ambi2_indian1.frames = tmp;
-                    effects.ambi2_indian1.name = "ambi2_indian1";
-                    effects.ambi2_indian1.looping = true;
-                    break;
-                case "ambi2_indian2.txt":
-                    effects.ambi2_indian2.frames = tmp;
-                    effects.ambi2_indian2.name = "ambi2_indian2";
-                    effects.ambi2_indian2.looping = true;
-                    break;
-                case "ambi2_indian3.txt":
-                    effects.ambi2_indian3.frames = tmp;
-                    effects.ambi2_indian3.name = "ambi2_indian3";
-                    effects.ambi2_indian3.looping = true;
-                    break;
-                case "ambi2_indian4.txt":
-                    effects.ambi2_indian4.frames = tmp;
-                    effects.ambi2_indian4.name = "ambi2_indian4";
-                    effects.ambi2_indian4.looping = true;
                     break;
                 case "ambi3_normal.txt":
                     effects.ambi3_normal.frames = tmp;
                     effects.ambi3_normal.name = "ambi3_normal";
                     effects.ambi3_normal.looping = false;
                     break;
-                case "ambi3_indian1.txt":
-                    effects.ambi3_indian1.frames = tmp;
-                    effects.ambi3_indian1.name = "ambi3_indian1";
-                    effects.ambi3_indian1.looping = true;
+                case "ambi11_indian1.txt":
+                    ambi11_indian1.frames = tmp;
+                    ambi11_indian1.name = "ambi11_indian1";
+                    ambi11_indian1.looping = true;
                     break;
-                case "ambi3_indian2.txt":
-                    effects.ambi3_indian2.frames = tmp;
-                    effects.ambi3_indian2.name = "ambi3_indian2";
-                    effects.ambi3_indian2.looping = true;
+                case "ambi12_indian1.txt":
+                    ambi12_indian1.frames = tmp;
+                    ambi12_indian1.name = "ambi12_indian1";
+                    ambi12_indian1.looping = true;
                     break;
-                case "ambi3_indian3.txt":
-                    effects.ambi3_indian3.frames = tmp;
-                    effects.ambi3_indian3.name = "ambi3_indian3";
-                    effects.ambi3_indian3.looping = true;
+                case "ambi21_indian1.txt":
+                    ambi21_indian1.frames = tmp;
+                    ambi21_indian1.name = "ambi21_indian1";
+                    ambi21_indian1.looping = true;
                     break;
-                case "ambi3_indian4.txt":
-                    effects.ambi3_indian4.frames = tmp;
-                    effects.ambi3_indian4.name = "ambi3_indian4";
-                    effects.ambi3_indian4.looping = true;
+                case "ambi22_indian1.txt":
+                    ambi22_indian1.frames = tmp;
+                    ambi22_indian1.name = "ambi22_indian1";
+                    ambi22_indian1.looping = true;
+                    break;
+                case "ambi11_indian2.txt":
+                    ambi11_indian2.frames = tmp;
+                    ambi11_indian2.name = "ambi11_indian2";
+                    ambi11_indian2.looping = true;
+                    break;
+                case "ambi12_indian2.txt":
+                    ambi12_indian2.frames = tmp;
+                    ambi12_indian2.name = "ambi12_indian2";
+                    ambi12_indian2.looping = true;
+                    break;
+                case "ambi21_indian2.txt":
+                    ambi21_indian2.frames = tmp;
+                    ambi21_indian2.name = "ambi21_indian2";
+                    ambi21_indian2.looping = true;
+                    break;
+                case "ambi22_indian2.txt":
+                    ambi22_indian2.frames = tmp;
+                    ambi22_indian2.name = "ambi22_indian2";
+                    ambi22_indian2.looping = true;
+                    break;
+                case "ambi11_indian3.txt":
+                    ambi11_indian3.frames = tmp;
+                    ambi11_indian3.name = "ambi11_indian3";
+                    ambi11_indian3.looping = true;
+                    break;
+                case "ambi12_indian3.txt":
+                    ambi12_indian3.frames = tmp;
+                    ambi12_indian3.name = "ambi12_indian3";
+                    ambi12_indian3.looping = true;
+                    break;
+                case "ambi21_indian3.txt":
+                    ambi21_indian3.frames = tmp;
+                    ambi21_indian3.name = "ambi21_indian3";
+                    ambi21_indian3.looping = true;
+                    break;
+                case "ambi22_indian3.txt":
+                    ambi22_indian3.frames = tmp;
+                    ambi22_indian3.name = "ambi22_indian3";
+                    ambi22_indian3.looping = true;
+                    break;
+                case "ambi11_indian4.txt":
+                    ambi11_indian4.frames = tmp;
+                    ambi11_indian4.name = "ambi11_indian4";
+                    ambi11_indian4.looping = true;
+                    break;
+                case "ambi12_indian4.txt":
+                    ambi12_indian4.frames = tmp;
+                    ambi12_indian4.name = "ambi12_indian4";
+                    ambi12_indian4.looping = true;
+                    break;
+                case "ambi21_indian4.txt":
+                    ambi21_indian4.frames = tmp;
+                    ambi21_indian4.name = "ambi21_indian4";
+                    ambi21_indian4.looping = true;
+                    break;
+                case "ambi22_indian4.txt":
+                    ambi22_indian4.frames = tmp;
+                    ambi22_indian4.name = "ambi22_indian4";
+                    ambi22_indian4.looping = true;
                     break;
                 case "dynamite.txt":
                     effects.dynamite.frames = tmp;

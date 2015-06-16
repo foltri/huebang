@@ -83,9 +83,19 @@ public class MyApplicationActivity extends Activity {
                 if (on) {
                     // Turn on storm effect
                     lamps.top_light.setOnGoingEffect(lightEffects.top_storm);
+
+                    lamps.ambi11light.setOnGoingEffect(lightEffects.ambi_storm);
+                    lamps.ambi12light.setOnGoingEffect(lightEffects.ambi_storm);
+                    lamps.ambi21light.setOnGoingEffect(lightEffects.ambi_storm);
+                    lamps.ambi22light.setOnGoingEffect(lightEffects.ambi_storm);
                 } else {
                     // Turn back normal lighting
                     lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
+
+                    lamps.ambi11light.setOnGoingEffect(lightEffects.ambi1_normal);
+                    lamps.ambi12light.setOnGoingEffect(lightEffects.ambi1_normal);
+                    lamps.ambi21light.setOnGoingEffect(lightEffects.ambi1_normal);
+                    lamps.ambi22light.setOnGoingEffect(lightEffects.ambi1_normal);
                 }
             }
         });
@@ -98,7 +108,7 @@ public class MyApplicationActivity extends Activity {
                 boolean on = ((ToggleButton) view).isChecked();
 
                 if (on) {
-                    // Turn on storm effect
+                    // Turn on night effect
                     lamps.top_light.setOnGoingEffect(lightEffects.top_night);
                     lamps.sun_light.setOnGoingEffect(lightEffects.sun_night);
 //                    lamps.p1light.setOnGoingEffect("heart_night");
@@ -180,10 +190,10 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //todo
-                lamps.ambi11light.setOnGoingEffect(lightEffects.ambi1_indian1);
-                lamps.ambi12light.setOnGoingEffect(lightEffects.ambi2_indian1);
-                lamps.ambi21light.setOnGoingEffect(lightEffects.ambi3_indian1);
-                lamps.ambi22light.setOnGoingEffect(lightEffects.ambi3_indian1);
+                lamps.ambi11light.setOnGoingEffect(ambi11_indian1);
+                lamps.ambi12light.setOnGoingEffect(ambi12_indian1);
+                lamps.ambi21light.setOnGoingEffect(ambi21_indian1);
+                lamps.ambi22light.setOnGoingEffect(ambi21_indian1);
             }
         });
 
@@ -242,7 +252,7 @@ public class MyApplicationActivity extends Activity {
 
                 if (on) {
                     lamps.ambi11light.indian_task_on = true;
-                    // Turn on storm effect
+                    // Turn on indian effect
                     //todo
 //                    lamps.ambi11light.setOnGoingEffect("ambi1_indian1");
 //                    lamps.ambi12light.setOnGoingEffect("ambi2_indian1");
