@@ -110,6 +110,7 @@ public class MyApplicationActivity extends Activity {
                     lamps.ambi21light.setOnGoingEffect(lightEffects.ambix1_night);
                     lamps.ambi22light.setOnGoingEffect(lightEffects.ambix2_night);
                 } else {
+                    lamps.ambi11light.night_task_on = false;
                     // Turn back normal lighting
                     lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
                     lamps.sun_light.setOnGoingEffect(lightEffects.sun_normal);
@@ -148,7 +149,15 @@ public class MyApplicationActivity extends Activity {
         sunriseButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                lamps.ambi11light.night_task_on = false;
+
                 lamps.top_light.setOnGoingEffect(lightEffects.top_sunrise);
+                lamps.sun_light.setOnGoingEffect(lightEffects.sun_sunrise);
+
+                lamps.ambi11light.setOnGoingEffect(lightEffects.ambix1_sunrise);
+                lamps.ambi12light.setOnGoingEffect(lightEffects.ambix2_sunrise);
+                lamps.ambi21light.setOnGoingEffect(lightEffects.ambix1_sunrise);
+                lamps.ambi22light.setOnGoingEffect(lightEffects.ambix2_sunrise);
 
                 if(p1.isHeartBeat()) {
                     lamps.p1light.setOnGoingEffect(lightEffects.heart_beat);
@@ -232,6 +241,7 @@ public class MyApplicationActivity extends Activity {
                 boolean on = ((ToggleButton) view).isChecked();
 
                 if (on) {
+                    lamps.ambi11light.indian_task_on = true;
                     // Turn on storm effect
                     //todo
 //                    lamps.ambi11light.setOnGoingEffect("ambi1_indian1");
@@ -241,6 +251,8 @@ public class MyApplicationActivity extends Activity {
 
                     indian1check.setChecked(true);
                 } else {
+                    lamps.ambi11light.indian_task_on = false;
+
                     // Turn back normal lighting
                     lamps.ambi11light.setOnGoingEffect(lightEffects.ambi1_normal);
                     lamps.ambi12light.setOnGoingEffect(lightEffects.ambi1_normal);
@@ -261,8 +273,6 @@ public class MyApplicationActivity extends Activity {
                         lamps.p3light.setOnGoingEffect(lightEffects.heart_beat);
                     } else lamps.p3light.setOnGoingEffect(lightEffects.heart_normal);
 
-                    lamps.ambi11light.timed_task_on = false;
-
                     indian1check.setChecked(false);
                     indian2check.setChecked(false);
                     indian3check.setChecked(false);
@@ -275,7 +285,7 @@ public class MyApplicationActivity extends Activity {
         dynamiteButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.ambi11light.timed_task_on = false;
+                lamps.ambi11light.indian_task_on = false;
 
                 lamps.ambi11light.setOnGoingEffect(lightEffects.dynamite);
                 lamps.ambi12light.setOnGoingEffect(lightEffects.dynamite);
@@ -299,6 +309,8 @@ public class MyApplicationActivity extends Activity {
         arrowButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                lamps.ambi11light.indian_task_on = false;
+
                 p1.gotIndianAttack(lamps.p1light);
                 p2.gotIndianAttack(lamps.p2light);
                 p3.gotIndianAttack(lamps.p3light);
@@ -309,8 +321,6 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi22light.setOnGoingEffect(lightEffects.ambi1_normal);
 
                 lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
-
-                lamps.ambi11light.timed_task_on = false;
 
                 indian1check.setChecked(false);
                 indian2check.setChecked(false);

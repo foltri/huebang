@@ -22,7 +22,8 @@ public class Lamp {
     public int nextFrameStartTime;
     public boolean heart_beat = false;
     public boolean heart_beat_started = false;
-    public boolean timed_task_on = false;
+    public boolean night_task_on = false;
+    public boolean indian_task_on = false;
     public Effect onGoingEffect = new Effect();
     public final LightEffects effects = new LightEffects().init();
 
@@ -42,13 +43,6 @@ public class Lamp {
         this.onGoingEffect.frames = newEffect;
         this.onGoingEffect.name = effect.name;
         this.onGoingEffect.looping = effect.looping;
-
-        if(effect.name.equals("ambi11_indian1")) { //todo
-            this.timed_task_on = true;
-        } else if(effect.name.equals("ambi11_sunrise") || effect.name.equals("dynamite") || effect.name.equals("heart_arrow")) { //todo
-            this.timed_task_on = false;
-        }
-
 
         /*switch (effect) {
             case "sun_normal":
@@ -468,7 +462,7 @@ public class Lamp {
                 bridge.updateLightState(this.source, lightState);
 
             //debug
-            //Log.w("Sent frames", this.index + ": " + String.valueOf(nextFrame.getHue()) + " " + String.valueOf(this.onGoingEffect.name));
+            Log.w("Sent frames", this.index + ": " + String.valueOf(nextFrame.getHue()) + " " + String.valueOf(this.onGoingEffect.name));
         }
     }
 
@@ -499,7 +493,7 @@ public class Lamp {
                     //todo all lights at the same time vs in order?
                     //bridge.updateLightState(this.source, lightState);
                     bridge.setLightStateForDefaultGroup(lightState);
-                    this.timed_task_on = true;
+                    this.night_task_on = true;
                 }
 
                 //loop if last frame of a looping effect

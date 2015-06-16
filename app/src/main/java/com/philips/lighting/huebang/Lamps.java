@@ -183,16 +183,17 @@ public class Lamps {
     private void TimerMethod1()
     {
         //night timing
-        if(this.top_light.timed_task_on) {
+        if(this.ambi11light.night_task_on) {
             this.nightTimer += 1;
             if(this.nightTimer%10 ==0) MyApplicationActivity.getInstance().runOnUiThread(Timer_Tick);
         } else this.nightTimer = 0;
 
         //indian timing
-        if(this.ambi11light.timed_task_on) {
+        if(this.ambi11light.indian_task_on) {
             this.indianTimer += 1;
             if(this.indianTimer%10 ==0) MyApplicationActivity.getInstance().runOnUiThread(Timer_Tick);
         } else this.indianTimer = 0;
+
         //needed another thread, otherwise it didn't always turn (off/) back on during sunrise effect
         if(this.top_light.onGoingEffect.name != null && this.top_light.source != null) this.top_light.sendNextFrame();
         if(this.sun_light.onGoingEffect.name != null && this.sun_light.source != null) this.sun_light.sendNextFrame();
@@ -217,10 +218,10 @@ public class Lamps {
         public void run() {
             //This method runs in the same thread as the UI.
             //Do something to the UI thread here
-            if(Lamps.this.top_light.timed_task_on) {
+            if(Lamps.this.ambi11light.night_task_on) {
                 Lamps.this.nightTimerView.setText("T:" + Lamps.this.nightTimer / 10);
             }
-            if(Lamps.this.ambi11light.timed_task_on) {
+            if(Lamps.this.ambi11light.indian_task_on) {
                 Lamps.this.indianTimerView.setText("T:" + Lamps.this.indianTimer / 10);
             }
         }
@@ -247,50 +248,4 @@ public class Lamps {
         }
     }
 
-    public void setIndians(LightEffects effect) {
-
-    }
-
-    public void setNight(LightEffects effect) {
-
-    }
-
-    public void setStorm(LightEffects effect) {
-
-    }
-
-    public void pause() {
-        this.pause = true;
-    }
-
-    public void resume() {
-        this.pause = false;
-    }
-
-    public void stop() {
-        //if (this.myTimer != null) this.myTimer.cancel();
-    }
-
-//    private void processRawFrames(ArrayList<ControlFrame> rawFrames) {
-//
-//        int numberOfLights = getNumberOfLights(rawFrames);
-//        allFrames.clear();
-//        newFrameStartTime.clear();
-//        timerState.clear();
-//        nextFrameIndex.clear();
-//
-//        //intitialise allFrames and timer arrays
-//        for (int i = 0; i < numberOfLights; i++) {
-//            allFrames.add(new ArrayList<controlFrame>());
-//            newFrameStartTime.add(0);
-//            timerState.add(0);
-//            nextFrameIndex.add(0);
-//        }
-//
-//        //separate frames by lights
-//        for (controlFrame frame : rawFrames) {
-//            int lightIndex = frame.getLightIndex();
-//            allFrames.get(lightIndex - 1).add(frame);
-//        }
-//    }
 }
