@@ -81,6 +81,7 @@ public class Lamps {
                     this.p1light.nextFrameIndex = 0;
                     this.p1light.nextFrameStartTime = 0;
                     this.p1light.onGoingEffect = new Effect();
+                    this.p1light.player = MyApplicationActivity.getInstance().p1;
                     break;
                 case "P2 lamp":
                     this.p2light.source = light;
@@ -89,6 +90,7 @@ public class Lamps {
                     this.p2light.nextFrameIndex = 0;
                     this.p2light.nextFrameStartTime = 0;
                     this.p2light.onGoingEffect = new Effect();
+                    this.p2light.player = MyApplicationActivity.getInstance().p2;
                     break;
                 case "P3 lamp":
                     this.p3light.source = light;
@@ -97,6 +99,7 @@ public class Lamps {
                     this.p3light.nextFrameIndex = 0;
                     this.p3light.nextFrameStartTime = 0;
                     this.p3light.onGoingEffect = new Effect();
+                    this.p3light.player = MyApplicationActivity.getInstance().p3;
                     break;
                 case "Top lamp":
                     this.top_light.source = light;

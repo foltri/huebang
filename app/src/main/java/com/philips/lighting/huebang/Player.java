@@ -20,6 +20,11 @@ public class Player {
         this.lifeNum.setText("L:" + lives);
     }
 
+    public Player() {
+        this.lives = 0;
+        this.arrows = 0;
+    }
+
     public int getLives() {
         return lives;
     }
@@ -27,12 +32,7 @@ public class Player {
     public void setLives(int lives, Lamp lamp) {
         this.lives = lives;
         this.lifeNum.setText("L:" + this.lives);
-        if(isHeartBeat() && lamp.onGoingEffect.name != "heart_beat") {
-            lamp.setOnGoingEffect(lamp.effects.heart_beat);
-        }
-        if(!isHeartBeat() && lamp.onGoingEffect.name == "heart_beat") {
-            lamp.setOnGoingEffect(lamp.effects.heart_normal);
-        }
+        lamp.setOnGoingEffect(lamp.effects.heart_normal);
     }
 
     public int getArrows() {
@@ -47,14 +47,14 @@ public class Player {
     public void gotShot(Lamp lamp) {
         this.lives = this.lives - 1;
         this.lifeNum.setText("L:" + this.lives);
-        lamp.setOnGoingEffect(lamp.effects.shot, isHeartBeat());
+        lamp.setOnGoingEffect(lamp.effects.shot);
     }
 
     public void gotIndianAttack(Lamp lamp) {
         this.lives = this.lives - this.arrows;
         this.lifeNum.setText("L:" + this.lives);
         this.setArrows(0);
-        lamp.setOnGoingEffect(lamp.effects.heart_arrow, isHeartBeat());
+        lamp.setOnGoingEffect(lamp.effects.heart_arrow);
     }
 
     public void gotArrow() {
@@ -65,12 +65,7 @@ public class Player {
     public void gotBeer(Lamp lamp) {
         this.lives = this.lives + 1;
         this.lifeNum.setText("L:" + this.lives);
-        if(isHeartBeat() && lamp.onGoingEffect.name != "heart_beat") {
-            lamp.setOnGoingEffect(lamp.effects.heart_beat);
-        }
-        if(!isHeartBeat() && lamp.onGoingEffect.name == "heart_beat") {
-            lamp.setOnGoingEffect(lamp.effects.heart_normal);
-        }
+        lamp.setOnGoingEffect(lamp.effects.heart_normal);
     }
 
     public void gotGgun(Player other1, Player other2, Lamp l1, Lamp l2) {
@@ -78,14 +73,14 @@ public class Player {
         other2.lives -= 1;
         other1.lifeNum.setText("L:" + other1.lives);
         other2.lifeNum.setText("L:" + other2.lives);
-        l1.setOnGoingEffect(l1.effects.shot, isHeartBeat());
-        l2.setOnGoingEffect(l1.effects.shot, isHeartBeat());
+        l1.setOnGoingEffect(l1.effects.shot);
+        l2.setOnGoingEffect(l1.effects.shot);
 
         this.setArrows(0);
     }
 
     public boolean isHeartBeat() {
-        if(this.lives <= 3) {
+        if(this.lives <= 2) {
             return true;
         }
         else return false;

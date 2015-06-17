@@ -56,6 +56,10 @@ public class MyApplicationActivity extends Activity {
 
         final LightEffects lightEffects = new LightEffects().init();
 
+        p1 = new Player(8,0, (TextView) findViewById(R.id.p1arrowView), (TextView) findViewById(R.id.p1lifeView));
+        p2 = new Player(8,0, (TextView) findViewById(R.id.p2arrowView), (TextView) findViewById(R.id.p2lifeView));
+        p3 = new Player(8,0, (TextView) findViewById(R.id.p3arrowView), (TextView) findViewById(R.id.p3lifeView));
+
         lamps = new Lamps(phHueSDK.getSelectedBridge().getResourceCache().getAllLights(), nightTimer, indianTimer);
         lamps.sun_light.setOnGoingEffect(lightEffects.sun_normal);
         lamps.p1light.setOnGoingEffect(lightEffects.heart_normal);
@@ -66,10 +70,6 @@ public class MyApplicationActivity extends Activity {
         lamps.ambi12light.setOnGoingEffect(lightEffects.ambi1_normal);
         lamps.ambi21light.setOnGoingEffect(lightEffects.ambi1_normal);
         lamps.ambi22light.setOnGoingEffect(lightEffects.ambi1_normal);
-
-        p1 = new Player(4,0, (TextView) findViewById(R.id.p1arrowView), (TextView) findViewById(R.id.p1lifeView));
-        p2 = new Player(4,0, (TextView) findViewById(R.id.p2arrowView), (TextView) findViewById(R.id.p2lifeView));
-        p3 = new Player(4,0, (TextView) findViewById(R.id.p3arrowView), (TextView) findViewById(R.id.p3lifeView));
 
 
         //EXTENTIONAL ELEMENTS//
@@ -125,9 +125,9 @@ public class MyApplicationActivity extends Activity {
                     lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
                     lamps.sun_light.setOnGoingEffect(lightEffects.sun_normal);
 
-                    lamps.p1light.setOnGoingEffect(lightEffects.heart_normal, p1.isHeartBeat());
-                    lamps.p2light.setOnGoingEffect(lightEffects.heart_normal, p2.isHeartBeat());
-                    lamps.p3light.setOnGoingEffect(lightEffects.heart_normal, p3.isHeartBeat());
+                    lamps.p1light.setOnGoingEffect(lightEffects.heart_normal);
+                    lamps.p2light.setOnGoingEffect(lightEffects.heart_normal);
+                    lamps.p3light.setOnGoingEffect(lightEffects.heart_normal);
 
                     lamps.ambi11light.setOnGoingEffect(lightEffects.ambi1_normal);
                     lamps.ambi12light.setOnGoingEffect(lightEffects.ambi1_normal);
@@ -610,9 +610,9 @@ public class MyApplicationActivity extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.refresh_list) {
-            lamps.p1light.setOnGoingEffect(lamps.ambi11light.effects.heart_normal, p1.isHeartBeat());
-            lamps.p2light.setOnGoingEffect(lamps.ambi11light.effects.heart_normal, p2.isHeartBeat());
-            lamps.p3light.setOnGoingEffect(lamps.ambi11light.effects.heart_normal, p3.isHeartBeat());
+            lamps.p1light.setOnGoingEffect(lamps.ambi11light.effects.heart_normal);
+            lamps.p2light.setOnGoingEffect(lamps.ambi11light.effects.heart_normal);
+            lamps.p3light.setOnGoingEffect(lamps.ambi11light.effects.heart_normal);
 
             lamps.top_light.setOnGoingEffect(lamps.ambi11light.effects.top_normal);
             lamps.sun_light.setOnGoingEffect(lamps.ambi11light.effects.sun_normal);

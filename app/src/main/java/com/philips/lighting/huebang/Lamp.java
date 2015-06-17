@@ -22,12 +22,13 @@ public class Lamp {
     public PHLight source;
     public int nextFrameIndex;
     public int nextFrameStartTime;
-    public boolean heart_beat = false;
+    //public boolean heart_beat = false;
     public boolean heart_beat_started = false;
     public boolean night_task_on = false;
     public boolean indian_task_on = false;
     public Effect onGoingEffect = new Effect();
     public final LightEffects effects = new LightEffects().init();
+    public Player player = new Player();
 
     public Lamp() {
         this.timer_state = 0;
@@ -35,7 +36,7 @@ public class Lamp {
         this.source = null;
         this.nextFrameIndex = 0;
         this.nextFrameStartTime = 0;
-        this.heart_beat = false;
+        //this.heart_beat = false;
         this.onGoingEffect = new Effect();
     }
 
@@ -59,6 +60,42 @@ public class Lamp {
             bridge.setLightStateForDefaultGroup(lightState);
             //bridge.setLightStateForGroup("heart_group",lightState);
             this.night_task_on = true;
+        }
+
+        if (this.onGoingEffect.name.equals("heart_normal")) {
+            int newBri = 20;
+            switch (this.player.getLives()) {
+                case 8:
+                    newBri = 100;
+                    break;
+                case 7:
+                    newBri = 80;
+                    break;
+                case 6:
+                    newBri = 60;
+                    break;
+                case 5:
+                    newBri = 40;
+                    break;
+                case 4:
+                    newBri = 20;
+                    break;
+                case 3:
+                    newBri = 10;
+                    break;
+                case 2:
+                    this.setOnGoingEffect(effects.heart_beat);
+                    this.heart_beat_started = true;
+                    break;
+                case 1:
+                    this.setOnGoingEffect(effects.heart_beat);
+                    this.heart_beat_started = true;
+                    break;
+                default:
+                    break;
+            }
+            ControlFrame adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
+            this.onGoingEffect.frames.set(0,adjusted);
         }
 
         if (this.onGoingEffect.name.equals("ambi11_indian1") || this.onGoingEffect.name.equals("ambi11_indian2") || this.onGoingEffect.name.equals("ambi11_indian3") || this.onGoingEffect.name.equals("ambi11_indian4")) {
@@ -120,40 +157,18 @@ public class Lamp {
             this.timer_state = 0;
             this.nextFrameIndex = 0;
             this.nextFrameStartTime = 0;
-
-            if (effect.name.equals("heart_beat")) {
-                this.heart_beat = true;
-                this.heart_beat_started = true;
-            } else if (effect.name.equals("heart_normal")) this.heart_beat = false;
         }
-    }
-
-    public void setOnGoingEffect(Effect effect, boolean heartBeat) { //call this if the effect changes the amount of lives!! It can set heartbeat!
-        ArrayList<ControlFrame> newEffect = new ArrayList<ControlFrame>();
-        newEffect.addAll(effect.frames);
-        this.onGoingEffect.frames = newEffect;
-        this.onGoingEffect.name = effect.name;
-        this.onGoingEffect.looping = effect.looping;
-
-        this.timer_state = 0;
-        this.nextFrameIndex = 0;
-        this.nextFrameStartTime = 0;
-
-        if (heartBeat) {
-            this.heart_beat = true;
-            //this.heart_beat_started = true;
-        } else this.heart_beat = false;
     }
 
     public void endOfEffect() {
 
         //id end of shot/arrow/dynamite set back normal heart state
-        if((this.onGoingEffect.name.equals("shot") || this.onGoingEffect.name.equals("heart_arrow") || this.onGoingEffect.name.equals("dynamite") || this.onGoingEffect.name.equals("heart_normal"))  && this.heart_beat) {
+        if(this.onGoingEffect.name.equals("shot") || this.onGoingEffect.name.equals("heart_arrow")) {
             this.onGoingEffect.name = null;
             this.onGoingEffect.frames.clear();
 
-            if (this.heart_beat) this.setOnGoingEffect(this.effects.heart_beat);
-            else this.setOnGoingEffect(this.effects.heart_normal);
+            this.setOnGoingEffect(this.effects.heart_normal);
+
         }
         //if end of dynamite set back normal ambience state
         else if (this.onGoingEffect.name.equals("dynamite")) {
@@ -173,6 +188,15 @@ public class Lamp {
                     break;
                 case "Ambi 21":
                     this.setOnGoingEffect(this.effects.ambi1_normal);
+                    break;
+                case "P1 lamp":
+                    this.setOnGoingEffect(this.effects.heart_normal);
+                    break;
+                case "P2 lamp":
+                    this.setOnGoingEffect(this.effects.heart_normal);
+                    break;
+                case "P3 lamp":
+                    this.setOnGoingEffect(this.effects.heart_normal);
                     break;
                 case "Ambi 22":
                     this.setOnGoingEffect(this.effects.ambi1_normal);
