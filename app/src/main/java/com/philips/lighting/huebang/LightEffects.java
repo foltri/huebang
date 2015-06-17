@@ -69,6 +69,7 @@ public class LightEffects {
     public final Effect ambi21_indian4;
     public final Effect ambi22_indian4;
     public final Effect dynamite;
+    public Effect ambi_effect;
 
 
     public LightEffects() {
@@ -123,10 +124,15 @@ public class LightEffects {
         ambi22_indian4 = new Effect();
 
         this.dynamite = new Effect();
+        this.ambi_effect = new Effect();
     }
 
     public LightEffects init() {
         LightEffects effects = new LightEffects();
+        effects.ambi_effect.frames = new ArrayList<ControlFrame>();
+        effects.ambi_effect.name = "ambi_effect";
+        effects.ambi_effect.looping = true;
+
         File sdCard = getExternalStorageDirectory();
         File dir = new File(sdCard.getAbsolutePath() + "/Hue animations/bang");
         dir.mkdirs();
@@ -322,84 +328,84 @@ public class LightEffects {
                     effects.ambi3_normal.looping = false;
                     break;
                 case "ambi11_indian1.txt":
-                    ambi11_indian1.frames = tmp;
-                    ambi11_indian1.name = "ambi11_indian1";
-                    ambi11_indian1.looping = true;
+                    effects.ambi11_indian1.frames = tmp;
+                    effects.ambi11_indian1.name = "ambi11_indian1";
+                    effects.ambi11_indian1.looping = true;
                     break;
                 case "ambi12_indian1.txt":
-                    ambi12_indian1.frames = tmp;
-                    ambi12_indian1.name = "ambi12_indian1";
-                    ambi12_indian1.looping = true;
+                    effects.ambi12_indian1.frames = tmp;
+                    effects.ambi12_indian1.name = "ambi12_indian1";
+                    effects.ambi12_indian1.looping = true;
                     break;
                 case "ambi21_indian1.txt":
-                    ambi21_indian1.frames = tmp;
-                    ambi21_indian1.name = "ambi21_indian1";
-                    ambi21_indian1.looping = true;
+                    effects.ambi21_indian1.frames = tmp;
+                    effects.ambi21_indian1.name = "ambi21_indian1";
+                    effects.ambi21_indian1.looping = true;
                     break;
                 case "ambi22_indian1.txt":
-                    ambi22_indian1.frames = tmp;
-                    ambi22_indian1.name = "ambi22_indian1";
-                    ambi22_indian1.looping = true;
+                    effects.ambi22_indian1.frames = tmp;
+                    effects.ambi22_indian1.name = "ambi22_indian1";
+                    effects.ambi22_indian1.looping = true;
                     break;
                 case "ambi11_indian2.txt":
-                    ambi11_indian2.frames = tmp;
-                    ambi11_indian2.name = "ambi11_indian2";
-                    ambi11_indian2.looping = true;
+                    effects.ambi11_indian2.frames = tmp;
+                    effects.ambi11_indian2.name = "ambi11_indian2";
+                    effects.ambi11_indian2.looping = true;
                     break;
                 case "ambi12_indian2.txt":
-                    ambi12_indian2.frames = tmp;
-                    ambi12_indian2.name = "ambi12_indian2";
-                    ambi12_indian2.looping = true;
+                    effects.ambi12_indian2.frames = tmp;
+                    effects.ambi12_indian2.name = "ambi12_indian2";
+                    effects.ambi12_indian2.looping = true;
                     break;
                 case "ambi21_indian2.txt":
-                    ambi21_indian2.frames = tmp;
-                    ambi21_indian2.name = "ambi21_indian2";
-                    ambi21_indian2.looping = true;
+                    effects.ambi21_indian2.frames = tmp;
+                    effects.ambi21_indian2.name = "ambi21_indian2";
+                    effects.ambi21_indian2.looping = true;
                     break;
                 case "ambi22_indian2.txt":
-                    ambi22_indian2.frames = tmp;
-                    ambi22_indian2.name = "ambi22_indian2";
-                    ambi22_indian2.looping = true;
+                    effects.ambi22_indian2.frames = tmp;
+                    effects.ambi22_indian2.name = "ambi22_indian2";
+                    effects.ambi22_indian2.looping = true;
                     break;
                 case "ambi11_indian3.txt":
-                    ambi11_indian3.frames = tmp;
-                    ambi11_indian3.name = "ambi11_indian3";
-                    ambi11_indian3.looping = true;
+                    effects.ambi11_indian3.frames = tmp;
+                    effects.ambi11_indian3.name = "ambi11_indian3";
+                    effects.ambi11_indian3.looping = true;
                     break;
                 case "ambi12_indian3.txt":
-                    ambi12_indian3.frames = tmp;
-                    ambi12_indian3.name = "ambi12_indian3";
-                    ambi12_indian3.looping = true;
+                    effects.ambi12_indian3.frames = tmp;
+                    effects.ambi12_indian3.name = "ambi12_indian3";
+                    effects.ambi12_indian3.looping = true;
                     break;
                 case "ambi21_indian3.txt":
-                    ambi21_indian3.frames = tmp;
-                    ambi21_indian3.name = "ambi21_indian3";
-                    ambi21_indian3.looping = true;
+                    effects.ambi21_indian3.frames = tmp;
+                    effects.ambi21_indian3.name = "ambi21_indian3";
+                    effects.ambi21_indian3.looping = true;
                     break;
                 case "ambi22_indian3.txt":
-                    ambi22_indian3.frames = tmp;
-                    ambi22_indian3.name = "ambi22_indian3";
-                    ambi22_indian3.looping = true;
+                    effects.ambi22_indian3.frames = tmp;
+                    effects.ambi22_indian3.name = "ambi22_indian3";
+                    effects.ambi22_indian3.looping = true;
                     break;
                 case "ambi11_indian4.txt":
-                    ambi11_indian4.frames = tmp;
-                    ambi11_indian4.name = "ambi11_indian4";
-                    ambi11_indian4.looping = true;
+                    effects.ambi11_indian4.frames = tmp;
+                    effects.ambi11_indian4.name = "ambi11_indian4";
+                    effects.ambi11_indian4.looping = true;
                     break;
                 case "ambi12_indian4.txt":
-                    ambi12_indian4.frames = tmp;
-                    ambi12_indian4.name = "ambi12_indian4";
-                    ambi12_indian4.looping = true;
+                    effects.ambi12_indian4.frames = tmp;
+                    effects.ambi12_indian4.name = "ambi12_indian4";
+                    effects.ambi12_indian4.looping = true;
                     break;
                 case "ambi21_indian4.txt":
-                    ambi21_indian4.frames = tmp;
-                    ambi21_indian4.name = "ambi21_indian4";
-                    ambi21_indian4.looping = true;
+                    effects.ambi21_indian4.frames = tmp;
+                    effects.ambi21_indian4.name = "ambi21_indian4";
+                    effects.ambi21_indian4.looping = true;
                     break;
                 case "ambi22_indian4.txt":
-                    ambi22_indian4.frames = tmp;
-                    ambi22_indian4.name = "ambi22_indian4";
-                    ambi22_indian4.looping = true;
+                    effects.ambi22_indian4.frames = tmp;
+                    effects.ambi22_indian4.name = "ambi22_indian4";
+                    effects.ambi22_indian4.looping = true;
                     break;
                 case "dynamite.txt":
                     effects.dynamite.frames = tmp;

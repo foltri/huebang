@@ -161,8 +161,8 @@ public class MyApplicationActivity extends Activity {
             public void onClick(View view) {
                 lamps.ambi11light.night_task_on = false;
 
-                lamps.top_light.setOnGoingEffect(lightEffects.top_sunrise);
                 lamps.sun_light.setOnGoingEffect(lightEffects.sun_sunrise);
+                lamps.top_light.setOnGoingEffect(lightEffects.top_sunrise);
 
                 lamps.ambi11light.setOnGoingEffect(lightEffects.ambix1_sunrise);
                 lamps.ambi12light.setOnGoingEffect(lightEffects.ambix2_sunrise);
@@ -189,11 +189,7 @@ public class MyApplicationActivity extends Activity {
         indian1check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo
-                lamps.ambi11light.setOnGoingEffect(ambi11_indian1);
-                lamps.ambi12light.setOnGoingEffect(ambi12_indian1);
-                lamps.ambi21light.setOnGoingEffect(ambi21_indian1);
-                lamps.ambi22light.setOnGoingEffect(ambi21_indian1);
+                lamps.setOngoingAmbiEffect(lightEffects.ambi11_indian1);
             }
         });
 
@@ -201,15 +197,12 @@ public class MyApplicationActivity extends Activity {
         indian2check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo
-//                lamps.ambi11light.setOnGoingEffect("ambi1_indian2");
-//                lamps.ambi12light.setOnGoingEffect("ambi2_indian2");
-//                lamps.ambi21light.setOnGoingEffect("ambi3_indian2");
-//                lamps.ambi22light.setOnGoingEffect("ambi3_indian2");
+                lamps.setOngoingAmbiEffect(lightEffects.ambi11_indian2);
 
-                lamps.p1light.setOnGoingEffect(lightEffects.heart_indian2);
-                lamps.p2light.setOnGoingEffect(lightEffects.heart_indian2);
-                lamps.p3light.setOnGoingEffect(lightEffects.heart_indian2);
+
+//                lamps.p1light.setOnGoingEffect(lightEffects.heart_indian2);
+//                lamps.p2light.setOnGoingEffect(lightEffects.heart_indian2);
+//                lamps.p3light.setOnGoingEffect(lightEffects.heart_indian2);
             }
         });
 
@@ -217,13 +210,10 @@ public class MyApplicationActivity extends Activity {
         indian3check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo
-//                lamps.ambi11light.setOnGoingEffect("ambi1_indian3");
-//                lamps.ambi12light.setOnGoingEffect("ambi2_indian3");
-//                lamps.ambi21light.setOnGoingEffect("ambi3_indian3");
-//                lamps.ambi22light.setOnGoingEffect("ambi3_indian3");
+                lamps.setOngoingAmbiEffect(lightEffects.ambi11_indian3);
 
-                lamps.top_light.setOnGoingEffect(lightEffects.top_indian3);
+
+                //lamps.top_light.setOnGoingEffect(lightEffects.top_indian3);
             }
         });
 
@@ -231,15 +221,12 @@ public class MyApplicationActivity extends Activity {
         indian4check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo
-//                lamps.ambi11light.setOnGoingEffect("ambi1_indian4");
-//                lamps.ambi12light.setOnGoingEffect("ambi2_indian4");
-//                lamps.ambi21light.setOnGoingEffect("ambi3_indian4");
-//                lamps.ambi22light.setOnGoingEffect("ambi3_indian4");
 
-                lamps.p1light.setOnGoingEffect(lightEffects.heart1_indian4);
-                lamps.p2light.setOnGoingEffect(lightEffects.heart2_indian4);
-                lamps.p3light.setOnGoingEffect(lightEffects.heart3_indian4);
+                lamps.setOngoingAmbiEffect(lightEffects.ambi11_indian4);
+
+//                lamps.p1light.setOnGoingEffect(lightEffects.heart1_indian4);
+//                lamps.p2light.setOnGoingEffect(lightEffects.heart2_indian4);
+//                lamps.p3light.setOnGoingEffect(lightEffects.heart3_indian4);
             }
         });
 
@@ -253,11 +240,7 @@ public class MyApplicationActivity extends Activity {
                 if (on) {
                     lamps.ambi11light.indian_task_on = true;
                     // Turn on indian effect
-                    //todo
-//                    lamps.ambi11light.setOnGoingEffect("ambi1_indian1");
-//                    lamps.ambi12light.setOnGoingEffect("ambi2_indian1");
-//                    lamps.ambi21light.setOnGoingEffect("ambi3_indian1");
-//                    lamps.ambi22light.setOnGoingEffect("ambi3_indian1");
+                    lamps.setOngoingAmbiEffect(lightEffects.ambi11_indian1);
 
                     indian1check.setChecked(true);
                 } else {

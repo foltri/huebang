@@ -21,6 +21,16 @@ public class ControlFrame {
         this.upTime = upTime;
     }
 
+    public ControlFrame()
+    {
+        this.lightIndex = 0;
+        this.hue = 0;
+        this.bri = 0;
+        this.sat = 0;
+        this.transitionTime = 0;
+        this.upTime = 0;
+    }
+
     public int getLightIndex()
     {
         return lightIndex;

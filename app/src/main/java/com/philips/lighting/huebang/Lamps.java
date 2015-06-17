@@ -27,23 +27,23 @@ public class Lamps {
     public Lamp ambi21light;
     public Lamp ambi22light;
     public Lamp sun_light;
-//    private Timer myTimer;
+    //    private Timer myTimer;
 //    private Timer myTimer1;
     public int task_timer;
     private boolean pause = false;
     private boolean heart_beat_reference_on = false;
     private Lamp heart_beat_reference;
-    private  Runnable timer = new Runnable() {
+    private Runnable timer = new Runnable() {
         public void run() {
             TimerMethod();
         }
     };
-    private  Runnable timer1 = new Runnable() {
+    private Runnable timer1 = new Runnable() {
         public void run() {
             TimerMethod1();
         }
     };
-    private  Runnable timer2 = new Runnable() {
+    private Runnable timer2 = new Runnable() {
         public void run() {
             TimerMethod2();
         }
@@ -72,7 +72,7 @@ public class Lamps {
         this.nightTimer = 0;
         this.indianTimer = 0;
 
-        for(PHLight light:lights) {
+        for (PHLight light : lights) {
             switch (light.getName()) {
                 case "P1 lamp":
                     this.p1light.source = new PHLight(light);
@@ -161,18 +161,22 @@ public class Lamps {
         scheduler.scheduleAtFixedRate(timer, 0, 110, TimeUnit.MILLISECONDS);
         scheduler.scheduleAtFixedRate(timer1, 5, 110, TimeUnit.MILLISECONDS);
         scheduler.scheduleAtFixedRate(timer2, 10, 110, TimeUnit.MILLISECONDS);
+
     }
 
-    private void TimerMethod()
-    {
+    private void TimerMethod() {
         //This method is called directly by the timer
         //and runs in the same thread as the timer.
         this.heart_beat_sync();
-        if(this.heart_beat_reference.onGoingEffect.name != null) this.heart_beat_reference.sendNextFrame();
+        if (this.heart_beat_reference.onGoingEffect.name != null)
+            this.heart_beat_reference.sendNextFrame();
         //if the lamp is connected and there's an ongoing effect
-        if(this.p1light.onGoingEffect.name != null && this.p1light.source != null) this.p1light.sendNextFrame();
-        if(this.p2light.onGoingEffect.name != null && this.p2light.source != null) this.p2light.sendNextFrame();
-        if(this.p3light.onGoingEffect.name != null && this.p3light.source != null) this.p3light.sendNextFrame();
+        if (this.p1light.onGoingEffect.name != null && this.p1light.source != null)
+            this.p1light.sendNextFrame();
+        if (this.p2light.onGoingEffect.name != null && this.p2light.source != null)
+            this.p2light.sendNextFrame();
+        if (this.p3light.onGoingEffect.name != null && this.p3light.source != null)
+            this.p3light.sendNextFrame();
 //        if(this.top_light.onGoingEffect.name != null && this.top_light.source != null) this.top_light.sendNextFrame();
 
         //We call the method that will work with the UI
@@ -180,35 +184,41 @@ public class Lamps {
         //this.runOnUiThread(Timer_Tick);
     }
 
-    private void TimerMethod1()
-    {
+    private void TimerMethod1() {
         //night timing
-        if(this.ambi11light.night_task_on) {
+        if (this.ambi11light.night_task_on) {
             this.nightTimer += 1;
-            if(this.nightTimer%10 ==0) MyApplicationActivity.getInstance().runOnUiThread(Timer_Tick);
+            if (this.nightTimer % 10 == 0)
+                MyApplicationActivity.getInstance().runOnUiThread(Timer_Tick);
         } else this.nightTimer = 0;
 
         //indian timing
-        if(this.ambi11light.indian_task_on) {
+        if (this.ambi11light.indian_task_on) {
             this.indianTimer += 1;
-            if(this.indianTimer%10 ==0) MyApplicationActivity.getInstance().runOnUiThread(Timer_Tick);
+            if (this.indianTimer % 10 == 0)
+                MyApplicationActivity.getInstance().runOnUiThread(Timer_Tick);
         } else this.indianTimer = 0;
 
         //needed another thread, otherwise it didn't always turn (off/) back on during sunrise effect
-        if(this.top_light.onGoingEffect.name != null && this.top_light.source != null) this.top_light.sendNextFrame();
-        if(this.sun_light.onGoingEffect.name != null && this.sun_light.source != null) this.sun_light.sendNextFrame();
+        if (this.top_light.onGoingEffect.name != null && this.top_light.source != null)
+            this.top_light.sendNextFrame();
+        if (this.sun_light.onGoingEffect.name != null && this.sun_light.source != null)
+            this.sun_light.sendNextFrame();
 
 
         //We call the method that will work with the UI
         //through the runOnUiThread method.
     }
 
-    private void TimerMethod2()
-    {
-        if(this.ambi11light.onGoingEffect.name != null && this.ambi11light.source != null) this.ambi11light.sendNextFrame();
-        if(this.ambi12light.onGoingEffect.name != null && this.ambi12light.source != null) this.ambi12light.sendNextFrame();
-        if(this.ambi21light.onGoingEffect.name != null && this.ambi21light.source != null) this.ambi21light.sendNextFrame();
-        if(this.ambi22light.onGoingEffect.name != null && this.ambi22light.source != null) this.ambi22light.sendNextFrame();
+    private void TimerMethod2() {
+        if (this.ambi11light.onGoingEffect.name != null && this.ambi11light.source != null)
+            this.ambi11light.sendNextFrame();
+        if (this.ambi12light.onGoingEffect.name != null && this.ambi12light.source != null)
+            this.ambi12light.sendNextFrame();
+        if (this.ambi21light.onGoingEffect.name != null && this.ambi21light.source != null)
+            this.ambi21light.sendNextFrame();
+        if (this.ambi22light.onGoingEffect.name != null && this.ambi22light.source != null)
+            this.ambi22light.sendNextFrame();
 
         //We call the method that will work with the UI
         //through the runOnUiThread method.
@@ -218,34 +228,40 @@ public class Lamps {
         public void run() {
             //This method runs in the same thread as the UI.
             //Do something to the UI thread here
-            if(Lamps.this.ambi11light.night_task_on) {
+            if (Lamps.this.ambi11light.night_task_on) {
                 Lamps.this.nightTimerView.setText("T:" + Lamps.this.nightTimer / 10);
             }
-            if(Lamps.this.ambi11light.indian_task_on) {
+            if (Lamps.this.ambi11light.indian_task_on) {
                 Lamps.this.indianTimerView.setText("T:" + Lamps.this.indianTimer / 10);
             }
         }
     };
 
     public void heart_beat_sync() {
-        if(this.p1light.heart_beat_started) {
-                this.p1light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
-                this.p1light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
-                this.p1light.timer_state = this.heart_beat_reference.timer_state;
-                this.p1light.heart_beat_started = false;
+        if (this.p1light.heart_beat_started) {
+            this.p1light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
+            this.p1light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
+            this.p1light.timer_state = this.heart_beat_reference.timer_state;
+            this.p1light.heart_beat_started = false;
         }
-        if(this.p2light.heart_beat_started) {
-                this.p2light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
-                this.p2light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
-                this.p2light.timer_state = this.heart_beat_reference.timer_state;
-                this.p2light.heart_beat_started = false;
+        if (this.p2light.heart_beat_started) {
+            this.p2light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
+            this.p2light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
+            this.p2light.timer_state = this.heart_beat_reference.timer_state;
+            this.p2light.heart_beat_started = false;
         }
-        if(this.p3light.heart_beat_started) {
-                this.p3light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
-                this.p3light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
-                this.p3light.timer_state = this.heart_beat_reference.timer_state;
-                this.p3light.heart_beat_started = false;
+        if (this.p3light.heart_beat_started) {
+            this.p3light.nextFrameIndex = this.heart_beat_reference.nextFrameIndex;
+            this.p3light.nextFrameStartTime = this.heart_beat_reference.nextFrameStartTime;
+            this.p3light.timer_state = this.heart_beat_reference.timer_state;
+            this.p3light.heart_beat_started = false;
         }
     }
 
+    public void setOngoingAmbiEffect(Effect effect) {
+        this.ambi11light.timer_state = 0;
+        this.ambi11light.nextFrameIndex = 0;
+        this.ambi11light.nextFrameStartTime = 0;
+        this.ambi11light.setOnGoingEffect(effect);
+    }
 }
