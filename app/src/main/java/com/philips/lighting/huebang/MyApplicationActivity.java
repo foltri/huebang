@@ -75,11 +75,11 @@ public class MyApplicationActivity extends Activity {
 
                 if (on) {
                     // Turn on storm effect
-                    lamps.top_light.setOnGoingEffect(lightEffects.top_storm);
+                   // lamps.top_light.setOnGoingEffect(lightEffects.top_storm);
 
-                    lamps.ambi11light.setOnGoingEffect(lightEffects.ambi_storm);
+//                    lamps.ambi11light.setOnGoingEffect(lightEffects.ambi_storm);
                     lamps.ambi12light.setOnGoingEffect(lightEffects.ambi_storm);
-                    lamps.ambi21light.setOnGoingEffect(lightEffects.ambi_storm);
+//                    lamps.ambi21light.setOnGoingEffect(lightEffects.ambi_storm);
                     lamps.ambi22light.setOnGoingEffect(lightEffects.ambi_storm);
                 } else {
                     // Turn back normal lighting

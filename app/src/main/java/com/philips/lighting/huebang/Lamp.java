@@ -10,6 +10,9 @@ import com.philips.lighting.model.PHLightState;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static com.philips.lighting.huebang.LightEffects.*;
 
@@ -29,6 +32,11 @@ public class Lamp {
     public Effect onGoingEffect = new Effect();
     public final LightEffects effects = new LightEffects().init();
     public Player player = new Player();
+    private PHHueSDK phHueSDK = PHHueSDK.create();
+    public PHBridge bridge = phHueSDK.getSelectedBridge();
+
+
+
 
     public Lamp() {
         this.timer_state = 0;
@@ -48,40 +56,53 @@ public class Lamp {
         this.onGoingEffect.looping = effect.looping;
 
         if(this.onGoingEffect.name.equals("sun_sunrise")) {
-            PHHueSDK phHueSDK = PHHueSDK.create();
-            PHBridge bridge = phHueSDK.getSelectedBridge();
+            //PHHueSDK phHueSDK = PHHueSDK.create();
+            //PHBridge bridge = phHueSDK.getSelectedBridge();
             PHLightState lightState = new PHLightState();
             lightState.setOn(true);
             lightState.setHue(13393);
             lightState.setBrightness(0);
 
             //todo all lights at the same time vs in order?
-            //bridge.updateLightState(this.source, lightState);
+            ////bridge.updateLightState(this.source, lightState);
             bridge.setLightStateForDefaultGroup(lightState);
-            //bridge.setLightStateForGroup("heart_group",lightState);
+            ////bridge.setLightStateForGroup("heart_group",lightState);
             this.night_task_on = true;
         }
 
         if (this.onGoingEffect.name.equals("heart_normal")) {
-            int newBri = 20;
+            int newBri = 0;
+            ControlFrame adjusted = new ControlFrame();
             switch (this.player.getLives()) {
                 case 8:
-                    newBri = 100;
+                    newBri = 20;
+                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
+                    this.onGoingEffect.frames.set(0,adjusted);
                     break;
                 case 7:
-                    newBri = 80;
+                    newBri = 16;
+                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
+                    this.onGoingEffect.frames.set(0,adjusted);
                     break;
                 case 6:
-                    newBri = 60;
+                    newBri = 13;
+                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
+                    this.onGoingEffect.frames.set(0,adjusted);
                     break;
                 case 5:
-                    newBri = 40;
+                    newBri = 11;
+                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
+                    this.onGoingEffect.frames.set(0,adjusted);
                     break;
                 case 4:
-                    newBri = 20;
+                    newBri = 9;
+                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
+                    this.onGoingEffect.frames.set(0,adjusted);
                     break;
                 case 3:
-                    newBri = 10;
+                    newBri = 8;
+                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
+                    this.onGoingEffect.frames.set(0,adjusted);
                     break;
                 case 2:
                     this.setOnGoingEffect(effects.heart_beat);
@@ -94,8 +115,6 @@ public class Lamp {
                 default:
                     break;
             }
-            ControlFrame adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
-            this.onGoingEffect.frames.set(0,adjusted);
         }
 
         if (this.onGoingEffect.name.equals("ambi11_indian1") || this.onGoingEffect.name.equals("ambi11_indian2") || this.onGoingEffect.name.equals("ambi11_indian3") || this.onGoingEffect.name.equals("ambi11_indian4")) {
@@ -103,15 +122,15 @@ public class Lamp {
             int delayMin = 0;
             Random rand = new Random();
             int lampIndex = rand.nextInt(4) + 1;
-            int colorIndex = rand.nextInt(2) + 0;
+            int colorIndex = 0;//rand.nextInt(2) + 0;
             int delay = 0;
             ControlFrame colored = new ControlFrame();
             ControlFrame normal = new ControlFrame();
 
             switch (effect.name) {
                 case "ambi11_indian1":
-                    delayMax = 5000;
-                    delayMin = 2000;
+                    delayMax = 800;
+                    delayMin = 200;
 
                     delay = rand.nextInt(delayMax / 100) + delayMin / 100;
                     delay *= 100;
@@ -119,8 +138,8 @@ public class Lamp {
                     normal = new ControlFrame(lampIndex, this.effects.ambi1_normal.frames.get(0).getHue(), this.effects.ambi1_normal.frames.get(0).getBri(), this.effects.ambi1_normal.frames.get(0).getSat(), this.effects.ambi11_indian1.frames.get(colorIndex).getTransitionTime(), delay);
                     break;
                 case "ambi11_indian2":
-                    delayMax = 4000;
-                    delayMin = 1600;
+                    delayMax = 200;
+                    delayMin = 100;
 
                     delay = rand.nextInt(delayMax / 100) + delayMin / 100;
                     delay *= 100;
@@ -211,10 +230,11 @@ public class Lamp {
         }
     }
 
-    public synchronized void sendNextFrame() {
+    public synchronized FrameBufferElement sendNextFrame() {
         PHHueSDK phHueSDK = PHHueSDK.create();
         PHBridge bridge = phHueSDK.getSelectedBridge();
         ControlFrame nextFrame = getNextFrame();
+        FrameBufferElement newElement = null;
         //if there's frame to send
         if (nextFrame != null && !this.index.equals("heart_beat_reference")) {
             PHLightState lightState = new PHLightState();
@@ -238,48 +258,55 @@ public class Lamp {
                 lightState.setOn(true);
             }
 
-
-
             if (this.onGoingEffect.name == "ambi11_indian1" || this.onGoingEffect.name == "ambi11_indian2" || this.onGoingEffect.name == "ambi11_indian3" || this.onGoingEffect.name == "ambi11_indian4") {
                 List<PHLight> allLights = bridge.getResourceCache().getAllLights();
                 PHLight lsource = null;
 
                 switch (nextFrame.getLightIndex()) {
                     case 1:
-                        bridge.updateLightState(this.source, lightState);
+                        //bridge.updateLightState(this.source, lightState);
+                        newElement = new FrameBufferElement(this.source, lightState);
                         break;
                     case 2:
                         for (PHLight light:allLights) {
                             if (light.getName().equals("Ambi 12")) {
-                                bridge.updateLightState(light, lightState);
+                                //bridge.updateLightState(light, lightState);
+                                newElement = new FrameBufferElement(light, lightState);
                             }
                         }
                         break;
                     case 3:
                         for (PHLight light:allLights) {
                             if (light.getName().equals("Ambi 21")) {
-                                bridge.updateLightState(light, lightState);
+                                //bridge.updateLightState(light, lightState);
+                                newElement = new FrameBufferElement(light, lightState);
                             }
                         }
                         break;
                     case 4:
                         for (PHLight light:allLights) {
                             if (light.getName().equals("Ambi 22")) {
-                                bridge.updateLightState(light, lightState);
+                                //bridge.updateLightState(light, lightState);
+                                newElement = new FrameBufferElement(light, lightState);
                             }
                         }
                         break;
                     default:
                         break;
                 }
-            } else bridge.updateLightState(this.source, lightState);
+            } else {
+                //bridge.updateLightState(this.source, lightState);
+                newElement = new FrameBufferElement(this.source, lightState);
+            }
+
 
 
             //bridge.updateLightState(this.source, lightState);
 
             //debug
-            Log.w("Sent frames", this.index + ": " + String.valueOf(nextFrame.getHue()) + " " + String.valueOf(this.onGoingEffect.name));
+            //Log.w("Sent frames", this.index + ": " + String.valueOf(nextFrame.getBri()) + " " + String.valueOf(this.onGoingEffect.name));
         }
+        return newElement;
     }
 
     //returns the frames that are scheduled for the current tick

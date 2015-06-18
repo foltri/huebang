@@ -1,5 +1,6 @@
 package com.philips.lighting.huebang;
 
+import android.util.Log;
 import android.widget.TextView;
 
 import com.philips.lighting.model.PHBridge;
@@ -33,6 +34,7 @@ public class Lamps {
     private boolean pause = false;
     private boolean heart_beat_reference_on = false;
     private Lamp heart_beat_reference;
+    public FrameBuffer frameBuffer = new FrameBuffer();
     private Runnable timer = new Runnable() {
         public void run() {
             TimerMethod();
@@ -48,7 +50,12 @@ public class Lamps {
             TimerMethod2();
         }
     };
-    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(3);
+    private Runnable timer3 = new Runnable() {
+        public void run() {
+            TimerMethod3();
+        }
+    };
+    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(4);
 
     private TextView nightTimerView = null;
     private TextView indianTimerView = null;
@@ -161,10 +168,18 @@ public class Lamps {
         this.heart_beat_reference.index = "heart_beat_reference";
         this.heart_beat_reference.setOnGoingEffect(this.top_light.effects.heart_beat);
 
-        scheduler.scheduleAtFixedRate(timer, 0, 110, TimeUnit.MILLISECONDS);
-        scheduler.scheduleAtFixedRate(timer1, 5, 110, TimeUnit.MILLISECONDS);
-        scheduler.scheduleAtFixedRate(timer2, 10, 110, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(timer, 0, 100, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(timer1, 5, 100, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(timer2, 10, 100, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(timer3, 0, 100, TimeUnit.MILLISECONDS);   //RATE OF SENDING OUT THE FRAMES
 
+    }
+
+    private void TimerMethod3() {
+        //Log.w("Sent: ","haho");
+        if (frameBuffer.size() != 0) {
+            frameBuffer.sendNextFrame();
+        }
     }
 
     private void TimerMethod() {
@@ -175,11 +190,11 @@ public class Lamps {
             this.heart_beat_reference.sendNextFrame();
         //if the lamp is connected and there's an ongoing effect
         if (this.p1light.onGoingEffect.name != null && this.p1light.source != null)
-            this.p1light.sendNextFrame();
+            frameBuffer.addFrame(this.p1light.sendNextFrame());
         if (this.p2light.onGoingEffect.name != null && this.p2light.source != null)
-            this.p2light.sendNextFrame();
+            frameBuffer.addFrame(this.p2light.sendNextFrame());
         if (this.p3light.onGoingEffect.name != null && this.p3light.source != null)
-            this.p3light.sendNextFrame();
+            frameBuffer.addFrame(this.p3light.sendNextFrame());
 //        if(this.top_light.onGoingEffect.name != null && this.top_light.source != null) this.top_light.sendNextFrame();
 
         //We call the method that will work with the UI
@@ -204,9 +219,9 @@ public class Lamps {
 
         //needed another thread, otherwise it didn't always turn (off/) back on during sunrise effect
         if (this.top_light.onGoingEffect.name != null && this.top_light.source != null)
-            this.top_light.sendNextFrame();
+            frameBuffer.addFrame(this.top_light.sendNextFrame());
         if (this.sun_light.onGoingEffect.name != null && this.sun_light.source != null)
-            this.sun_light.sendNextFrame();
+            frameBuffer.addFrame(this.sun_light.sendNextFrame());
 
 
         //We call the method that will work with the UI
@@ -215,13 +230,13 @@ public class Lamps {
 
     private void TimerMethod2() {
         if (this.ambi11light.onGoingEffect.name != null && this.ambi11light.source != null)
-            this.ambi11light.sendNextFrame();
+            frameBuffer.addFrame(this.ambi11light.sendNextFrame());
         if (this.ambi12light.onGoingEffect.name != null && this.ambi12light.source != null)
-            this.ambi12light.sendNextFrame();
+            frameBuffer.addFrame(this.ambi12light.sendNextFrame());
         if (this.ambi21light.onGoingEffect.name != null && this.ambi21light.source != null)
-            this.ambi21light.sendNextFrame();
+            frameBuffer.addFrame(this.ambi21light.sendNextFrame());
         if (this.ambi22light.onGoingEffect.name != null && this.ambi22light.source != null)
-            this.ambi22light.sendNextFrame();
+            frameBuffer.addFrame(this.ambi22light.sendNextFrame());
 
         //We call the method that will work with the UI
         //through the runOnUiThread method.
