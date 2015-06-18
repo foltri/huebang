@@ -1,24 +1,17 @@
 package com.philips.lighting.huebang;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -323,28 +316,28 @@ public class MyApplicationActivity extends Activity {
             }
         });
 
-        //LIFE INC//
-        Button p1incLifeButton = (Button) findViewById(R.id.p1incLifeButton);
-        p1incLifeButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                p1.setLives(p1.getLives() + 1, lamps.p1light);
-            }
-        });
-        Button p2incLifeButton = (Button) findViewById(R.id.p2incLifeButton);
-        p2incLifeButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                p2.setLives(p2.getLives() + 1, lamps.p2light);
-            }
-        });
-        Button p3incLifeButton = (Button) findViewById(R.id.p3incLifeButton);
-        p3incLifeButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                p3.setLives(p3.getLives() + 1, lamps.p3light);
-            }
-        });
+//        //LIFE INC//
+//        Button p1incLifeButton = (Button) findViewById(R.id.p1incLifeButton);
+//        p1incLifeButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                p1.setLives(p1.getLives() + 1, lamps.p1light);
+//            }
+//        });
+//        Button p2incLifeButton = (Button) findViewById(R.id.p2incLifeButton);
+//        p2incLifeButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                p2.setLives(p2.getLives() + 1, lamps.p2light);
+//            }
+//        });
+//        Button p3incLifeButton = (Button) findViewById(R.id.p3incLifeButton);
+//        p3incLifeButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                p3.setLives(p3.getLives() + 1, lamps.p3light);
+//            }
+//        });
 
         //LIFE DEC//
         Button p1decLifeButton = (Button) findViewById(R.id.p1decLifeButton);
