@@ -83,12 +83,14 @@ public class MyApplicationActivity extends Activity {
                     lamps.ambi22light.setOnGoingEffect(lightEffects.ambi_storm);
                 } else {
                     // Turn back normal lighting
+                    lamps.frameBuffer.clear();
                     lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
 
                     lamps.ambi11light.setOnGoingEffect(lightEffects.ambi1_normal);
                     lamps.ambi12light.setOnGoingEffect(lightEffects.ambi1_normal);
                     lamps.ambi21light.setOnGoingEffect(lightEffects.ambi1_normal);
                     lamps.ambi22light.setOnGoingEffect(lightEffects.ambi1_normal);
+
                 }
             }
         });

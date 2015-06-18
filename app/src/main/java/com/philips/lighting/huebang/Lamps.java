@@ -169,8 +169,8 @@ public class Lamps {
         this.heart_beat_reference.setOnGoingEffect(this.top_light.effects.heart_beat);
 
         scheduler.scheduleAtFixedRate(timer, 0, 100, TimeUnit.MILLISECONDS);
-        scheduler.scheduleAtFixedRate(timer1, 5, 100, TimeUnit.MILLISECONDS);
-        scheduler.scheduleAtFixedRate(timer2, 10, 100, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(timer1, 0, 100, TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(timer2, 0, 100, TimeUnit.MILLISECONDS);
         scheduler.scheduleAtFixedRate(timer3, 0, 100, TimeUnit.MILLISECONDS);   //RATE OF SENDING OUT THE FRAMES
 
     }
