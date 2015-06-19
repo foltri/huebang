@@ -250,8 +250,8 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Ggun"
-                        android:id="@+id/p1ggun"
+                        android:text="Beer"
+                        android:id="@+id/p1beer"
                         android:layout_weight="1" />
 
                     <Button
@@ -264,8 +264,8 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Beer"
-                        android:id="@+id/p1beer"
+                        android:text="Ggun"
+                        android:id="@+id/p1ggun"
                         android:layout_weight="1" />
 
                 </LinearLayout>
@@ -350,8 +350,8 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Ggun"
-                        android:id="@+id/p2ggun"
+                        android:text="Beer"
+                        android:id="@+id/p2beer"
                         android:layout_weight="1" />
 
                     <Button
@@ -364,8 +364,8 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Beer"
-                        android:id="@+id/p2beer"
+                        android:text="Ggun"
+                        android:id="@+id/p2ggun"
                         android:layout_weight="1" />
 
                 </LinearLayout>
@@ -452,8 +452,8 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Ggun"
-                        android:id="@+id/p3ggun"
+                        android:text="Beer"
+                        android:id="@+id/p3beer"
                         android:layout_weight="1" />
 
                     <Button
@@ -466,8 +466,8 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Beer"
-                        android:id="@+id/p3beer"
+                        android:text="Ggun"
+                        android:id="@+id/p3ggun"
                         android:layout_weight="1" />
 
                 </LinearLayout>

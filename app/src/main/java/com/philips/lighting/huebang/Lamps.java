@@ -231,10 +231,10 @@ public class Lamps {
     private void TimerMethod2() {
         if (this.ambi11light.onGoingEffect.name != null && this.ambi11light.source != null)
             frameBuffer.addFrame(this.ambi11light.sendNextFrame());
-        if (this.ambi12light.onGoingEffect.name != null && this.ambi12light.source != null)
-            frameBuffer.addFrame(this.ambi12light.sendNextFrame());
         if (this.ambi21light.onGoingEffect.name != null && this.ambi21light.source != null)
             frameBuffer.addFrame(this.ambi21light.sendNextFrame());
+        if (this.ambi12light.onGoingEffect.name != null && this.ambi12light.source != null)
+            frameBuffer.addFrame(this.ambi12light.sendNextFrame());
         if (this.ambi22light.onGoingEffect.name != null && this.ambi22light.source != null)
             frameBuffer.addFrame(this.ambi22light.sendNextFrame());
 
@@ -277,9 +277,21 @@ public class Lamps {
     }
 
     public void setOngoingAmbiEffect(Effect effect) {
-        this.ambi11light.timer_state = 0;
-        this.ambi11light.nextFrameIndex = 0;
-        this.ambi11light.nextFrameStartTime = 0;
-        this.ambi11light.setOnGoingEffect(effect);
+        if (effect.name == "ambi_indian2") {
+            this.ambi11light.timer_state = 0;
+            this.ambi11light.nextFrameIndex = 0;
+            this.ambi11light.nextFrameStartTime = 0;
+            this.ambi11light.setOnGoingEffect(this.ambi11light.effects.ambi11_indian2);
+
+            this.ambi12light.timer_state = 0;
+            this.ambi12light.nextFrameIndex = 0;
+            this.ambi12light.nextFrameStartTime = 0;
+            this.ambi12light.setOnGoingEffect(this.ambi11light.effects.ambi12_indian2);
+        } else {
+            this.ambi11light.timer_state = 0;
+            this.ambi11light.nextFrameIndex = 0;
+            this.ambi11light.nextFrameStartTime = 0;
+            this.ambi11light.setOnGoingEffect(effect);
+        }
     }
 }

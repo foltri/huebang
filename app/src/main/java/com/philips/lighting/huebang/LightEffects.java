@@ -1,7 +1,5 @@
 package com.philips.lighting.huebang;
 
-import android.os.Environment;
-
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
@@ -24,6 +22,7 @@ public class LightEffects {
     public final Effect sun_sunset;
     public final Effect sun_sunrise;
     public final Effect heart_normal;
+    public final Effect heart_gameover;
     public final Effect heart_beat;
     public final Effect heart_night;
     public final Effect heart_sunset;
@@ -74,6 +73,10 @@ public class LightEffects {
     public final Effect ambi_indian4;
     public final Effect ambix1_indian3;
     public final Effect ambix2_indian3;
+    public final Effect ambi11_storm;
+    public final Effect ambi12_storm;
+    public final Effect ambi21_storm;
+    public final Effect ambi22_storm;
     public final Effect dynamite;
     public Effect ambi_effect;
 
@@ -84,6 +87,7 @@ public class LightEffects {
         this.sun_sunset = new Effect();
         this.sun_sunrise = new Effect();
         this.heart_normal = new Effect();
+        this.heart_gameover = new Effect();
         this.heart_beat = new Effect();
         this.heart_night = new Effect();
         this.heart_sunset = new Effect();
@@ -134,6 +138,10 @@ public class LightEffects {
         this.ambi_indian4 = new Effect();
         this.ambix1_indian3 = new Effect();
         this.ambix2_indian3 = new Effect();
+        this.ambi11_storm = new Effect();
+        this.ambi12_storm = new Effect();
+        this.ambi21_storm = new Effect();
+        this.ambi22_storm = new Effect();
 
         this.dynamite = new Effect();
         this.ambi_effect = new Effect();
@@ -198,6 +206,11 @@ public class LightEffects {
                     effects.heart_normal.frames = tmp;
                     effects.heart_normal.name = "heart_normal";
                     effects.heart_normal.looping = false;
+                    break;
+                case "heart_ngameover.txt":
+                    effects.heart_gameover.frames = tmp;
+                    effects.heart_gameover.name = "heart_gameover";
+                    effects.heart_gameover.looping = false;
                     break;
                 case "heart_beat.txt":
                     effects.heart_beat.frames = tmp;
@@ -282,7 +295,7 @@ public class LightEffects {
                 case "top_indian3.txt":
                     effects.top_indian3.frames = tmp;
                     effects.top_indian3.name = "top_indian3";
-                    effects.top_indian3.looping = true;
+                    effects.top_indian3.looping = false;
                     break;
                 case "top_indian4.txt":
                     effects.top_indian4.frames = tmp;
@@ -448,6 +461,26 @@ public class LightEffects {
                     effects.ambix2_indian3.frames = tmp;
                     effects.ambix2_indian3.name = "ambix2_indian3";
                     effects.ambix2_indian3.looping = false;
+                    break;
+                case "ambi11_storm.txt":
+                    effects.ambi11_storm.frames = tmp;
+                    effects.ambi11_storm.name = "ambi11_storm";
+                    effects.ambi11_storm.looping = true;
+                    break;
+                case "ambi12_storm.txt":
+                    effects.ambi12_storm.frames = tmp;
+                    effects.ambi12_storm.name = "ambi12_storm";
+                    effects.ambi12_storm.looping = true;
+                    break;
+                case "ambi21_storm.txt":
+                    effects.ambi21_storm.frames = tmp;
+                    effects.ambi21_storm.name = "ambi21_storm";
+                    effects.ambi21_storm.looping = true;
+                    break;
+                case "ambi22_storm.txt":
+                    effects.ambi22_storm.frames = tmp;
+                    effects.ambi22_storm.name = "ambi22_storm";
+                    effects.ambi22_storm.looping = true;
                     break;
                 case "dynamite.txt":
                     effects.dynamite.frames = tmp;

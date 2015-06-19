@@ -26,7 +26,7 @@ public class FrameBuffer {
         PHLight light = this.frames.remove(0).light;
 
         bridge.updateLightState(light, lightState);
-        Log.w("Sent: ", String.valueOf(light.getName()));
+        //Log.w("Sent: ", String.valueOf(this.size()));
     }
 
     public int size() {

@@ -46,12 +46,14 @@ public class Player {
 
     public void gotShot(Lamp lamp) {
         this.lives = this.lives - 1;
+        if (this.lives < 0) this.lives = 0;
         this.lifeNum.setText("L:" + this.lives);
         lamp.setOnGoingEffect(lamp.effects.shot);
     }
 
     public void gotIndianAttack(Lamp lamp) {
         this.lives = this.lives - this.arrows;
+        if (this.lives < 0) this.lives = 0;
         this.lifeNum.setText("L:" + this.lives);
         this.setArrows(0);
         lamp.setOnGoingEffect(lamp.effects.heart_arrow);
@@ -70,7 +72,9 @@ public class Player {
 
     public void gotGgun(Player other1, Player other2, Lamp l1, Lamp l2) {
         other1.lives -= 1;
+        if (other1.lives < 0) other1.lives = 0;
         other2.lives -= 1;
+        if (other1.lives < 0) other1.lives = 0;
         other1.lifeNum.setText("L:" + other1.lives);
         other2.lifeNum.setText("L:" + other2.lives);
         l1.setOnGoingEffect(l1.effects.shot);

@@ -36,6 +36,7 @@ public class MyApplicationActivity extends Activity {
     public Player p1;
     public Player p2;
     public Player p3;
+    public int ref = 0;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,12 +76,13 @@ public class MyApplicationActivity extends Activity {
 
                 if (on) {
                     // Turn on storm effect
-                    // lamps.top_light.setOnGoingEffect(lightEffects.top_storm);
+                    lamps.top_light.setOnGoingEffect(lightEffects.top_storm);
 
-//                    lamps.ambi11light.setOnGoingEffect(lightEffects.ambi_storm);
-                    lamps.ambi12light.setOnGoingEffect(lightEffects.ambi_storm);
-//                    lamps.ambi21light.setOnGoingEffect(lightEffects.ambi_storm);
-                    lamps.ambi22light.setOnGoingEffect(lightEffects.ambi_storm);
+                    lamps.ambi11light.setOnGoingEffect(lightEffects.ambi11_storm);
+                    lamps.ambi12light.setOnGoingEffect(lightEffects.ambi12_storm);
+                    lamps.ambi21light.setOnGoingEffect(lightEffects.ambi21_storm);
+                    lamps.ambi22light.setOnGoingEffect(lightEffects.ambi22_storm);
+
                 } else {
                     // Turn back normal lighting
                     lamps.frameBuffer.clear();
@@ -184,6 +186,8 @@ public class MyApplicationActivity extends Activity {
                 //lamps.setOngoingAmbiEffect(lightEffects.ambi_indian2);
                 lamps.ambi11light.setOnGoingEffect(lightEffects.ambi11_indian2);
                 lamps.ambi12light.setOnGoingEffect(lightEffects.ambi12_indian2);
+                lamps.ambi21light.setOnGoingEffect(lightEffects.ambi21_indian2);
+                lamps.ambi22light.setOnGoingEffect(lightEffects.ambi22_indian2);
 
 
 
@@ -198,7 +202,7 @@ public class MyApplicationActivity extends Activity {
         indian3check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.setOngoingAmbiEffect(lightEffects.ambi_indian3);
+                //lamps.setOngoingAmbiEffect(lightEffects.ambi_indian3);
 
                 lamps.ambi11light.setOnGoingEffect(lightEffects.ambix1_indian3);
                 lamps.ambi12light.setOnGoingEffect(lightEffects.ambix2_indian3);
@@ -206,7 +210,7 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi22light.setOnGoingEffect(lightEffects.ambix2_indian3);
 
 
-                //lamps.top_light.setOnGoingEffect(lightEffects.top_indian3);
+                lamps.top_light.setOnGoingEffect(lightEffects.top_indian3);
             }
         });
 
@@ -215,7 +219,7 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                lamps.setOngoingAmbiEffect(lightEffects.ambi_indian4);
+                lamps.setOngoingAmbiEffect(lightEffects.ambi_indian3);
 
 //                lamps.p1light.setOnGoingEffect(lightEffects.heart1_indian4);
 //                lamps.p2light.setOnGoingEffect(lightEffects.heart2_indian4);
@@ -224,7 +228,7 @@ public class MyApplicationActivity extends Activity {
         });
 
         final RadioButton indian5check = (RadioButton) findViewById(R.id.indian5check);
-        indian4check.setOnClickListener(new OnClickListener() {
+        indian5check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -291,15 +295,11 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi21light.setOnGoingEffect(lightEffects.dynamite);
                 lamps.ambi22light.setOnGoingEffect(lightEffects.dynamite);
 
-                lamps.p1light.setOnGoingEffect(lightEffects.dynamite);
-                lamps.p2light.setOnGoingEffect(lightEffects.dynamite);
-                lamps.p3light.setOnGoingEffect(lightEffects.dynamite);
-                lamps.top_light.setOnGoingEffect(lightEffects.dynamite);
-
                 indian1check.setChecked(false);
                 indian2check.setChecked(false);
                 indian3check.setChecked(false);
                 indian4check.setChecked(false);
+                indian5check.setChecked(false);
                 indianButton.setChecked(false);
             }
         });
@@ -325,6 +325,7 @@ public class MyApplicationActivity extends Activity {
                 indian2check.setChecked(false);
                 indian3check.setChecked(false);
                 indian4check.setChecked(false);
+                indian5check.setChecked(false);
                 indianButton.setChecked(false);
             }
         });

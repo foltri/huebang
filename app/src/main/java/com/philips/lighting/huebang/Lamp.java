@@ -34,6 +34,7 @@ public class Lamp {
     public Player player = new Player();
     private PHHueSDK phHueSDK = PHHueSDK.create();
     public PHBridge bridge = phHueSDK.getSelectedBridge();
+    public boolean dead = false;
 
 
 
@@ -72,6 +73,7 @@ public class Lamp {
         if (this.onGoingEffect.name.equals("heart_normal")) {
             int newBri = 0;
             ControlFrame adjusted = new ControlFrame();
+            PHLightState lightState = new PHLightState();
             switch (this.player.getLives()) {
                 case 8:
                     newBri = 20;
@@ -159,19 +161,22 @@ public class Lamp {
                         //todo delay
                     }
 
+
                     this.onGoingEffect.frames.clear();
                     this.onGoingEffect.frames.add(colored);
                     this.onGoingEffect.frames.add(normal);
                     break;
 
                 case "ambi_indian3":
-                    delayMax = 3200;
-                    delayMin = 1200;
+                    delayMax = 3000;
+                    delayMin = 1000;
+                    colorIndex = 0;
 
                     delay = rand.nextInt(delayMax / 100) + delayMin / 100;
                     delay *= 100;
-                    colored = new ControlFrame(lampIndex, this.effects.ambi_indian3.frames.get(colorIndex).getHue(), this.effects.ambi_indian3.frames.get(colorIndex).getBri(), this.effects.ambi_indian3.frames.get(colorIndex).getSat(), this.effects.ambi_indian3.frames.get(colorIndex).getTransitionTime(), this.effects.ambi_indian3.frames.get(colorIndex).getUpTime());
-                    normal = new ControlFrame(lampIndex, this.effects.ambi1_normal.frames.get(0).getHue(), this.effects.ambi1_normal.frames.get(0).getBri(), this.effects.ambi1_normal.frames.get(0).getSat(), this.effects.ambi_indian1.frames.get(colorIndex).getTransitionTime(), delay);
+                    delay = 100;
+                    colored = new ControlFrame(lampIndex, this.effects.ambi_indian4.frames.get(colorIndex).getHue(), this.effects.ambi_indian4.frames.get(colorIndex).getBri(), this.effects.ambi_indian4.frames.get(colorIndex).getSat(), this.effects.ambi_indian4.frames.get(colorIndex).getTransitionTime(), this.effects.ambi_indian4.frames.get(colorIndex).getUpTime());
+                    normal = new ControlFrame(lampIndex, this.effects.ambix1_indian3.frames.get(0).getHue(), this.effects.ambix1_indian3.frames.get(0).getBri(), this.effects.ambix1_indian3.frames.get(0).getSat(), 100, delay);
 
                     this.onGoingEffect.frames.clear();
                     this.onGoingEffect.frames.add(colored);
@@ -181,16 +186,18 @@ public class Lamp {
                 case "ambi_indian4":
                     delayMax = 200;
                     delayMin = 100;
+                    colorIndex = 1;
 
                     delay = rand.nextInt(delayMax / 100) + delayMin / 100;
                     delay = 100;
                     colored = new ControlFrame(lampIndex, this.effects.ambi_indian4.frames.get(colorIndex).getHue(), this.effects.ambi_indian4.frames.get(colorIndex).getBri(), this.effects.ambi_indian4.frames.get(colorIndex).getSat(), this.effects.ambi_indian4.frames.get(colorIndex).getTransitionTime(), this.effects.ambi_indian4.frames.get(colorIndex).getUpTime());
-                    normal = new ControlFrame(lampIndex, this.effects.ambi1_normal.frames.get(0).getHue(), this.effects.ambi1_normal.frames.get(0).getBri(), this.effects.ambi1_normal.frames.get(0).getSat(), this.effects.ambi_indian1.frames.get(colorIndex).getTransitionTime(), delay);
+                    normal = new ControlFrame(lampIndex, this.effects.ambix1_indian3.frames.get(0).getHue(), this.effects.ambix1_indian3.frames.get(0).getBri(), this.effects.ambix1_indian3.frames.get(0).getSat(), 200, delay);
 
                     this.onGoingEffect.frames.clear();
                     this.onGoingEffect.frames.add(colored);
                     this.onGoingEffect.frames.add(normal);
                     break;
+
                 default:
                     break;
             }
@@ -210,7 +217,11 @@ public class Lamp {
             this.onGoingEffect.name = null;
             this.onGoingEffect.frames.clear();
 
-            this.setOnGoingEffect(this.effects.heart_normal);
+            if (this.player.getLives() < 1) {
+                PHLightState lightState = new PHLightState();
+                lightState.setOn(false);
+                bridge.updateLightState(this.source,lightState);
+            } else this.setOnGoingEffect(this.effects.heart_normal);
 
         }
         //if end of dynamite set back normal ambience state
@@ -232,15 +243,6 @@ public class Lamp {
                 case "Ambi 21":
                     this.setOnGoingEffect(this.effects.ambi1_normal);
                     break;
-                case "P1 lamp":
-                    this.setOnGoingEffect(this.effects.heart_normal);
-                    break;
-                case "P2 lamp":
-                    this.setOnGoingEffect(this.effects.heart_normal);
-                    break;
-                case "P3 lamp":
-                    this.setOnGoingEffect(this.effects.heart_normal);
-                    break;
                 case "Ambi 22":
                     this.setOnGoingEffect(this.effects.ambi1_normal);
                     break;
@@ -255,10 +257,10 @@ public class Lamp {
     }
 
     public synchronized FrameBufferElement sendNextFrame() {
-        PHHueSDK phHueSDK = PHHueSDK.create();
-        PHBridge bridge = phHueSDK.getSelectedBridge();
+
         ControlFrame nextFrame = getNextFrame();
         FrameBufferElement newElement = null;
+
         //if there's frame to send
         if (nextFrame != null && !this.index.equals("heart_beat_reference")) {
             PHLightState lightState = new PHLightState();
@@ -282,51 +284,23 @@ public class Lamp {
                 lightState.setOn(true);
             }
 
-            if (this.onGoingEffect.name == "ambi_indian1" || this.onGoingEffect.name == "ambi_indian2" || this.onGoingEffect.name == "ambi_indian3" || this.onGoingEffect.name == "ambi_indian4") {
-                List<PHLight> allLights = bridge.getResourceCache().getAllLights();
-                PHLight lsource = null;
+            //send frames according to lightIndex!
+            if (this.onGoingEffect.name == "ambi_indian1" || this.onGoingEffect.name == "ambi_indian3" || this.onGoingEffect.name == "ambi_indian4") {
 
-                switch (nextFrame.getLightIndex()) {
-                    case 1:
-                        //bridge.updateLightState(this.source, lightState);
-                        newElement = new FrameBufferElement(this.source, lightState);
-                        break;
-                    case 2:
-                        for (PHLight light:allLights) {
-                            if (light.getName().equals("Ambi 12")) {
-                                //bridge.updateLightState(light, lightState);
-                                newElement = new FrameBufferElement(light, lightState);
-                            }
-                        }
-                        break;
-                    case 3:
-                        for (PHLight light:allLights) {
-                            if (light.getName().equals("Ambi 21")) {
-                                //bridge.updateLightState(light, lightState);
-                                newElement = new FrameBufferElement(light, lightState);
-                            }
-                        }
-                        break;
-                    case 4:
-                        for (PHLight light:allLights) {
-                            if (light.getName().equals("Ambi 22")) {
-                                //bridge.updateLightState(light, lightState);
-                                newElement = new FrameBufferElement(light, lightState);
-                            }
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                newElement = putAmbiFrameInBuffer(nextFrame.getLightIndex(), lightState);
+
+            } else if (this.onGoingEffect.name == "ambi_indian2") {
+                int l1 = 0;
+                int l2 = 1;
+                putAmbiFrameInBuffer(l1, lightState);
+                putAmbiFrameInBuffer(l2, lightState);
+                //todo
             } else {
                 //bridge.updateLightState(this.source, lightState);
                 newElement = new FrameBufferElement(this.source, lightState);
             }
 
-
-
             //bridge.updateLightState(this.source, lightState);
-
             //debug
             //Log.w("Sent frames", this.index + ": " + String.valueOf(nextFrame.getBri()) + " " + String.valueOf(this.onGoingEffect.name));
         }
@@ -381,6 +355,7 @@ public class Lamp {
                     //restart ambi_indian effect
                     if (this.onGoingEffect.name.equals("ambi_indian1") || this.onGoingEffect.name.equals("ambi_indian2") || this.onGoingEffect.name.equals("ambi_indian3") || this.onGoingEffect.name.equals("ambi_indian4")) {
                         this.setOnGoingEffect(this.onGoingEffect);
+
                     }
                 } else {
                     this.endOfEffect();
@@ -395,6 +370,44 @@ public class Lamp {
             this.timer_state += 1;
         }
         return frameToSend;
+    }
+
+    private FrameBufferElement putAmbiFrameInBuffer(int index, PHLightState lightState) {
+        List<PHLight> allLights = bridge.getResourceCache().getAllLights();
+        FrameBufferElement newElement = null;
+        switch (index) {
+            case 1:
+                //bridge.updateLightState(this.source, lightState);
+                newElement = new FrameBufferElement(this.source, lightState);
+                break;
+            case 2:
+                for (PHLight light:allLights) {
+                    if (light.getName().equals("Ambi 12")) {
+                        //bridge.updateLightState(light, lightState);
+                        newElement = new FrameBufferElement(light, lightState);
+                    }
+                }
+                break;
+            case 3:
+                for (PHLight light:allLights) {
+                    if (light.getName().equals("Ambi 21")) {
+                        //bridge.updateLightState(light, lightState);
+                        newElement = new FrameBufferElement(light, lightState);
+                    }
+                }
+                break;
+            case 4:
+                for (PHLight light:allLights) {
+                    if (light.getName().equals("Ambi 22")) {
+                        //bridge.updateLightState(light, lightState);
+                        newElement = new FrameBufferElement(light, lightState);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        return newElement;
     }
 }
 
