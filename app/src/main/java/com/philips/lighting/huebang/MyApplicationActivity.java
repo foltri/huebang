@@ -75,7 +75,7 @@ public class MyApplicationActivity extends Activity {
 
                 if (on) {
                     // Turn on storm effect
-                   // lamps.top_light.setOnGoingEffect(lightEffects.top_storm);
+                    // lamps.top_light.setOnGoingEffect(lightEffects.top_storm);
 
 //                    lamps.ambi11light.setOnGoingEffect(lightEffects.ambi_storm);
                     lamps.ambi12light.setOnGoingEffect(lightEffects.ambi_storm);
@@ -136,10 +136,7 @@ public class MyApplicationActivity extends Activity {
         sunsetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.top_light.setOnGoingEffect(lightEffects.top_sunset);
-//                lamps.p1light.setOnGoingEffect("heart_sunset");
-//                lamps.p2light.setOnGoingEffect("heart_sunset");
-//                lamps.p3light.setOnGoingEffect("heart_sunset");
+
 
                 lamps.sun_light.setOnGoingEffect(lightEffects.sun_sunset);
 
@@ -164,17 +161,9 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi21light.setOnGoingEffect(lightEffects.ambix1_sunrise);
                 lamps.ambi22light.setOnGoingEffect(lightEffects.ambix2_sunrise);
 
-                if(p1.isHeartBeat()) {
-                    lamps.p1light.setOnGoingEffect(lightEffects.heart_beat);
-                } else lamps.p1light.setOnGoingEffect(lightEffects.heart_normal);
-
-                if(p2.isHeartBeat()) {
-                    lamps.p2light.setOnGoingEffect(lightEffects.heart_beat);
-                } else lamps.p2light.setOnGoingEffect(lightEffects.heart_normal);
-
-                if(p3.isHeartBeat()) {
-                    lamps.p3light.setOnGoingEffect(lightEffects.heart_beat);
-                } else lamps.p3light.setOnGoingEffect(lightEffects.heart_normal);
+                lamps.p1light.setOnGoingEffect(lightEffects.heart_normal);
+                lamps.p2light.setOnGoingEffect(lightEffects.heart_normal);
+                lamps.p3light.setOnGoingEffect(lightEffects.heart_normal);
 
                 nightButton.setChecked(false);
             }
@@ -184,7 +173,7 @@ public class MyApplicationActivity extends Activity {
         indian1check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.setOngoingAmbiEffect(lightEffects.ambi11_indian1);
+                lamps.setOngoingAmbiEffect(lightEffects.ambi_indian1);
             }
         });
 
@@ -192,7 +181,11 @@ public class MyApplicationActivity extends Activity {
         indian2check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.setOngoingAmbiEffect(lightEffects.ambi11_indian2);
+                //lamps.setOngoingAmbiEffect(lightEffects.ambi_indian2);
+                lamps.ambi11light.setOnGoingEffect(lightEffects.ambi11_indian2);
+                lamps.ambi12light.setOnGoingEffect(lightEffects.ambi12_indian2);
+
+
 
 
 //                lamps.p1light.setOnGoingEffect(lightEffects.heart_indian2);
@@ -205,7 +198,12 @@ public class MyApplicationActivity extends Activity {
         indian3check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                lamps.setOngoingAmbiEffect(lightEffects.ambi11_indian3);
+                lamps.setOngoingAmbiEffect(lightEffects.ambi_indian3);
+
+                lamps.ambi11light.setOnGoingEffect(lightEffects.ambix1_indian3);
+                lamps.ambi12light.setOnGoingEffect(lightEffects.ambix2_indian3);
+                lamps.ambi21light.setOnGoingEffect(lightEffects.ambix1_indian3);
+                lamps.ambi22light.setOnGoingEffect(lightEffects.ambix2_indian3);
 
 
                 //lamps.top_light.setOnGoingEffect(lightEffects.top_indian3);
@@ -217,7 +215,20 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                lamps.setOngoingAmbiEffect(lightEffects.ambi11_indian4);
+                lamps.setOngoingAmbiEffect(lightEffects.ambi_indian4);
+
+//                lamps.p1light.setOnGoingEffect(lightEffects.heart1_indian4);
+//                lamps.p2light.setOnGoingEffect(lightEffects.heart2_indian4);
+//                lamps.p3light.setOnGoingEffect(lightEffects.heart3_indian4);
+            }
+        });
+
+        final RadioButton indian5check = (RadioButton) findViewById(R.id.indian5check);
+        indian4check.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                lamps.setOngoingAmbiEffect(lightEffects.ambi_indian4);
 
 //                lamps.p1light.setOnGoingEffect(lightEffects.heart1_indian4);
 //                lamps.p2light.setOnGoingEffect(lightEffects.heart2_indian4);
@@ -235,7 +246,7 @@ public class MyApplicationActivity extends Activity {
                 if (on) {
                     lamps.ambi11light.indian_task_on = true;
                     // Turn on indian effect
-                    lamps.setOngoingAmbiEffect(lightEffects.ambi11_indian1);
+                    lamps.setOngoingAmbiEffect(lightEffects.ambi_indian1);
 
                     indian1check.setChecked(true);
                 } else {

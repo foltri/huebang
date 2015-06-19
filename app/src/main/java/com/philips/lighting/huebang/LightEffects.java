@@ -68,6 +68,12 @@ public class LightEffects {
     public final Effect ambi12_indian4;
     public final Effect ambi21_indian4;
     public final Effect ambi22_indian4;
+    public final Effect ambi_indian1;
+    public final Effect ambi_indian2;
+    public final Effect ambi_indian3;
+    public final Effect ambi_indian4;
+    public final Effect ambix1_indian3;
+    public final Effect ambix2_indian3;
     public final Effect dynamite;
     public Effect ambi_effect;
 
@@ -106,22 +112,28 @@ public class LightEffects {
         this.ambi1_normal = new Effect();
         this.ambi2_normal = new Effect();
         this.ambi3_normal = new Effect();
-        ambi11_indian1 = new Effect();
-        ambi12_indian1 = new Effect();
-        ambi21_indian1 = new Effect();
-        ambi22_indian1 = new Effect();
-        ambi11_indian2 = new Effect();
-        ambi12_indian2 = new Effect();
-        ambi21_indian2 = new Effect();
-        ambi22_indian2 = new Effect();
-        ambi11_indian3 = new Effect();
-        ambi12_indian3 = new Effect();
-        ambi21_indian3 = new Effect();
-        ambi22_indian3 = new Effect();
-        ambi11_indian4 = new Effect();
-        ambi12_indian4 = new Effect();
-        ambi21_indian4 = new Effect();
-        ambi22_indian4 = new Effect();
+        this.ambi11_indian1 = new Effect();
+        this.ambi12_indian1 = new Effect();
+        this.ambi21_indian1 = new Effect();
+        this.ambi22_indian1 = new Effect();
+        this.ambi11_indian2 = new Effect();
+        this.ambi12_indian2 = new Effect();
+        this.ambi21_indian2 = new Effect();
+        this.ambi22_indian2 = new Effect();
+        this.ambi11_indian3 = new Effect();
+        this.ambi12_indian3 = new Effect();
+        this.ambi21_indian3 = new Effect();
+        this.ambi22_indian3 = new Effect();
+        this.ambi11_indian4 = new Effect();
+        this.ambi12_indian4 = new Effect();
+        this.ambi21_indian4 = new Effect();
+        this.ambi22_indian4 = new Effect();
+        this.ambi_indian1 = new Effect();
+        this.ambi_indian2 = new Effect();
+        this.ambi_indian3 = new Effect();
+        this.ambi_indian4 = new Effect();
+        this.ambix1_indian3 = new Effect();
+        this.ambix2_indian3 = new Effect();
 
         this.dynamite = new Effect();
         this.ambi_effect = new Effect();
@@ -406,6 +418,36 @@ public class LightEffects {
                     effects.ambi22_indian4.frames = tmp;
                     effects.ambi22_indian4.name = "ambi22_indian4";
                     effects.ambi22_indian4.looping = true;
+                    break;
+                case "ambi_indian1.txt":
+                    effects.ambi_indian1.frames = tmp;
+                    effects.ambi_indian1.name = "ambi_indian1";
+                    effects.ambi_indian1.looping = true;
+                    break;
+                case "ambi_indian2.txt":
+                    effects.ambi_indian2.frames = tmp;
+                    effects.ambi_indian2.name = "ambi_indian2";
+                    effects.ambi_indian2.looping = true;
+                    break;
+                case "ambi_indian3.txt":
+                    effects.ambi_indian3.frames = tmp;
+                    effects.ambi_indian3.name = "ambi_indian3";
+                    effects.ambi_indian3.looping = true;
+                    break;
+                case "ambi_indian4.txt":
+                    effects.ambi_indian4.frames = tmp;
+                    effects.ambi_indian4.name = "ambi_indian4";
+                    effects.ambi_indian4.looping = true;
+                    break;
+                case "ambix1_indian3.txt":
+                    effects.ambix1_indian3.frames = tmp;
+                    effects.ambix1_indian3.name = "ambix1_indian3";
+                    effects.ambix1_indian3.looping = false;
+                    break;
+                case "ambix2_indian3.txt":
+                    effects.ambix2_indian3.frames = tmp;
+                    effects.ambix2_indian3.name = "ambix2_indian3";
+                    effects.ambix2_indian3.looping = false;
                     break;
                 case "dynamite.txt":
                     effects.dynamite.frames = tmp;
