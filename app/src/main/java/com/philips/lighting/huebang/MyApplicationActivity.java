@@ -146,6 +146,10 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi12light.setOnGoingEffect(lightEffects.ambix2_sunset);
                 lamps.ambi21light.setOnGoingEffect(lightEffects.ambix1_sunset);
                 lamps.ambi22light.setOnGoingEffect(lightEffects.ambix2_sunset);
+
+                lamps.p1light.onGoingEffect.name = "night";
+                lamps.p2light.onGoingEffect.name = "night";
+                lamps.p3light.onGoingEffect.name = "night";
             }
         });
 
@@ -294,6 +298,7 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi12light.setOnGoingEffect(lightEffects.dynamite);
                 lamps.ambi21light.setOnGoingEffect(lightEffects.dynamite);
                 lamps.ambi22light.setOnGoingEffect(lightEffects.dynamite);
+                lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
 
                 indian1check.setChecked(false);
                 indian2check.setChecked(false);
@@ -453,6 +458,7 @@ public class MyApplicationActivity extends Activity {
         p1shot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(lamps.top_light.onGoingEffect.name == "top_storm") lamps.frameBuffer.clear();
                 p1.gotShot(lamps.p1light);
             }
         });
@@ -460,6 +466,7 @@ public class MyApplicationActivity extends Activity {
         p2shot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(lamps.top_light.onGoingEffect.name == "top_storm") lamps.frameBuffer.clear();
                 p2.gotShot(lamps.p2light);
             }
         });
@@ -467,6 +474,7 @@ public class MyApplicationActivity extends Activity {
         p3shot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(lamps.top_light.onGoingEffect.name == "top_storm") lamps.frameBuffer.clear();
                 p3.gotShot(lamps.p3light);
             }
         });
