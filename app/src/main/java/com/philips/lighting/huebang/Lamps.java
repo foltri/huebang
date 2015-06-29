@@ -60,7 +60,6 @@ public class Lamps {
     private TextView nightTimerView = null;
     private TextView indianTimerView = null;
     public int nightTimer = 0;
-    public int indianTimer = 0;
 
     public Lamps(List<PHLight> lights, TextView nightTimer, TextView indianTimer) {
         this.p1light = new Lamp();
@@ -77,7 +76,6 @@ public class Lamps {
         this.nightTimerView = nightTimer;
         this.indianTimerView = indianTimer;
         this.nightTimer = 0;
-        this.indianTimer = 0;
 
         for (PHLight light : lights) {
             switch (light.getName()) {
@@ -212,10 +210,10 @@ public class Lamps {
 
         //indian timing
         if (this.ambi11light.indian_task_on) {
-            this.indianTimer += 1;
-            if (this.indianTimer % 10 == 0)
+            this.ambi11light.indianTimer += 1;
+            if (this.ambi11light.indianTimer % 10 == 0)
                 MyApplicationActivity.getInstance().runOnUiThread(Timer_Tick);
-        } else this.indianTimer = 0;
+        } else this.ambi11light.indianTimer = 0;
 
         //needed another thread, otherwise it didn't always turn (off/) back on during sunrise effect
         if (this.top_light.onGoingEffect.name != null && this.top_light.source != null)
@@ -250,7 +248,7 @@ public class Lamps {
                 Lamps.this.nightTimerView.setText("T:" + Lamps.this.nightTimer / 10);
             }
             if (Lamps.this.ambi11light.indian_task_on) {
-                Lamps.this.indianTimerView.setText("T:" + Lamps.this.indianTimer / 10);
+                Lamps.this.indianTimerView.setText("T:" + Lamps.this.ambi11light.indianTimer / 10);
             }
         }
     };
@@ -294,4 +292,5 @@ public class Lamps {
             this.ambi11light.setOnGoingEffect(effect);
         }
     }
+
 }

@@ -17,8 +17,11 @@ public class FrameBuffer {
     private PHHueSDK phHueSDK = PHHueSDK.create();
     public PHBridge bridge = phHueSDK.getSelectedBridge();
 
-    public void addFrame(FrameBufferElement newElement) {
-        if(newElement != null) frames.add(newElement);
+    public synchronized void addFrame(FrameBufferElement newElement) {
+        if(newElement != null) {
+            if (this.size() > 100) this.clear(); //hope it solves freezing bug
+            frames.add(newElement);
+        }
     }
 
     public synchronized void sendNextFrame() {
@@ -26,7 +29,7 @@ public class FrameBuffer {
         PHLight light = this.frames.remove(0).light;
 
         bridge.updateLightState(light, lightState);
-        //Log.w("Sent: ", String.valueOf(this.size()));
+        Log.w("Sent: ", String.valueOf(this.size()));
     }
 
     public int size() {

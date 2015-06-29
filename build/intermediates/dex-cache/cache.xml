@@ -2,25 +2,25 @@
 <items version="2" >
 
     <item
-        jar="/Users/folti/Documents/hue/HueBang/app/libs/gson-2.3.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="/Users/folti/Documents/hue/HueBang/app/build/intermediates/pre-dexed/debug/gson-2.3.1-abcd64279ed328354bd3492a766a35a8a720e582.jar" />
-    </item>
-    <item
-        jar="/Users/folti/Documents/hue/HueBang/app/libs/huesdkresources.jar"
+        jar="/Users/folti/Google Drive/1 EIT ICT Labs/Thesis/Balint - HueLink/Android/hue/HueBang/app/libs/huesdkresources.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="a77e9371d8378ee06e42cb3e3e3f04bbdb7714d8">
-        <dex dex="/Users/folti/Documents/hue/HueBang/app/build/intermediates/pre-dexed/debug/huesdkresources-be9a3098ba03e4495aeaf916d4928a5d1b0f4893.jar" />
+        <dex dex="/Users/folti/Google Drive/1 EIT ICT Labs/Thesis/Balint - HueLink/Android/hue/HueBang/app/build/intermediates/pre-dexed/debug/huesdkresources-83522f58336af7bfc47e9b158802373262f205e2.jar" />
     </item>
     <item
-        jar="/Users/folti/Documents/hue/HueBang/app/libs/huelocalsdk.jar"
+        jar="/Users/folti/Google Drive/1 EIT ICT Labs/Thesis/Balint - HueLink/Android/hue/HueBang/app/libs/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/folti/Google Drive/1 EIT ICT Labs/Thesis/Balint - HueLink/Android/hue/HueBang/app/build/intermediates/pre-dexed/debug/gson-2.3.1-72ce827b3266f5ebc4ab5cfa13afed6fe72eca18.jar" />
+    </item>
+    <item
+        jar="/Users/folti/Google Drive/1 EIT ICT Labs/Thesis/Balint - HueLink/Android/hue/HueBang/app/libs/huelocalsdk.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="b4834b4f53fe4e244207b99082a1651959f4db31">
-        <dex dex="/Users/folti/Documents/hue/HueBang/app/build/intermediates/pre-dexed/debug/huelocalsdk-95ca223f15e5613b5376a7f9c8ced8e62b7c59dc.jar" />
+        <dex dex="/Users/folti/Google Drive/1 EIT ICT Labs/Thesis/Balint - HueLink/Android/hue/HueBang/app/build/intermediates/pre-dexed/debug/huelocalsdk-e99c7eddfdb9f97eed31febca2cc322d964daed3.jar" />
     </item>
 
 </items>

@@ -35,8 +35,7 @@ public class Lamp {
     private PHHueSDK phHueSDK = PHHueSDK.create();
     public PHBridge bridge = phHueSDK.getSelectedBridge();
     public boolean dead = false;
-
-
+    public int indianTimer = 0;
 
 
     public Lamp() {
@@ -46,6 +45,7 @@ public class Lamp {
         this.nextFrameIndex = 0;
         this.nextFrameStartTime = 0;
         this.onGoingEffect = new Effect();
+        this.indianTimer = 0;
     }
 
     public synchronized void setOnGoingEffect(Effect effect) {
@@ -74,48 +74,49 @@ public class Lamp {
             int newBri = 0;
             ControlFrame adjusted = new ControlFrame();
             PHLightState lightState = new PHLightState();
-            switch (this.player.getLives()) {
-                case 8:
-                    newBri = 20;
-                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
-                    this.onGoingEffect.frames.set(0,adjusted);
-                    break;
-                case 7:
-                    newBri = 16;
-                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
-                    this.onGoingEffect.frames.set(0,adjusted);
-                    break;
-                case 6:
-                    newBri = 13;
-                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
-                    this.onGoingEffect.frames.set(0,adjusted);
-                    break;
-                case 5:
-                    newBri = 11;
-                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
-                    this.onGoingEffect.frames.set(0,adjusted);
-                    break;
-                case 4:
-                    newBri = 9;
-                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
-                    this.onGoingEffect.frames.set(0,adjusted);
-                    break;
-                case 3:
-                    newBri = 8;
-                    adjusted = new ControlFrame(0,this.onGoingEffect.frames.get(0).getHue(), newBri,this.onGoingEffect.frames.get(0).getSat(),this.onGoingEffect.frames.get(0).getTransitionTime(),this.onGoingEffect.frames.get(0).getUpTime());
-                    this.onGoingEffect.frames.set(0,adjusted);
-                    break;
-                case 2:
-                    this.setOnGoingEffect(effects.heart_beat);
-                    this.heart_beat_started = true;
-                    break;
-                case 1:
-                    this.setOnGoingEffect(effects.heart_beat);
-                    this.heart_beat_started = true;
-                    break;
-                default:
-                    break;
-            }
+
+                switch (this.player.getLives()) {
+                    case 8:
+                        newBri = 20;
+                        adjusted = new ControlFrame(0, this.onGoingEffect.frames.get(0).getHue(), newBri, this.onGoingEffect.frames.get(0).getSat(), this.onGoingEffect.frames.get(0).getTransitionTime(), this.onGoingEffect.frames.get(0).getUpTime());
+                        this.onGoingEffect.frames.set(0, adjusted);
+                        break;
+                    case 7:
+                        newBri = 16;
+                        adjusted = new ControlFrame(0, this.onGoingEffect.frames.get(0).getHue(), newBri, this.onGoingEffect.frames.get(0).getSat(), this.onGoingEffect.frames.get(0).getTransitionTime(), this.onGoingEffect.frames.get(0).getUpTime());
+                        this.onGoingEffect.frames.set(0, adjusted);
+                        break;
+                    case 6:
+                        newBri = 13;
+                        adjusted = new ControlFrame(0, this.onGoingEffect.frames.get(0).getHue(), newBri, this.onGoingEffect.frames.get(0).getSat(), this.onGoingEffect.frames.get(0).getTransitionTime(), this.onGoingEffect.frames.get(0).getUpTime());
+                        this.onGoingEffect.frames.set(0, adjusted);
+                        break;
+                    case 5:
+                        newBri = 11;
+                        adjusted = new ControlFrame(0, this.onGoingEffect.frames.get(0).getHue(), newBri, this.onGoingEffect.frames.get(0).getSat(), this.onGoingEffect.frames.get(0).getTransitionTime(), this.onGoingEffect.frames.get(0).getUpTime());
+                        this.onGoingEffect.frames.set(0, adjusted);
+                        break;
+                    case 4:
+                        newBri = 9;
+                        adjusted = new ControlFrame(0, this.onGoingEffect.frames.get(0).getHue(), newBri, this.onGoingEffect.frames.get(0).getSat(), this.onGoingEffect.frames.get(0).getTransitionTime(), this.onGoingEffect.frames.get(0).getUpTime());
+                        this.onGoingEffect.frames.set(0, adjusted);
+                        break;
+                    case 3:
+                        newBri = 8;
+                        adjusted = new ControlFrame(0, this.onGoingEffect.frames.get(0).getHue(), newBri, this.onGoingEffect.frames.get(0).getSat(), this.onGoingEffect.frames.get(0).getTransitionTime(), this.onGoingEffect.frames.get(0).getUpTime());
+                        this.onGoingEffect.frames.set(0, adjusted);
+                        break;
+                    case 2:
+                        this.setOnGoingEffect(effects.heart_beat);
+                        this.heart_beat_started = true;
+                        break;
+                    case 1:
+                        this.setOnGoingEffect(effects.heart_beat);
+                        this.heart_beat_started = true;
+                        break;
+                    default:
+                        break;
+                }
         }
 
         if (this.onGoingEffect.name.equals("ambi_indian1") || this.onGoingEffect.name.equals("ambi_indian2") || this.onGoingEffect.name.equals("ambi_indian3") || this.onGoingEffect.name.equals("ambi_indian4")) {
@@ -310,7 +311,7 @@ public class Lamp {
     //returns the frames that are scheduled for the current tick
     private ControlFrame getNextFrame() {
         ControlFrame frameToSend = null;
-        if (this.timer_state == this.nextFrameStartTime && this.onGoingEffect.frames.size() > this.nextFrameIndex) {
+        if (this.timer_state == this.nextFrameStartTime && this.onGoingEffect.frames.size() > this.nextFrameIndex && this.onGoingEffect.name != "night") {
             frameToSend = this.onGoingEffect.frames.get(this.nextFrameIndex); // error: onGoingEffect = "shot" but nextFrameIndex = 3 (so it's still heart_beat)
 
             //reset timer
@@ -338,7 +339,7 @@ public class Lamp {
                 }
 
                 //turn off top lamp at night
-                if (this.onGoingEffect.name.equals("top_night")) {
+                /*if (this.onGoingEffect.name.equals("top_night")) {
                     PHHueSDK phHueSDK = PHHueSDK.create();
                     PHBridge bridge = phHueSDK.getSelectedBridge();
                     PHLightState lightState = new PHLightState();
@@ -346,7 +347,7 @@ public class Lamp {
 
                     bridge.updateLightState(this.source, lightState);
 
-                }
+                }*/
 
                 //loop if last frame of a looping effect
                 if (this.onGoingEffect.looping) {

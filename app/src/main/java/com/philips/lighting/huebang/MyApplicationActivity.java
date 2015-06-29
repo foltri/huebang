@@ -146,6 +146,10 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi12light.setOnGoingEffect(lightEffects.ambix2_sunset);
                 lamps.ambi21light.setOnGoingEffect(lightEffects.ambix1_sunset);
                 lamps.ambi22light.setOnGoingEffect(lightEffects.ambix2_sunset);
+
+                lamps.p1light.onGoingEffect.name = "night";
+                lamps.p2light.onGoingEffect.name = "night";
+                lamps.p3light.onGoingEffect.name = "night";
             }
         });
 
@@ -184,13 +188,12 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //lamps.setOngoingAmbiEffect(lightEffects.ambi_indian2);
+                lamps.ambi11light.indianTimer = 1;
+
                 lamps.ambi11light.setOnGoingEffect(lightEffects.ambi11_indian2);
                 lamps.ambi12light.setOnGoingEffect(lightEffects.ambi12_indian2);
                 lamps.ambi21light.setOnGoingEffect(lightEffects.ambi21_indian2);
                 lamps.ambi22light.setOnGoingEffect(lightEffects.ambi22_indian2);
-
-
-
 
 //                lamps.p1light.setOnGoingEffect(lightEffects.heart_indian2);
 //                lamps.p2light.setOnGoingEffect(lightEffects.heart_indian2);
@@ -203,6 +206,7 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //lamps.setOngoingAmbiEffect(lightEffects.ambi_indian3);
+                lamps.ambi11light.indianTimer = 1;
 
                 lamps.ambi11light.setOnGoingEffect(lightEffects.ambix1_indian3);
                 lamps.ambi12light.setOnGoingEffect(lightEffects.ambix2_indian3);
@@ -219,6 +223,8 @@ public class MyApplicationActivity extends Activity {
             @Override
             public void onClick(View view) {
 
+                lamps.ambi11light.indianTimer = 1;
+
                 lamps.setOngoingAmbiEffect(lightEffects.ambi_indian3);
 
 //                lamps.p1light.setOnGoingEffect(lightEffects.heart1_indian4);
@@ -231,6 +237,8 @@ public class MyApplicationActivity extends Activity {
         indian5check.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                lamps.ambi11light.indianTimer = 1;
 
                 lamps.setOngoingAmbiEffect(lightEffects.ambi_indian4);
 
@@ -294,6 +302,7 @@ public class MyApplicationActivity extends Activity {
                 lamps.ambi12light.setOnGoingEffect(lightEffects.dynamite);
                 lamps.ambi21light.setOnGoingEffect(lightEffects.dynamite);
                 lamps.ambi22light.setOnGoingEffect(lightEffects.dynamite);
+                lamps.top_light.setOnGoingEffect(lightEffects.top_normal);
 
                 indian1check.setChecked(false);
                 indian2check.setChecked(false);
@@ -453,6 +462,7 @@ public class MyApplicationActivity extends Activity {
         p1shot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(lamps.top_light.onGoingEffect.name == "top_storm") lamps.frameBuffer.clear();
                 p1.gotShot(lamps.p1light);
             }
         });
@@ -460,6 +470,7 @@ public class MyApplicationActivity extends Activity {
         p2shot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(lamps.top_light.onGoingEffect.name == "top_storm") lamps.frameBuffer.clear();
                 p2.gotShot(lamps.p2light);
             }
         });
@@ -467,6 +478,7 @@ public class MyApplicationActivity extends Activity {
         p3shot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(lamps.top_light.onGoingEffect.name == "top_storm") lamps.frameBuffer.clear();
                 p3.gotShot(lamps.p3light);
             }
         });
