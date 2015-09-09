@@ -20,4 +20,8 @@ The 9 lamps and their names needed to use the application are the followings:
   
 The application can only control the lamps if their names match the ones above. 
 In case some lamps are missing, the application can still control the rest of them. 
+
+Before using the application, the "Hue animations" folder has to be placed in the root folder of the phone! This folder contains the frame files for the light effects. It can be downladed [here] (http://bit.ly/1LXc10q).
+
+
   
