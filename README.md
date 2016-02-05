@@ -1,6 +1,6 @@
 # Hue Bang
 Hue Bang is an Android application that controls the light effects, that were designed for Bang the dice game.
-The 9 lamps and their names needed to use the application are the followings:
+The 9 lamps and their names that the application uses are the followings:
 
 1.  Desk lamp over the game play area (1 Hue Spotlight): 
   - Top lamp
